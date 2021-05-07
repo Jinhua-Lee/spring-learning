@@ -7,6 +7,7 @@ import org.springframework.context.annotation.Configuration;
 
 /**
  * 定时任务配置类
+ *
  * @author Jinhua
  * @version 1.0
  * @date 2021/5/7 10:01
@@ -24,7 +25,7 @@ public class QuartzConfig {
         SimpleScheduleBuilder scheduleBuilder = SimpleScheduleBuilder.simpleSchedule()
                 .withIntervalInSeconds(2)
                 .repeatForever();
-        // 构建Trigger实例，每10s执行一次
+        // 构建Trigger实例，每2s执行一次
         return TriggerBuilder.newTrigger()
                 .forJob(testJobDetail())
                 .withIdentity("demoJob")

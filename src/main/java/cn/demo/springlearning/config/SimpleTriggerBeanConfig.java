@@ -6,6 +6,8 @@ import org.springframework.scheduling.quartz.SimpleTriggerFactoryBean;
 import org.springframework.stereotype.Component;
 
 /**
+ * 简单触发器配置
+ *
  * @author Jinhua
  * @version 1.0
  * @date 2021/5/7 9:43

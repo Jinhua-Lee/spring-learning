@@ -13,11 +13,10 @@ import java.time.LocalDateTime;
  * @version 1.0
  * @date 2021/5/7 9:47
  */
-public class DemoJob extends QuartzJobBean {
-
+public class QuartzJob extends QuartzJobBean {
 
     @Override
     protected void executeInternal(JobExecutionContext jobExecutionContext) throws JobExecutionException {
-        System.out.println("模拟定时任务..." + LocalDateTime.now());
+        System.out.println("模拟quartz定时任务..." + LocalDateTime.now());
     }
 }

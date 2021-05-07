@@ -1,6 +1,6 @@
 package cn.demo.springlearning.config;
 
-import cn.demo.springlearning.task.DemoJob;
+import cn.demo.springlearning.task.QuartzJob;
 import org.quartz.*;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -17,7 +17,7 @@ public class QuartzConfig {
 
     @Bean
     public JobDetail testJobDetail() {
-        return JobBuilder.newJob(DemoJob.class).withIdentity("demoJob").storeDurably().build();
+        return JobBuilder.newJob(QuartzJob.class).withIdentity("quartzJob").storeDurably().build();
     }
 
     @Bean
@@ -28,7 +28,7 @@ public class QuartzConfig {
         // 构建Trigger实例，每2s执行一次
         return TriggerBuilder.newTrigger()
                 .forJob(testJobDetail())
-                .withIdentity("demoJob")
+                .withIdentity("quartzJob")
                 .withSchedule(scheduleBuilder)
                 .build();
     }

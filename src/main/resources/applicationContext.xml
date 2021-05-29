@@ -2,8 +2,11 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:context="http://www.springframework.org/schema/context"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
-        http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/aop   https://www.springframework.org/schema/aop/spring-aop.xsd">
 
     <context:component-scan base-package="cn.demo.springlearning.bean"/>
 
@@ -18,6 +21,14 @@
         <property name="id" value="1"/>
         <property name="name" value="学生小明"/>
     </bean>
+    <!--属性注入方式：构造器-->
+    <bean id="cBean" class="cn.demo.springlearning.bean.SingletonBean">
+        <constructor-arg name="id" value="1" index="0" type="java.lang.Integer"/>
+        <constructor-arg name="name" value="小红" index="1" type="java.lang.String"/>
+    </bean>
+    <!--p名称空间注入-->
+    <bean id="pNameBean" class="cn.demo.springlearning.bean.SingletonBean" p:id="2" p:name="小强"/>
+
     <!--原型：每次根据原型克隆出新的对象-->
     <bean id="pBean" class="cn.demo.springlearning.bean.PrototypeBean" scope="prototype">
         <property name="id" value="1"/>
@@ -33,11 +44,51 @@
     <bean id="fBean" factory-bean="beanFactory" factory-method="getSingleton"/>
 
     <!--初始化及销毁方法-->
-    <bean id="initDestroy" class="cn.demo.springlearning.bean.SingletonBean" init-method="init" destroy-method="destroy">
+    <bean id="initDestroy" class="cn.demo.springlearning.bean.SingletonBean" init-method="init"
+          destroy-method="destroy">
         <property name="id" value="1"/>
         <property name="name" value="学生小明"/>
     </bean>
 
     <!--导入其他spring配置-->
     <import resource="tx.xml"/>
+
+    <!--复杂类型注入-->
+    <bean id="complexBean" class="cn.demo.springlearning.bean.ComplexInjectionBean">
+        <property name="intArray">
+            <array>
+                <value>1</value>
+                <value>4</value>
+            </array>
+        </property>
+        <property name="integers">
+            <list>
+                <value>2</value>
+                <value>3</value>
+            </list>
+        </property>
+        <property name="int2Str">
+            <map>
+                <entry key="1" value="你好"/>
+                <entry key="2" value="再见"/>
+            </map>
+        </property>
+    </bean>
+
+    <!--AOP-->
+    <!--1. 目标对象-->
+    <bean id="aopBean" class="cn.demo.springlearning.bean.AopBean"/>
+    <!--2. 通知（增强内容）-->
+    <bean id="myAdvice" class="cn.demo.springlearning.aop.MyAdvice"/>
+    <!--3. 织入过程-->
+    <aop:config>
+        <aop:pointcut id="pc" expression="execution(*cn.demo.springlearning.bean.AopBean.method())"/>
+        <aop:aspect ref="myAdvice">
+            <aop:before method="before" pointcut-ref="pc"/>
+            <aop:after-returning method="afterReturning" pointcut-ref="pc"/>
+<!--            <aop:around method="around" pointcut-ref="pc"/>-->
+            <aop:after-throwing method="afterException" pointcut-ref="pc"/>
+            <aop:after method="after" pointcut-ref="pc"/>
+        </aop:aspect>
+    </aop:config>
 </beans>

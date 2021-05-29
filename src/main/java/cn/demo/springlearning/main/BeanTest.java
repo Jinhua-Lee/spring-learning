@@ -1,10 +1,16 @@
 package cn.demo.springlearning.main;
 
+import cn.demo.springlearning.bean.AopBean;
+import cn.demo.springlearning.bean.ComplexInjectionBean;
 import cn.demo.springlearning.bean.SingletonBean;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.SneakyThrows;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.AbstractApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+import java.util.Arrays;
 
 /**
  * 非 Spring Boot环境
@@ -56,6 +62,36 @@ public class BeanTest {
     }
 
     /**
+     * 测试构造器注入
+     */
+    @Test
+    @SneakyThrows
+    public void testCtorInject() {
+        SingletonBean cBean = (SingletonBean) CONTEXT.getBean("cBean");
+        System.out.println(toString(cBean));
+    }
+
+    /**
+     * 测试p名称空间注入
+     */
+    @Test
+    public void pNameInject() {
+        SingletonBean pNameBean = (SingletonBean) CONTEXT.getBean("pNameBean");
+        System.out.println(toString(pNameBean));
+    }
+
+    /**
+     * 测试复杂类型注入
+     */
+    @Test
+    public void testComplexInjection() {
+        ComplexInjectionBean complexBean = (ComplexInjectionBean) CONTEXT.getBean("complexBean");
+        Arrays.stream(complexBean.getIntArray()).forEach(System.out::println);
+        complexBean.getIntegers().forEach(System.out::println);
+        complexBean.getInt2Str().forEach((k, v) -> System.out.println(k + "-->" + v));
+    }
+
+    /**
      * 测试初始化及销毁方法
      */
     @Test
@@ -63,7 +99,21 @@ public class BeanTest {
         SingletonBean initDestroy = (SingletonBean) CONTEXT.getBean("initDestroy");
         System.out.println(initDestroy);
         // TODO 2021/5/27 待确定Bean的销毁时机，目前仅知道从以下两个时机会执行destroy方法
-        ((AbstractApplicationContext)CONTEXT).close();
-        ((AbstractApplicationContext)CONTEXT).registerShutdownHook();
+        ((AbstractApplicationContext) CONTEXT).close();
+        ((AbstractApplicationContext) CONTEXT).registerShutdownHook();
+    }
+
+    /**
+     * 测试AOP方法增强
+     */
+    @Test
+    public void testAop() {
+        AopBean aopBean = (AopBean) CONTEXT.getBean("aopBean");
+        aopBean.method();
+    }
+
+    @SneakyThrows
+    private String toString(Object obj) {
+        return new ObjectMapper().writeValueAsString(obj);
     }
 }

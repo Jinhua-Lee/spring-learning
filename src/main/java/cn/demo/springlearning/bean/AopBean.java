@@ -1,5 +1,7 @@
 package cn.demo.springlearning.bean;
 
+import org.springframework.stereotype.Component;
+
 /**
  * 被代理的原始对象
  *
@@ -7,6 +9,7 @@ package cn.demo.springlearning.bean;
  * @version 1.0
  * @date 2021/5/29 20:46
  */
+@Component
 public class AopBean {
 
     public void method() {

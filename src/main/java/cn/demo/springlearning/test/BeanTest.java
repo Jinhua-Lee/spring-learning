@@ -1,16 +1,20 @@
-package cn.demo.springlearning.main;
+package cn.demo.springlearning.test;
 
 import cn.demo.springlearning.bean.AopBean;
 import cn.demo.springlearning.bean.ComplexInjectionBean;
 import cn.demo.springlearning.bean.SingletonBean;
+import cn.demo.springlearning.tx.User;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.mchange.v2.c3p0.ComboPooledDataSource;
 import lombok.SneakyThrows;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.AbstractApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.jdbc.core.JdbcTemplate;
 
 import java.util.Arrays;
+import java.util.List;
 
 /**
  * 非 Spring Boot环境
@@ -110,6 +114,22 @@ public class BeanTest {
     public void testAop() {
         AopBean aopBean = (AopBean) CONTEXT.getBean("aopBean");
         aopBean.method();
+    }
+
+    /**
+     * 测试JDBC
+     */
+    @Test
+    public void testJdbc() {
+        ComboPooledDataSource c3p0dataSource = new ComboPooledDataSource("c3p0-config.xml");
+        JdbcTemplate jTemplate = new JdbcTemplate(c3p0dataSource);
+        String sql = "select * from usr";
+        List<User> users = jTemplate.query(sql,
+                (rs, i) -> new User(rs.getInt("id"), rs.getString("name"),
+                rs.getString("pwd"), rs.getString("sex"),
+                rs.getString("home"), rs.getString("info")
+        ));
+        users.forEach(System.out::println);
     }
 
     @SneakyThrows

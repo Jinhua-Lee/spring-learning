@@ -75,20 +75,52 @@
         </property>
     </bean>
 
-    <!--AOP-->
-    <!--1. 目标对象-->
-    <bean id="aopBean" class="cn.demo.springlearning.bean.AopBean"/>
-    <!--2. 通知（增强内容）-->
-    <bean id="myAdvice" class="cn.demo.springlearning.aop.MyAdvice"/>
-    <!--3. 织入过程-->
-    <aop:config>
-        <aop:pointcut id="pc" expression="execution(*cn.demo.springlearning.bean.AopBean.method())"/>
-        <aop:aspect ref="myAdvice">
-            <aop:before method="before" pointcut-ref="pc"/>
-            <aop:after-returning method="afterReturning" pointcut-ref="pc"/>
-<!--            <aop:around method="around" pointcut-ref="pc"/>-->
-            <aop:after-throwing method="afterException" pointcut-ref="pc"/>
-            <aop:after method="after" pointcut-ref="pc"/>
-        </aop:aspect>
-    </aop:config>
+    <!--AOP XML方式-->
+
+<!--    &lt;!&ndash;1. 目标对象&ndash;&gt;-->
+<!--    <bean id="aopBean" class="cn.demo.springlearning.bean.AopBean"/>-->
+<!--    &lt;!&ndash;2. 通知（增强内容）&ndash;&gt;-->
+<!--    <bean id="myAdvice" class="cn.demo.springlearning.aop.MyAdvice"/>-->
+<!--    &lt;!&ndash;3. 织入过程&ndash;&gt;-->
+<!--    <aop:config>-->
+<!--        <aop:pointcut id="pc" expression="execution(* cn.demo.springlearning.bean.AopBean.method())"/>-->
+<!--        <aop:aspect ref="myAdvice">-->
+<!--            <aop:before method="before" pointcut-ref="pc"/>-->
+<!--            <aop:after-returning method="afterReturning" pointcut-ref="pc"/>-->
+<!--            <aop:around method="around" pointcut-ref="pc" arg-names="pjp"/>-->
+<!--            <aop:after-throwing method="afterThrowing" pointcut-ref="pc"/>-->
+<!--            <aop:after method="after" pointcut-ref="pc"/>-->
+<!--        </aop:aspect>-->
+<!--    </aop:config>-->
+
+    <!--AOP 注解方式-->
+    <context:component-scan base-package="cn.demo.springlearning.aop"/>
+
+    <context:property-placeholder location="classpath*:mysql.properties" ignore-unresolvable="true"/>
+    <context:component-scan base-package="cn.demo.springlearning.test"/>
+
+<!--    &lt;!&ndash;MySQL 数据库驱动&ndash;&gt;-->
+<!--    <bean id="driver" class="com.mysql.cj.jdbc.Driver"/>-->
+
+    <!--Druid 数据库连接池-->
+    <bean id="druidDataSource" class="com.alibaba.druid.pool.DruidDataSource">
+        <property name="driverClassName" value="${jdbc.driver}"/>
+        <property name="url" value="${jdbc.url}"/>
+        <property name="username" value="${jdbc.user}"/>
+        <property name="password" value="${jdbc.password}"/>
+    </bean>
+
+    <!--C3P0 数据库连接池-->
+    <bean id="comboPooledDataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+        <property name="driverClass" value="${jdbc.driver}"/>
+        <property name="jdbcUrl" value="${jdbc.url}"/>
+        <property name="user" value="${jdbc.user}"/>
+        <property name="password" value="${jdbc.password}"/>
+    </bean>
+
+    <!--JDBC模板-->
+    <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+        <property name="dataSource" ref="comboPooledDataSource"/>
+    </bean>
+
 </beans>

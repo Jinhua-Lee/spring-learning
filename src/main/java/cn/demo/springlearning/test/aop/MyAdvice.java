@@ -1,4 +1,4 @@
-package cn.demo.springlearning.aop;
+package cn.demo.springlearning.test.aop;
 
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.*;
@@ -17,7 +17,7 @@ import org.springframework.stereotype.Component;
 @EnableAspectJAutoProxy
 public class MyAdvice {
 
-    @Pointcut(value = "execution(* cn.demo.springlearning.bean.AopBean.method())")
+    @Pointcut(value = "execution(* cn.demo.springlearning.test.bean.AopBean.method())")
     public void pc() {
     }
 

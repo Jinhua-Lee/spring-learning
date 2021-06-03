@@ -1,9 +1,7 @@
 package cn.demo.springlearning.test;
 
-import lombok.SneakyThrows;
+import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
@@ -15,15 +13,9 @@ import org.springframework.stereotype.Component;
  * @date 2021/6/1 22:36
  */
 @Component
-public class MyJdbcTemplateDemo {
+public class MyJdbcTemplateTest extends MyApplicationContext {
 
     private JdbcTemplate template;
-
-    private static final ApplicationContext CONTEXT;
-
-    static {
-        CONTEXT = new ClassPathXmlApplicationContext("applicationContext.xml");
-    }
 
     @Autowired
     public void setTemplate(JdbcTemplate template) {
@@ -35,8 +27,9 @@ public class MyJdbcTemplateDemo {
         return template.queryForObject(sql, int.class);
     }
 
-    public static void main(String[] args) {
-        MyJdbcTemplateDemo demo = (MyJdbcTemplateDemo) CONTEXT.getBean("myJdbcTemplateDemo");
+    @Test
+    public void testJdbcTemplate() {
+        MyJdbcTemplateTest demo = (MyJdbcTemplateTest) CONTEXT.getBean("myJdbcTemplateTest");
         Integer totalCount = demo.getTotalCount();
         System.out.println("totalCount = " + totalCount);
     }

@@ -1,16 +1,14 @@
 package cn.demo.springlearning.test;
 
-import cn.demo.springlearning.bean.AopBean;
-import cn.demo.springlearning.bean.ComplexInjectionBean;
-import cn.demo.springlearning.bean.SingletonBean;
-import cn.demo.springlearning.tx.User;
+import cn.demo.springlearning.test.bean.AopBean;
+import cn.demo.springlearning.test.bean.ComplexInjectionBean;
+import cn.demo.springlearning.test.bean.SingletonBean;
+import cn.demo.springlearning.test.entity.User;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mchange.v2.c3p0.ComboPooledDataSource;
 import lombok.SneakyThrows;
 import org.junit.Test;
-import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.AbstractApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import java.util.Arrays;
@@ -23,17 +21,7 @@ import java.util.List;
  * @version 1.0
  * @date 2021/5/24 21:14
  */
-public class BeanTest {
-
-    private static final ApplicationContext CONTEXT;
-
-    static {
-        CONTEXT = new ClassPathXmlApplicationContext("applicationContext.xml");
-    }
-
-    public static void main(String[] args) {
-
-    }
+public class BeanTest extends MyApplicationContext {
 
     /**
      * 修改XML中的scope，测试单例和原型
@@ -122,9 +110,9 @@ public class BeanTest {
     @Test
     public void testJdbc() {
         ComboPooledDataSource c3p0dataSource = new ComboPooledDataSource("c3p0-config.xml");
-        JdbcTemplate jTemplate = new JdbcTemplate(c3p0dataSource);
+        JdbcTemplate template = new JdbcTemplate(c3p0dataSource);
         String sql = "select * from usr";
-        List<User> users = jTemplate.query(sql,
+        List<User> users = template.query(sql,
                 (rs, i) -> new User(rs.getInt("id"), rs.getString("name"),
                 rs.getString("pwd"), rs.getString("sex"),
                 rs.getString("home"), rs.getString("info")

@@ -1,4 +1,4 @@
-package cn.demo.springlearning.bean;
+package cn.demo.springlearning.test.bean;
 
 import org.springframework.stereotype.Component;
 

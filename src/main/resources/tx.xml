@@ -1,6 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mybatis="http://mybatis.org/schema/mybatis-spring"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd
+         http://mybatis.org/schema/mybatis-spring https://mybatis.org/schema/mybatis-spring.xsd">
+
+    <context:component-scan base-package="cn.demo.springlearning.test.tx"/>
+
+    <!--读取外部配置文件-->
+    <context:property-placeholder location="classpath*:mysql.properties"/>
+
+    <!-- sqlSessionFactory -->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <!-- 加载 MyBatis 的配置文件 -->
+        <property name="configLocation" value="SqlMapConfig.xml"/>
+        <!-- 数据源 -->
+        <property name="dataSource" ref="druidDataSource"/>
+    </bean>
+
+    <!--Mapper动态代理开发，自动实现Mapper-->
+    <mybatis:scan base-package="cn.demo.springlearning.test.tx"/>
+    <!--Mapper动态代理开发增强扫描,甚至可以自动扫描工厂-->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <!--可以扫描基本表及其子包-->
+        <property name="basePackage" value="cn.demo.springlearning.test.tx"/>
+    </bean>
+
+    <!--配置Spring AOP核心事务管理器-->
+    <bean name="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="druidDataSource"/>
+    </bean>
 
 </beans>

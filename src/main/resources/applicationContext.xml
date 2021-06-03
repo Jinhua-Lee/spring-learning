@@ -1,106 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xmlns:context="http://www.springframework.org/schema/context"
-       xmlns:p="http://www.springframework.org/schema/p"
-       xmlns:aop="http://www.springframework.org/schema/aop"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
-        http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd
-        http://www.springframework.org/schema/aop   https://www.springframework.org/schema/aop/spring-aop.xsd">
+       xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd">
 
-    <context:component-scan base-package="cn.demo.springlearning.bean"/>
-
-    <!--    scope：-->
-    <!--        1) singleton（默认，初始化即创建）-->
-    <!--        2) prototype（每次获取，根据原型创建）-->
-    <!--        3) request（Web环境，bean生命周期与request一致）-->
-    <!--        4) session（Web环境，bean生命周期与session一致）-->
-
-    <!--单例：每次返回同一个-->
-    <bean id="sBean" class="cn.demo.springlearning.bean.SingletonBean">
-        <property name="id" value="1"/>
-        <property name="name" value="学生小明"/>
-    </bean>
-    <!--属性注入方式：构造器-->
-    <bean id="cBean" class="cn.demo.springlearning.bean.SingletonBean">
-        <constructor-arg name="id" value="1" index="0" type="java.lang.Integer"/>
-        <constructor-arg name="name" value="小红" index="1" type="java.lang.String"/>
-    </bean>
-    <!--p名称空间注入-->
-    <bean id="pNameBean" class="cn.demo.springlearning.bean.SingletonBean" p:id="2" p:name="小强"/>
-
-    <!--原型：每次根据原型克隆出新的对象-->
-    <bean id="pBean" class="cn.demo.springlearning.bean.PrototypeBean" scope="prototype">
-        <property name="id" value="1"/>
-        <property name="name" value="学生小明"/>
-    </bean>
-
-    <!--静态工厂构造：静态方法，只需指定所在类即可-->
-    <bean id="beanStatic" class="cn.demo.springlearning.factory.MyBeanFactory"
-          factory-method="getSingletonStatic"/>
-
-    <!--实例工厂创建：需要将工厂注册为bean-->
-    <bean id="beanFactory" class="cn.demo.springlearning.factory.MyBeanFactory"/>
-    <bean id="fBean" factory-bean="beanFactory" factory-method="getSingleton"/>
-
-    <!--初始化及销毁方法-->
-    <bean id="initDestroy" class="cn.demo.springlearning.bean.SingletonBean" init-method="init"
-          destroy-method="destroy">
-        <property name="id" value="1"/>
-        <property name="name" value="学生小明"/>
-    </bean>
-
-    <!--导入其他spring配置-->
+    <!--通过打开或关闭注释，来调试不同功能-->
+<!--    <import resource="bean.xml"/>-->
     <import resource="tx.xml"/>
-
-    <!--复杂类型注入-->
-    <bean id="complexBean" class="cn.demo.springlearning.bean.ComplexInjectionBean">
-        <property name="intArray">
-            <array>
-                <value>1</value>
-                <value>4</value>
-            </array>
-        </property>
-        <property name="integers">
-            <list>
-                <value>2</value>
-                <value>3</value>
-            </list>
-        </property>
-        <property name="int2Str">
-            <map>
-                <entry key="1" value="你好"/>
-                <entry key="2" value="再见"/>
-            </map>
-        </property>
-    </bean>
-
-    <!--AOP XML方式-->
-
-<!--    &lt;!&ndash;1. 目标对象&ndash;&gt;-->
-<!--    <bean id="aopBean" class="cn.demo.springlearning.bean.AopBean"/>-->
-<!--    &lt;!&ndash;2. 通知（增强内容）&ndash;&gt;-->
-<!--    <bean id="myAdvice" class="cn.demo.springlearning.aop.MyAdvice"/>-->
-<!--    &lt;!&ndash;3. 织入过程&ndash;&gt;-->
-<!--    <aop:config>-->
-<!--        <aop:pointcut id="pc" expression="execution(* cn.demo.springlearning.bean.AopBean.method())"/>-->
-<!--        <aop:aspect ref="myAdvice">-->
-<!--            <aop:before method="before" pointcut-ref="pc"/>-->
-<!--            <aop:after-returning method="afterReturning" pointcut-ref="pc"/>-->
-<!--            <aop:around method="around" pointcut-ref="pc" arg-names="pjp"/>-->
-<!--            <aop:after-throwing method="afterThrowing" pointcut-ref="pc"/>-->
-<!--            <aop:after method="after" pointcut-ref="pc"/>-->
-<!--        </aop:aspect>-->
-<!--    </aop:config>-->
-
-    <!--AOP 注解方式-->
-    <context:component-scan base-package="cn.demo.springlearning.aop"/>
-
-    <context:property-placeholder location="classpath*:mysql.properties" ignore-unresolvable="true"/>
-    <context:component-scan base-package="cn.demo.springlearning.test"/>
-
-<!--    &lt;!&ndash;MySQL 数据库驱动&ndash;&gt;-->
-<!--    <bean id="driver" class="com.mysql.cj.jdbc.Driver"/>-->
 
     <!--Druid 数据库连接池-->
     <bean id="druidDataSource" class="com.alibaba.druid.pool.DruidDataSource">
@@ -118,9 +23,11 @@
         <property name="password" value="${jdbc.password}"/>
     </bean>
 
-    <!--JDBC模板-->
-    <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
-        <property name="dataSource" ref="comboPooledDataSource"/>
+    <!--Spring 驱动管理连接池-->
+    <bean id="driverManagerDataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName" value="${jdbc.driver}"/>
+        <property name="url" value="${jdbc.url}"/>
+        <property name="username" value="${jdbc.user}"/>
+        <property name="password" value="${jdbc.password}"/>
     </bean>
-
 </beans>

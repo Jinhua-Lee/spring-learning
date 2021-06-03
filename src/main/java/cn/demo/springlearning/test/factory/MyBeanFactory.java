@@ -1,6 +1,6 @@
-package cn.demo.springlearning.factory;
+package cn.demo.springlearning.test.factory;
 
-import cn.demo.springlearning.bean.SingletonBean;
+import cn.demo.springlearning.test.bean.SingletonBean;
 
 /**
  * 简单工厂

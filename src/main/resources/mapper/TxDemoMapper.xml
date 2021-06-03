@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF8" ?>
+
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.demo.springlearning.test.tx.TxDemoMapper">
+
+    <insert id="upsertBalance" useGeneratedKeys="true" parameterType="cn.demo.springlearning.test.entity.Account">
+        insert into account(name, age, balance)
+        values (#{name}, #{age}, #{balance})
+        on duplicate key update
+        balance = balance + #{balance}
+    </insert>
+
+</mapper>

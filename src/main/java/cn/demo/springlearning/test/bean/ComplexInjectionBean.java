@@ -1,4 +1,4 @@
-package cn.demo.springlearning.bean;
+package cn.demo.springlearning.test.bean;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

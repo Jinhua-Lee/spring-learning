@@ -1,4 +1,4 @@
-package cn.demo.springlearning.tx;
+package cn.demo.springlearning.test.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -21,7 +21,7 @@ public class User {
     /**
      * 用户Id
      */
-    private int id;
+    private Integer id;
 
     /**
      * 用户名

@@ -1,4 +1,4 @@
-package cn.demo.springlearning.core;
+package cn.demo.springlearning.test.core;
 
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.BeanPostProcessor;

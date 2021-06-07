@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF8" ?>
+
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.demo.springlearning.test.tx.PropagationMapper">
+
+    <insert id="addCommodity" useGeneratedKeys="false">
+        insert into commodity(name, price, produceCity)
+        values
+        <foreach collection="commodities" item="commodity" separator=", " open="(" close=")">
+            #{name}, #{price}, #{produceCity}
+        </foreach>
+    </insert>
+</mapper>

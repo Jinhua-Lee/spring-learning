@@ -3,6 +3,8 @@ package cn.demo.springlearning.test;
 import cn.demo.springlearning.test.entity.Account;
 import cn.demo.springlearning.test.tx.TxDemoService;
 import org.junit.Test;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 
@@ -25,5 +27,15 @@ public class TxTest extends MyApplicationContext {
                 .build();
         boolean success = txService.updateBalance(account);
         System.out.println("success = " + success);
+    }
+
+    @Test
+    @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+    public void testTransfer() {
+        TxDemoService txService = (TxDemoService) CONTEXT.getBean("txDemoService");
+        Account from = new Account(7, null, null, null);
+        Account to = new Account(1, null, null, null);
+        BigDecimal amount = BigDecimal.valueOf(3000);
+        txService.transfer(from, to, amount);
     }
 }

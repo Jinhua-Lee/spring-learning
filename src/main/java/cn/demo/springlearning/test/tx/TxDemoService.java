@@ -3,8 +3,12 @@ package cn.demo.springlearning.test.tx;
 import cn.demo.springlearning.test.entity.Account;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.CollectionUtils;
 
+import java.math.BigDecimal;
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -17,11 +21,11 @@ import java.util.Objects;
 @Service
 public class TxDemoService {
 
-    private TxDemoMapper demoDao;
+    private TxDemoMapper demoMapper;
 
     @Autowired
-    public void setDemoDao(TxDemoMapper demoDao) {
-        this.demoDao = demoDao;
+    public void setDemoMapper(TxDemoMapper demoMapper) {
+        this.demoMapper = demoMapper;
     }
 
     @Transactional(rollbackFor = Exception.class)
@@ -32,6 +36,29 @@ public class TxDemoService {
                 || Objects.isNull(account.getBalance())) {
             throw new IllegalArgumentException("不合法入参");
         }
-        return demoDao.upsertBalance(account) > 0;
+        return demoMapper.upsertBalance(account) > 0;
+    }
+
+    @Transactional(propagation = Propagation.REQUIRED, rollbackFor = RuntimeException.class)
+    public void transfer(Account from, Account to, BigDecimal amount) {
+        // 1. 转账金额入参校验
+        if (amount.compareTo(BigDecimal.ZERO) < 0) {
+            throw new IllegalArgumentException("转账金额必须大于0");
+        }
+        // 2. from账户余额校验
+        List<Account> accountDos = demoMapper.getBalanceById(from);
+        if (CollectionUtils.isEmpty(accountDos) || accountDos.get(0).getBalance().compareTo(amount) < 0) {
+            throw new RuntimeException("账户不存在，或者账户余额不足！");
+        }
+        // 3. 开始转账逻辑
+        from.setBalance(amount.negate().doubleValue());
+        to.setBalance(amount.doubleValue());
+        if (demoMapper.updateBalance(from) < 1) {
+            throw new RuntimeException("from 账户更新失败！");
+        }
+        int i = 1 / 0;
+        if (demoMapper.updateBalance(to) < 1) {
+            throw new RuntimeException("to 账户更新失败！");
+        }
     }
 }

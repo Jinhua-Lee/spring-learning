@@ -14,7 +14,7 @@
 
     <!--查询指定账户的余额-->
     <select id="getBalanceById" resultType="cn.demo.springlearning.test.entity.Account">
-        select *
+        select id, balance
         from account
         where id = #{id};
     </select>

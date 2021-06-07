@@ -2,6 +2,7 @@ package cn.demo.springlearning.test.entity;
 
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 
@@ -13,6 +14,7 @@ import java.math.BigDecimal;
  * @date 2021/6/3 23:40
  */
 @Data
+@NoArgsConstructor
 @Builder
 public class Account {
 

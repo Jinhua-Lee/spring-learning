@@ -30,7 +30,6 @@ public class TxTest extends MyApplicationContext {
     }
 
     @Test
-    @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public void testTransfer() {
         TxDemoService txService = (TxDemoService) CONTEXT.getBean("txDemoService");
         Account from = new Account(7, null, null, null);

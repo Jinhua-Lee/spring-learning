@@ -1,6 +1,7 @@
 package cn.demo.springlearning.test.tx;
 
 import cn.demo.springlearning.test.entity.Commodity;
+import cn.demo.springlearning.test.entity.Customer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -10,7 +11,8 @@ import org.springframework.util.CollectionUtils;
 import java.util.List;
 
 /**
- * 事务传播行为测试的业务类
+ * 事务传播行为测试的业务类<p>&emsp;
+ * 修改两个业务方法的事务注解，测试七种传播行为
  *
  * @author Jinhua
  * @version 1.0
@@ -26,11 +28,23 @@ public class PropagationService {
         this.propagationMapper = propagationMapper;
     }
 
-    @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
-    public boolean addCommodity(List<Commodity> commodities) {
+    @Transactional(propagation = Propagation.NEVER, rollbackFor = Exception.class)
+    public boolean addCommodities(List<Commodity> commodities) {
         if (CollectionUtils.isEmpty(commodities)) {
             throw new RuntimeException("待插入集合不能为空！");
         }
-        return propagationMapper.addCommodity(commodities) > 0;
+        int insert = propagationMapper.addCommodities(commodities);
+        System.out.println("insert = " + insert);
+        return insert > 0;
+    }
+
+    @Transactional(propagation = Propagation.NEVER, rollbackFor = Exception.class)
+    public boolean addCustomers(List<Customer> customers) {
+        if (CollectionUtils.isEmpty(customers)) {
+            throw new RuntimeException("待插入集合不能为空！");
+        }
+        int insert = propagationMapper.addCustomers(customers);
+        System.out.println("insert = " + insert);
+        return insert > 0;
     }
 }

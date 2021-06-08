@@ -1,6 +1,7 @@
 package cn.demo.springlearning.test.tx;
 
 import cn.demo.springlearning.test.entity.Commodity;
+import cn.demo.springlearning.test.entity.Customer;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -21,5 +22,13 @@ public interface PropagationMapper {
      * @param commodities 商品实体列表
      * @return 受影响的行数
      */
-    int addCommodity(List<Commodity> commodities);
+    int addCommodities(List<Commodity> commodities);
+
+    /**
+     * 添加顾客的方法
+     *
+     * @param customers 顾客
+     * @return 受影响的行数
+     */
+    int addCustomers(List<Customer> customers);
 }

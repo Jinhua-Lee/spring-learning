@@ -58,5 +58,6 @@
     <mappers>
 <!--        <package name="cn.demo.springlearning.test.tx"/>-->
         <mapper resource="mapper/TxDemoMapper.xml"/>
+        <mapper resource="mapper/PropagationMapper.xml"/>
     </mappers>
 </configuration>

@@ -56,7 +56,9 @@ public class TxDemoService {
         if (demoMapper.updateBalance(from) < 1) {
             throw new RuntimeException("from 账户更新失败！");
         }
-        int i = 1 / 0;
+        if (true) {
+            throw new RuntimeException("手动抛出 [运行时异常] ");
+        }
         if (demoMapper.updateBalance(to) < 1) {
             throw new RuntimeException("to 账户更新失败！");
         }

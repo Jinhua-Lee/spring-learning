@@ -28,7 +28,7 @@ public class PropagationService {
         this.propagationMapper = propagationMapper;
     }
 
-    @Transactional(propagation = Propagation.NEVER, rollbackFor = Exception.class)
+    @Transactional(propagation = Propagation.SUPPORTS, rollbackFor = Exception.class)
     public boolean addCommodities(List<Commodity> commodities) {
         if (CollectionUtils.isEmpty(commodities)) {
             throw new RuntimeException("待插入集合不能为空！");
@@ -38,13 +38,26 @@ public class PropagationService {
         return insert > 0;
     }
 
-    @Transactional(propagation = Propagation.NEVER, rollbackFor = Exception.class)
+    @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public boolean addCustomers(List<Customer> customers) {
         if (CollectionUtils.isEmpty(customers)) {
             throw new RuntimeException("待插入集合不能为空！");
         }
         int insert = propagationMapper.addCustomers(customers);
         System.out.println("insert = " + insert);
+        return insert > 0;
+    }
+
+    @Transactional(propagation = Propagation.SUPPORTS, rollbackFor = Exception.class)
+    public boolean addCustomersException(List<Customer> customers) {
+        if (CollectionUtils.isEmpty(customers)) {
+            throw new RuntimeException("待插入集合不能为空！");
+        }
+        int insert = propagationMapper.addCustomers(customers);
+        System.out.println("insert = " + insert);
+        if (true) {
+            throw new RuntimeException("手动抛出 [运行时异常] ");
+        }
         return insert > 0;
     }
 }

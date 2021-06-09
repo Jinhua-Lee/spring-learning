@@ -1,4 +1,4 @@
-# 01_Spring事务小结
+# 02_Spring事务传播行为小结
 
 ## 〇、约定
 
@@ -86,7 +86,13 @@ public class PropagationTest {
 }
 ```
 
-## 一、七种事务传播行为概述
+## 一、七种事务传播行为
+
+### 0. 个人总结规律
+
+1. 嵌套调用和扁平组合两种方式，即可构建一个类似于对象引用关系的事务调用关系。
+2. 总是通过上层调用方来决定自身是否启用事务，启用哪个事务。
+3. 自身仅表示准备好了一个原子过程，是否以原子方式执行。
 
 ### 1. Required（有担当）
 
@@ -154,9 +160,8 @@ public class RequireTest extends PropagationTest {
         try {
             boolean cusRes = propagationService.addCustomersException(buildCustomers());
             System.out.println("cusRes = " + cusRes);
-        } catch (Exception e) {
+        } catch (Exception ignored) {
             // 即使被catch不被外部感知，但发生回滚，同属外围事务，会被事务管理器监测到。整个事务都回滚。（测试成功）
-            e.printStackTrace();
         }
     }
 }
@@ -396,13 +401,12 @@ public class NestedTest extends PropagationTest {
     @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public void testTx_Nested_NestedExTry() {
         boolean comRes = propagationService.addCommodities(buildCommodities());
-
         System.out.println("comRes = " + comRes);
         try {
             boolean cusRes = propagationService.addCustomersException(buildCustomers());
             System.out.println("cusRes = " + cusRes);
         } catch (Exception ignored) {
-            // 顾客事务发生异常回滚，上层事务也要回滚，则所有都插入失败！（测试成功）
+            // FIXME: 2021/6/9 顾客事务发生异常回滚，但异常不暴露给上层，上层事务执行成功，则商品插入成功，顾客插入失败！（测试失败！）
         }
     }
 
@@ -422,5 +426,14 @@ public class NestedTest extends PropagationTest {
 }
 ```
 
-## 二、事务隔离级别小结
+这里需要注意两点：
 
+- 和**REQUIRES_NEW**的区别
+
+> **REQUIRES_NEW**是新建一个事务并且新开启的这个事务**与原有事务无关**，而NESTED则是当前存在事务时（我们把当前事务称之为父事务）会开启一个嵌套事务（称之为一个子事务）。
+> 在NESTED情况下父事务回滚时，子事务也会回滚，而在REQUIRES_NEW情况下，原有事务回滚，不会影响新开启的事务。
+
+- 和**REQUIRED**的区别
+
+> **REQUIRED**情况下，调用方存在事务时，则被调用方和调用方**使用同一事务**，那么被调用方出现异常时，由于共用一个事务，所以无论调用方是否catch其异常，事务都会回滚
+> 而在**NESTED**情况下，被调用方发生异常时，调用方**可以catch其异常，这样只有子事务回滚**，父事务不受影响

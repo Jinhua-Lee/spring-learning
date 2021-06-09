@@ -2,6 +2,7 @@ package cn.demo.springlearning.test.propagation;
 
 import cn.demo.springlearning.test.PropagationTest;
 import org.junit.Test;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
@@ -14,16 +15,31 @@ import org.springframework.transaction.annotation.Transactional;
 public class NotSupportedTest extends PropagationTest {
 
     /**
-     * 非事务方式执行操作。当前存在事务，就把当前事务挂起
+     * 5.1 不存在，则以非事务方式执行操作
      */
     @Test
-    @Transactional
-    public void testNotSupported() {
+    public void testNoTx_NotSupported_NotSupportedEx() {
+        boolean comRes = propagationService.addCommodities(buildCommodities());
+        if (true) {
+            throw new RuntimeException("手动抛出 [运行时异常] ");
+        }
+        boolean cusRes = propagationService.addCustomers(buildCustomers());
+        System.out.println("comRes = " + comRes);
+        System.out.println("cusRes = " + cusRes);
+        // 非事务方式，商品插入成功，顾客插入失败！（测试成功）
+    }
+
+    /**
+     * 5.2 当前存在事务，就把当前事务挂起（影响上层事务）
+     */
+    @Test
+    @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+    public void testTx_NotSupported_NotSupportedEx() {
         boolean comRes = propagationService.addCommodities(buildCommodities());
         boolean cusRes = propagationService.addCustomers(buildCustomers());
         System.out.println("comRes = " + comRes);
         System.out.println("cusRes = " + cusRes);
-        // 无论当前方法是否开启事务，都以非事务方式执行，两批都插入成功！（测试通过）
         throw new RuntimeException("手动抛出 [运行时异常] ");
+        // 非事务方式，挂起上层事务，商品和顾客都插入成功！（测试成功）
     }
 }

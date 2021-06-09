@@ -2,6 +2,7 @@ package cn.demo.springlearning.test.propagation;
 
 import cn.demo.springlearning.test.PropagationTest;
 import org.junit.Test;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
@@ -15,19 +16,31 @@ import org.springframework.transaction.annotation.Transactional;
  */
 public class NeverTest extends PropagationTest {
 
-
     /**
-     * 以非事务方式执行；
+     * 6.1 以非事务方式执行
      */
     @Test
-    @Transactional
-    public void testNever() {
+    public void testNoTx_Never_Never() {
+        boolean comRes = propagationService.addCommodities(buildCommodities());
+        if (true) {
+            throw new RuntimeException("手动抛出 [运行时异常] ");
+        }
+        boolean cusRes = propagationService.addCustomers(buildCustomers());
+        System.out.println("comRes = " + comRes);
+        System.out.println("cusRes = " + cusRes);
+        // 非事务方式，商品插入成功，顾客插入失败！（测试成功）
+    }
+
+    /**
+     * 6.2 上层存在事务，则直接抛出异常
+     */
+    @Test
+    @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+    public void testTx_Never_Never() {
         boolean comRes = propagationService.addCommodities(buildCommodities());
         boolean cusRes = propagationService.addCustomers(buildCustomers());
         System.out.println("comRes = " + comRes);
         System.out.println("cusRes = " + cusRes);
-        // 1. 该测试方法未开启事务，以非事务方式执行，两批数据都插入成功！（测试通过）
-        // TODO: 2021/6/8 2. 该测试方法开启事务，不执行，抛出异常！（测试失败）
-        throw new RuntimeException("手动抛出 [运行时异常] ");
+        // 上层存在事务，直接抛异常，方法不执行，商品和顾客都插入失败！（测试成功）
     }
 }

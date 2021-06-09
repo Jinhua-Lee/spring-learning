@@ -68,16 +68,15 @@ public class RequireTest extends PropagationTest {
      * 即使被catch不被外部感知，但发生回滚了。整个事务都回滚
      */
     @Test
-    @Transactional
+    @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public void testTxOut_Required_RequiredExTry() {
         boolean comRes = propagationService.addCommodities(buildCommodities());
         System.out.println("comRes = " + comRes);
         try {
             boolean cusRes = propagationService.addCustomersException(buildCustomers());
             System.out.println("cusRes = " + cusRes);
-        } catch (Exception e) {
+        } catch (Exception ignored) {
             // 即使被catch不被外部感知，但发生回滚了，会被事务管理器监测到。整个事务都回滚。（测试成功）
-            e.printStackTrace();
         }
     }
 }

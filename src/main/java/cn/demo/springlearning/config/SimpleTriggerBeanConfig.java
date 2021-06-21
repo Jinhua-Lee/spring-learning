@@ -15,7 +15,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class SimpleTriggerBeanConfig {
 
-    @Bean
+//    @Bean
     public SimpleTrigger config() {
         SimpleTriggerFactoryBean factoryBean = new SimpleTriggerFactoryBean();
         factoryBean.setStartDelay(0L);

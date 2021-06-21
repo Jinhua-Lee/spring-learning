@@ -20,7 +20,7 @@ public class QuartzConfig {
         return JobBuilder.newJob(QuartzJob.class).withIdentity("quartzJob").storeDurably().build();
     }
 
-    @Bean
+//    @Bean
     public Trigger testTrigger() {
         SimpleScheduleBuilder scheduleBuilder = SimpleScheduleBuilder.simpleSchedule()
                 .withIntervalInSeconds(2)

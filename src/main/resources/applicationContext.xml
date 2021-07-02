@@ -4,7 +4,7 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd">
 
     <!--通过打开或关闭注释，来调试不同功能-->
-<!--    <import resource="bean.xml"/>-->
+    <import resource="bean.xml"/>
     <import resource="tx.xml"/>
 
     <!--Druid 数据库连接池-->

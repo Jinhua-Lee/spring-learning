@@ -1,8 +1,8 @@
 package cn.demo.springlearning.test;
 
-import cn.demo.springlearning.test.entity.Commodity;
-import cn.demo.springlearning.test.entity.Customer;
-import cn.demo.springlearning.test.tx.PropagationService;
+import cn.demo.springlearning.entity.Commodity;
+import cn.demo.springlearning.entity.Customer;
+import cn.demo.springlearning.service.PropagationService;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;

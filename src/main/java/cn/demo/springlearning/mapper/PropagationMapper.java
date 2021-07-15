@@ -1,7 +1,7 @@
-package cn.demo.springlearning.test.tx;
+package cn.demo.springlearning.mapper;
 
-import cn.demo.springlearning.test.entity.Commodity;
-import cn.demo.springlearning.test.entity.Customer;
+import cn.demo.springlearning.entity.Commodity;
+import cn.demo.springlearning.entity.Customer;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;

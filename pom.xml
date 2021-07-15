@@ -47,6 +47,20 @@
             <version>${parent.version}</version>
         </dependency>
 
+        <!--Spring Data JPA-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
+            <version>2.5.2</version>
+        </dependency>
+
+        <!--分页插件-->
+        <dependency>
+            <groupId>com.github.pagehelper</groupId>
+            <artifactId>pagehelper</artifactId>
+            <version>5.2.1</version>
+        </dependency>
+
         <!--Spring 整合Mybatis-->
         <dependency>
             <groupId>org.mybatis.spring.boot</groupId>

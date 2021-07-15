@@ -1,6 +1,7 @@
-package cn.demo.springlearning.test.tx;
+package cn.demo.springlearning.service;
 
-import cn.demo.springlearning.test.entity.Account;
+import cn.demo.springlearning.mapper.TxDemoMapper;
+import cn.demo.springlearning.entity.Account;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;

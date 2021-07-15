@@ -1,7 +1,8 @@
-package cn.demo.springlearning.test.tx;
+package cn.demo.springlearning.service;
 
-import cn.demo.springlearning.test.entity.Commodity;
-import cn.demo.springlearning.test.entity.Customer;
+import cn.demo.springlearning.mapper.PropagationMapper;
+import cn.demo.springlearning.entity.Commodity;
+import cn.demo.springlearning.entity.Customer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;

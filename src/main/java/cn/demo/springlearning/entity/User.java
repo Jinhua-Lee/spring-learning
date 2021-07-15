@@ -1,4 +1,4 @@
-package cn.demo.springlearning.test.entity;
+package cn.demo.springlearning.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

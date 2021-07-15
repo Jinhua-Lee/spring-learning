@@ -3,25 +3,37 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="cn.demo.springlearning.test.tx.TxDemoMapper">
+<mapper namespace="cn.demo.springlearning.mapper.TxDemoMapper">
 
-    <insert id="upsertBalance" useGeneratedKeys="true" parameterType="cn.demo.springlearning.test.entity.Account">
+    <insert id="upsertBalance" useGeneratedKeys="true" parameterType="cn.demo.springlearning.entity.Account">
         insert into account(name, age, balance)
         values (#{name}, #{age}, #{balance})
         on duplicate key update
-        balance = balance + #{balance};
+        balance = balance + #{balance}
     </insert>
 
     <!--查询指定账户的余额-->
-    <select id="getBalanceById" resultType="cn.demo.springlearning.test.entity.Account">
+    <select id="getBalanceById" resultType="cn.demo.springlearning.entity.Account">
         select id, balance
         from account
-        where id = #{id};
+        where id = #{id}
+    </select>
+
+    <!--查询所有账户-->
+    <select id="getAllAccounts" resultType="cn.demo.springlearning.entity.Account">
+        select id, name, age, balance
+        from account
+    </select>
+
+    <!--分页查询账户-->
+    <select id="getAccountsByPage" resultType="cn.demo.springlearning.entity.Account">
+        select id, name, age, balance
+        from account
     </select>
 
     <update id="updateBalance">
         update account
         set balance = balance + #{balance}
-        where id = #{id};
+        where id = #{id}
     </update>
 </mapper>

@@ -30,12 +30,11 @@
 <!--        <setting name="jdbcTypeForNull" value="NULL"/>-->
 <!--    </settings>-->
     <typeAliases>
-        <package name="cn.demo.springlearning.test.tx"/>
+        <package name="cn.demo.springlearning.mapper"/>
     </typeAliases>
 <!--    <plugins>-->
-<!--        &lt;!&ndash;MyBatis分页插件&ndash;&gt;-->
-<!--        <plugin interceptor="com.github.pagehelper.PageHelper">-->
-<!--            <property name="dialect" value="mysql"/>-->
+<!--        &lt;!&ndash;MyBatis分页插件，4.0+版本要改为 Interceptor&ndash;&gt;-->
+<!--        <plugin interceptor="com.github.pagehelper.PageInterceptor">-->
 <!--            <property name="offsetAsPageNum" value="false"/>-->
 <!--            <property name="rowBoundsWithCount" value="false"/>-->
 <!--            <property name="pageSizeZero" value="false"/>-->

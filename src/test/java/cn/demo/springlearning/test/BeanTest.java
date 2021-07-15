@@ -3,7 +3,7 @@ package cn.demo.springlearning.test;
 import cn.demo.springlearning.test.bean.AopBean;
 import cn.demo.springlearning.test.bean.ComplexInjectionBean;
 import cn.demo.springlearning.test.bean.SingletonBean;
-import cn.demo.springlearning.test.entity.User;
+import cn.demo.springlearning.entity.User;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mchange.v2.c3p0.ComboPooledDataSource;
 import lombok.SneakyThrows;

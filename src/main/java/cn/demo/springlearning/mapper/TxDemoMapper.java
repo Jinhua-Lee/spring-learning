@@ -1,6 +1,6 @@
-package cn.demo.springlearning.test.tx;
+package cn.demo.springlearning.mapper;
 
-import cn.demo.springlearning.test.entity.Account;
+import cn.demo.springlearning.entity.Account;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -38,4 +38,18 @@ public interface TxDemoMapper {
      * @return 受影响的行数
      */
     int updateBalance(Account from);
+
+    /**
+     * 查询所有账户
+     *
+     * @return 所有账户
+     */
+    List<Account> getAllAccounts();
+
+    /**
+     * 分页查询账户
+     *
+     * @return 分页查询账户
+     */
+    List<Account> getAccountsByPage();
 }

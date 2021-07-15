@@ -7,7 +7,7 @@
         http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd
          http://mybatis.org/schema/mybatis-spring https://mybatis.org/schema/mybatis-spring.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
 
-    <context:component-scan base-package="cn.demo.springlearning.test.tx"/>
+    <context:component-scan base-package="cn.demo.springlearning"/>
 
     <!--读取外部配置文件-->
     <context:property-placeholder location="classpath*:mysql.properties"/>
@@ -18,14 +18,31 @@
         <property name="configLocation" value="SqlMapConfig.xml"/>
         <!-- 数据源 -->
         <property name="dataSource" ref="druidDataSource"/>
+        <!--插件-->
+        <property name="plugins">
+            <array>
+                <bean name="pageInterceptor" class="com.github.pagehelper.PageInterceptor">
+                    <property name="properties">
+                        <value>
+                            offsetAsPageNum=false
+                            rowBoundsWithCount=false
+                            pageSizeZero=false
+                            reasonable=false
+                            supportMethodsArguments=false
+                            returnPageInfo=none
+                        </value>
+                    </property>
+                </bean>
+            </array>
+        </property>
     </bean>
 
     <!--Mapper动态代理开发，自动实现Mapper-->
-    <mybatis:scan base-package="cn.demo.springlearning.test.tx"/>
+    <mybatis:scan base-package="cn.demo.springlearning.mapper"/>
     <!--Mapper动态代理开发增强扫描,甚至可以自动扫描工厂-->
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
         <!--可以扫描基本表及其子包-->
-        <property name="basePackage" value="cn.demo.springlearning.test.tx"/>
+        <property name="basePackage" value="cn.demo.springlearning.mapper"/>
     </bean>
 
     <!--配置Spring AOP核心事务管理器-->

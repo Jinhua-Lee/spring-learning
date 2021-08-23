@@ -43,6 +43,9 @@
     <bean id="beanFactory" class="cn.demo.springlearning.test.factory.MyBeanFactory"/>
     <bean id="fBean" factory-bean="beanFactory" factory-method="getSingleton"/>
 
+    <!--FactoryBean 构建-->
+    <bean id="factoryBeanSingleton" class="cn.demo.springlearning.test.bean.MyFactoryBean"/>
+
     <!--初始化及销毁方法-->
     <bean id="initDestroy" class="cn.demo.springlearning.test.bean.SingletonBean" init-method="init"
           destroy-method="destroy">

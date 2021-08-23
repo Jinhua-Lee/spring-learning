@@ -1,6 +1,7 @@
 package cn.demo.springlearning.test;
 
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 /**
@@ -16,5 +17,6 @@ public abstract class MyApplicationContext {
 
     static {
         CONTEXT = new ClassPathXmlApplicationContext("applicationContext.xml");
+//        CONTEXT = new AnnotationConfigApplicationContext("cn.demo");
     }
 }

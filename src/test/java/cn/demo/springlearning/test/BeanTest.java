@@ -1,13 +1,13 @@
 package cn.demo.springlearning.test;
 
-import cn.demo.springlearning.test.bean.AopBean;
-import cn.demo.springlearning.test.bean.ComplexInjectionBean;
-import cn.demo.springlearning.test.bean.SingletonBean;
+import cn.demo.springlearning.test.bean.*;
 import cn.demo.springlearning.entity.User;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mchange.v2.c3p0.ComboPooledDataSource;
 import lombok.SneakyThrows;
 import org.junit.Test;
+import org.springframework.beans.factory.BeanFactory;
+import org.springframework.beans.factory.FactoryBean;
 import org.springframework.context.support.AbstractApplicationContext;
 import org.springframework.jdbc.core.JdbcTemplate;
 
@@ -34,8 +34,8 @@ public class BeanTest extends MyApplicationContext {
         System.out.println(s1.equals(s2));
 
         // 原型 => 每次返回新对象，false
-        SingletonBean s3 = (SingletonBean) CONTEXT.getBean("pBean");
-        SingletonBean s4 = (SingletonBean) CONTEXT.getBean("pBean");
+        PrototypeBean s3 = (PrototypeBean) CONTEXT.getBean("pBean");
+        PrototypeBean s4 = (PrototypeBean) CONTEXT.getBean("pBean");
         System.out.println(s3.equals(s4));
     }
 
@@ -51,6 +51,15 @@ public class BeanTest extends MyApplicationContext {
         // 2. 实例工厂
         SingletonBean fBean = (SingletonBean) CONTEXT.getBean("fBean");
         System.out.println(fBean);
+
+        // 3. FactoryBean方式
+        String beanName = "factoryBeanSingleton";
+        // 3.1 工厂Bean
+        MyFactoryBean factoryBean = (MyFactoryBean) CONTEXT.getBean(BeanFactory.FACTORY_BEAN_PREFIX + beanName);
+        System.out.println(factoryBean);
+        // 3.2 工厂Bean返回的Bean
+        SingletonBean factoryBeanSingleton = (SingletonBean) CONTEXT.getBean(beanName);
+        System.out.println(factoryBeanSingleton);
     }
 
     /**

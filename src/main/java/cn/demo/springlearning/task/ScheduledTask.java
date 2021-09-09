@@ -1,5 +1,7 @@
 package cn.demo.springlearning.task;
 
+import cn.demo.springlearning.source.MyApplicationContextAware;
+import cn.demo.springlearning.test.bean.SingletonBean;
 import lombok.SneakyThrows;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -49,6 +51,15 @@ public class ScheduledTask {
         Thread.sleep(10_000L);
         System.out.println("end: " + LocalDateTime.now());
         System.out.println("===========");
+    }
+
+    /**
+     * 测试Aware接口
+     */
+    @Scheduled(cron = "*/5 * * * * ?")
+    public void testAware() {
+        SingletonBean sBean = MyApplicationContextAware.getBean(SingletonBean.class);
+        System.out.println(sBean);
     }
 
 }

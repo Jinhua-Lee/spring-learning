@@ -20,6 +20,11 @@ class ParentService {
     private String name;
 }
 
+/**
+ * @author Jinhua
+ * @version 1.0
+ * @date 2021/8/24 13:55
+ */
 public class ParentChildTest {
     public static void main(String[] args) {
         AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext();

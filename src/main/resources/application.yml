@@ -2,9 +2,12 @@ spring:
   application:
     name: spring-learning
   datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/test?serverTimezone=UTC
-    username: root
-    password: cafebabe
+    type: com.alibaba.druid.pool.DruidDataSource
+    druid:
+      learning:
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        url: jdbc:mysql://localhost:3306/test?serverTimezone=UTC
+        username: root
+        password: cafebabe
 server:
   port: 8080

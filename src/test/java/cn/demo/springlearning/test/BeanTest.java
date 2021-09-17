@@ -2,6 +2,9 @@ package cn.demo.springlearning.test;
 
 import cn.demo.springlearning.test.bean.*;
 import cn.demo.springlearning.entity.User;
+import cn.demo.springlearning.test.bean.circular.BeanA;
+import cn.demo.springlearning.test.bean.circular.BeanB;
+import cn.demo.springlearning.test.bean.circular.BeanC;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mchange.v2.c3p0.ComboPooledDataSource;
 import lombok.SneakyThrows;
@@ -111,6 +114,17 @@ public class BeanTest extends MyApplicationContext {
     public void testAop() {
         AopBean aopBean = (AopBean) CONTEXT.getBean("aopBean");
         aopBean.method();
+    }
+
+    @Test
+    public void testCircularBean() {
+        BeanA a = (BeanA) CONTEXT.getBean("a");
+        BeanB b = (BeanB) CONTEXT.getBean("b");
+        BeanC c = (BeanC) CONTEXT.getBean("c");
+
+        System.out.println(a);
+        System.out.println(b);
+        System.out.println(c);
     }
 
     /**

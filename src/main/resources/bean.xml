@@ -53,6 +53,18 @@
         <property name="name" value="学生小明"/>
     </bean>
 
+    <!--测试【循环依赖】-->
+    <bean id="beanA" class="cn.demo.springlearning.test.bean.circular.BeanA">
+        <property name="b" ref="beanB"/>
+    </bean>
+    <bean id="beanB" class="cn.demo.springlearning.test.bean.circular.BeanB">
+        <property name="c" ref="beanC"/>
+    </bean>
+    <bean id="beanC" class="cn.demo.springlearning.test.bean.circular.BeanC">
+        <property name="a" ref="beanA"/>
+    </bean>
+
+
     <!--导入其他spring配置-->
     <import resource="tx.xml"/>
 

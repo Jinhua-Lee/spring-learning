@@ -68,7 +68,6 @@ public class PropagationService {
 
 ```java
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(value = "classpath*:applicationContext.xml")
 public class PropagationTest {
     
     protected PropagationService propagationService;

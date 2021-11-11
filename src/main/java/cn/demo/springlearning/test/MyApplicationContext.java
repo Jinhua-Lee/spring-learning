@@ -16,7 +16,6 @@ public abstract class MyApplicationContext {
     protected static final ApplicationContext CONTEXT;
 
     static {
-        CONTEXT = new ClassPathXmlApplicationContext("applicationContext.xml");
-//        CONTEXT = new AnnotationConfigApplicationContext("cn.demo");
+        CONTEXT = new AnnotationConfigApplicationContext("cn.demo");
     }
 }

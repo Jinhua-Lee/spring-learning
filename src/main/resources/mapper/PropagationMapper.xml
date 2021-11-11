@@ -6,7 +6,7 @@
 <mapper namespace="cn.demo.springlearning.mapper.PropagationMapper">
 
     <insert id="addCommodities" parameterType="cn.demo.springlearning.entity.Commodity">
-        insert into commodity(name, price, produceCity)
+        insert into commodity(name, price, produce_city)
         values
         <foreach collection="commodities" item="commodity" separator=", ">
             (#{commodity.name}, #{commodity.price}, #{commodity.produceCity})

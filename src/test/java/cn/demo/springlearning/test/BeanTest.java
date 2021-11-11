@@ -1,16 +1,15 @@
 package cn.demo.springlearning.test;
 
-import cn.demo.springlearning.test.bean.*;
+import cn.demo.springlearning.bean.*;
 import cn.demo.springlearning.entity.User;
-import cn.demo.springlearning.test.bean.circular.BeanA;
-import cn.demo.springlearning.test.bean.circular.BeanB;
-import cn.demo.springlearning.test.bean.circular.BeanC;
+import cn.demo.springlearning.bean.circular.BeanA;
+import cn.demo.springlearning.bean.circular.BeanB;
+import cn.demo.springlearning.bean.circular.BeanC;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mchange.v2.c3p0.ComboPooledDataSource;
 import lombok.SneakyThrows;
 import org.junit.Test;
 import org.springframework.beans.factory.BeanFactory;
-import org.springframework.beans.factory.FactoryBean;
 import org.springframework.context.support.AbstractApplicationContext;
 import org.springframework.jdbc.core.JdbcTemplate;
 

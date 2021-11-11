@@ -9,7 +9,9 @@ import org.springframework.scheduling.annotation.EnableScheduling;
  *
  * @author Jinhua
  */
-@SpringBootApplication
+@SpringBootApplication(scanBasePackages = {
+        "cn.demo.springlearning"
+})
 @EnableScheduling
 public class SpringLearningApplication {
 

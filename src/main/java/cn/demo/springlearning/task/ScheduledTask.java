@@ -1,7 +1,7 @@
 package cn.demo.springlearning.task;
 
+import cn.demo.springlearning.bean.SingletonBean;
 import cn.demo.springlearning.source.MyApplicationContextAware;
-import cn.demo.springlearning.test.bean.SingletonBean;
 import lombok.SneakyThrows;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.Scheduled;

@@ -1,7 +1,6 @@
 package cn.demo.springlearning.config;
 
 import org.quartz.SimpleTrigger;
-import org.springframework.context.annotation.Bean;
 import org.springframework.scheduling.quartz.SimpleTriggerFactoryBean;
 import org.springframework.stereotype.Component;
 

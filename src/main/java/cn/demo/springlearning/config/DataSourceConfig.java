@@ -1,6 +1,7 @@
 package cn.demo.springlearning.config;
 
 import com.alibaba.druid.pool.DruidDataSource;
+import com.github.pagehelper.PageInterceptor;
 import lombok.SneakyThrows;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
@@ -15,6 +16,7 @@ import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 
 import javax.sql.DataSource;
+import java.util.Properties;
 
 /**
  * 数据源配置
@@ -47,12 +49,28 @@ public class DataSourceConfig {
     }
 
     @Bean(name = DATASOURCE_SESSION_FACTORY)
-    public SqlSessionFactory sqlSessionFactory(@Qualifier(DATASOURCE_NAME) DataSource dataSource) throws Exception {
+    public SqlSessionFactory sqlSessionFactory(@Qualifier(DATASOURCE_NAME) DataSource dataSource,
+                                               PageInterceptor pageInterceptor) throws Exception {
         final SqlSessionFactoryBean sessionFactoryBean = new SqlSessionFactoryBean();
         sessionFactoryBean.setDataSource(dataSource);
         sessionFactoryBean.setMapperLocations(new PathMatchingResourcePatternResolver()
                 .getResources("classpath:/mapper/**.xml"));
+        sessionFactoryBean.setPlugins(pageInterceptor);
         return sessionFactoryBean.getObject();
+    }
+
+    @Bean
+    public PageInterceptor pageInterceptor() {
+        PageInterceptor pageInterceptor = new PageInterceptor();
+        Properties properties = new Properties();
+        properties.put("offsetAsPageNum", false);
+        properties.put("rowBoundsWithCount", false);
+        properties.put("pageSizeZero", false);
+        properties.put("reasonable", false);
+        properties.put("supportMethodsArguments", false);
+        properties.put("returnPageInfo", false);
+        pageInterceptor.setProperties(properties);
+        return pageInterceptor;
     }
 
     @Bean(name = DATASOURCE_TRANSACTION_MANAGER)
@@ -62,7 +80,7 @@ public class DataSourceConfig {
 
     @Bean(name = DATASOURCE_SESSION_TEMPLATE)
     public SqlSessionTemplate sqlSessionTemplate(@Qualifier(DATASOURCE_SESSION_FACTORY)
-                                                             SqlSessionFactory sqlSessionFactory) {
+                                                         SqlSessionFactory sqlSessionFactory) {
         return new SqlSessionTemplate(sqlSessionFactory);
     }
 }

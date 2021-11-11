@@ -17,7 +17,7 @@ import org.springframework.stereotype.Component;
 @EnableAspectJAutoProxy
 public class MyAdvice {
 
-    @Pointcut(value = "execution(* cn.demo.springlearning.test.bean.AopBean.method())")
+    @Pointcut(value = "execution(* cn.demo.springlearning.bean.AopBean.method())")
     public void pc() {
     }
 

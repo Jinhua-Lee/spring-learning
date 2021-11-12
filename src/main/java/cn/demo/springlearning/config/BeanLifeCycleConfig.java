@@ -14,7 +14,7 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class BeanLifeCycleConfig {
 
-    @Bean(initMethod = "initMethod", destroyMethod = "destroyMethod")
+    @Bean(name = "singletonBean2", initMethod = "initMethod", destroyMethod = "destroyMethod")
     public SingletonBean singletonBean() {
         return new SingletonBean(1, "a singleton bean");
     }

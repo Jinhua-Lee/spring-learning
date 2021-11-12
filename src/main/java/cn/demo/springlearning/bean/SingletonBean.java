@@ -46,7 +46,7 @@ public class SingletonBean implements InitializingBean {
     }
 
     @Override
-    public void afterPropertiesSet() throws Exception {
+    public void afterPropertiesSet() {
         log.info("initializing bean...");
     }
 

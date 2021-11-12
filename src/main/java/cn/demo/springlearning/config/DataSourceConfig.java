@@ -63,12 +63,13 @@ public class DataSourceConfig {
     public PageInterceptor pageInterceptor() {
         PageInterceptor pageInterceptor = new PageInterceptor();
         Properties properties = new Properties();
-        properties.put("offsetAsPageNum", false);
-        properties.put("rowBoundsWithCount", false);
-        properties.put("pageSizeZero", false);
-        properties.put("reasonable", false);
-        properties.put("supportMethodsArguments", false);
-        properties.put("returnPageInfo", false);
+        // 注意这里识别属性都是字符串。
+        properties.put("offsetAsPageNum", "false");
+        properties.put("rowBoundsWithCount", "false");
+        properties.put("pageSizeZero", "false");
+        properties.put("reasonable", "false");
+        properties.put("supportMethodsArguments", "false");
+        properties.put("returnPageInfo", "false");
         pageInterceptor.setProperties(properties);
         return pageInterceptor;
     }

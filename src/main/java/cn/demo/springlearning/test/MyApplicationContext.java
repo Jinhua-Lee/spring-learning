@@ -1,8 +1,7 @@
 package cn.demo.springlearning.test;
 
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.context.ApplicationContextAware;
 
 /**
  * 带Spring上下文的抽象类，给子类使用
@@ -11,11 +10,12 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
  * @version 1.0
  * @date 2021/6/3 23:19
  */
-public abstract class MyApplicationContext {
+public class MyApplicationContext implements ApplicationContextAware {
 
-    protected static final ApplicationContext CONTEXT;
+    protected ApplicationContext context;
 
-    static {
-        CONTEXT = new AnnotationConfigApplicationContext("cn.demo");
+    @Override
+    public void setApplicationContext(ApplicationContext applicationContext) {
+        this.context = applicationContext;
     }
 }

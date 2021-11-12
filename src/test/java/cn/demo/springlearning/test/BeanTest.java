@@ -1,17 +1,20 @@
 package cn.demo.springlearning.test;
 
 import cn.demo.springlearning.bean.*;
-import cn.demo.springlearning.entity.User;
 import cn.demo.springlearning.bean.circular.BeanA;
 import cn.demo.springlearning.bean.circular.BeanB;
 import cn.demo.springlearning.bean.circular.BeanC;
+import cn.demo.springlearning.entity.User;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mchange.v2.c3p0.ComboPooledDataSource;
 import lombok.SneakyThrows;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.springframework.beans.factory.BeanFactory;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.support.AbstractApplicationContext;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.Arrays;
 import java.util.List;
@@ -23,6 +26,8 @@ import java.util.List;
  * @version 1.0
  * @date 2021/5/24 21:14
  */
+@SpringBootTest
+@RunWith(SpringRunner.class)
 public class BeanTest extends MyApplicationContext {
 
     /**
@@ -31,13 +36,13 @@ public class BeanTest extends MyApplicationContext {
     @Test
     public void testScope() {
         // 单例 => 返回同一个对象，true
-        SingletonBean s1 = (SingletonBean) CONTEXT.getBean("sBean");
-        SingletonBean s2 = (SingletonBean) CONTEXT.getBean("sBean");
+        SingletonBean s1 = (SingletonBean) context.getBean("singletonBean");
+        SingletonBean s2 = (SingletonBean) context.getBean("singletonBean");
         System.out.println(s1.equals(s2));
 
         // 原型 => 每次返回新对象，false
-        PrototypeBean s3 = (PrototypeBean) CONTEXT.getBean("pBean");
-        PrototypeBean s4 = (PrototypeBean) CONTEXT.getBean("pBean");
+        PrototypeBean s3 = (PrototypeBean) context.getBean("prototypeBean");
+        PrototypeBean s4 = (PrototypeBean) context.getBean("prototypeBean");
         System.out.println(s3.equals(s4));
     }
 
@@ -47,20 +52,20 @@ public class BeanTest extends MyApplicationContext {
     @Test
     public void testCreate() {
         // 1. 静态工厂
-        SingletonBean staticBean = (SingletonBean) CONTEXT.getBean("beanStatic");
+        SingletonBean staticBean = (SingletonBean) context.getBean("beanStatic");
         System.out.println(staticBean);
 
         // 2. 实例工厂
-        SingletonBean fBean = (SingletonBean) CONTEXT.getBean("fBean");
+        SingletonBean fBean = (SingletonBean) context.getBean("fBean");
         System.out.println(fBean);
 
         // 3. FactoryBean方式
         String beanName = "factoryBeanSingleton";
         // 3.1 工厂Bean
-        MyFactoryBean factoryBean = (MyFactoryBean) CONTEXT.getBean(BeanFactory.FACTORY_BEAN_PREFIX + beanName);
+        MyFactoryBean factoryBean = (MyFactoryBean) context.getBean(BeanFactory.FACTORY_BEAN_PREFIX + beanName);
         System.out.println(factoryBean);
         // 3.2 工厂Bean返回的Bean
-        SingletonBean factoryBeanSingleton = (SingletonBean) CONTEXT.getBean(beanName);
+        SingletonBean factoryBeanSingleton = (SingletonBean) context.getBean(beanName);
         System.out.println(factoryBeanSingleton);
     }
 
@@ -70,7 +75,7 @@ public class BeanTest extends MyApplicationContext {
     @Test
     @SneakyThrows
     public void testCtorInject() {
-        SingletonBean cBean = (SingletonBean) CONTEXT.getBean("cBean");
+        SingletonBean cBean = (SingletonBean) context.getBean("cBean");
         System.out.println(toString(cBean));
     }
 
@@ -79,7 +84,7 @@ public class BeanTest extends MyApplicationContext {
      */
     @Test
     public void pNameInject() {
-        SingletonBean pNameBean = (SingletonBean) CONTEXT.getBean("pNameBean");
+        SingletonBean pNameBean = (SingletonBean) context.getBean("pNameBean");
         System.out.println(toString(pNameBean));
     }
 
@@ -88,7 +93,7 @@ public class BeanTest extends MyApplicationContext {
      */
     @Test
     public void testComplexInjection() {
-        ComplexInjectionBean complexBean = (ComplexInjectionBean) CONTEXT.getBean("complexBean");
+        ComplexInjectionBean complexBean = (ComplexInjectionBean) context.getBean("complexBean");
         Arrays.stream(complexBean.getIntArray()).forEach(System.out::println);
         complexBean.getIntegers().forEach(System.out::println);
         complexBean.getInt2Str().forEach((k, v) -> System.out.println(k + "-->" + v));
@@ -99,11 +104,11 @@ public class BeanTest extends MyApplicationContext {
      */
     @Test
     public void testInitDestroy() {
-        SingletonBean initDestroy = (SingletonBean) CONTEXT.getBean("initDestroy");
+        SingletonBean initDestroy = (SingletonBean) context.getBean("initDestroy");
         System.out.println(initDestroy);
         // TODO 2021/5/27 待确定Bean的销毁时机，目前仅知道从以下两个时机会执行destroy方法
-        ((AbstractApplicationContext) CONTEXT).close();
-        ((AbstractApplicationContext) CONTEXT).registerShutdownHook();
+        ((AbstractApplicationContext) context).close();
+        ((AbstractApplicationContext) context).registerShutdownHook();
     }
 
     /**
@@ -111,15 +116,15 @@ public class BeanTest extends MyApplicationContext {
      */
     @Test
     public void testAop() {
-        AopBean aopBean = (AopBean) CONTEXT.getBean("aopBean");
+        AopBean aopBean = (AopBean) context.getBean("aopBean");
         aopBean.method();
     }
 
     @Test
     public void testCircularBean() {
-        BeanA a = (BeanA) CONTEXT.getBean("a");
-        BeanB b = (BeanB) CONTEXT.getBean("b");
-        BeanC c = (BeanC) CONTEXT.getBean("c");
+        BeanA a = (BeanA) context.getBean("a");
+        BeanB b = (BeanB) context.getBean("b");
+        BeanC c = (BeanC) context.getBean("c");
 
         System.out.println(a);
         System.out.println(b);
@@ -136,9 +141,9 @@ public class BeanTest extends MyApplicationContext {
         String sql = "select * from usr";
         List<User> users = template.query(sql,
                 (rs, i) -> new User(rs.getInt("id"), rs.getString("name"),
-                rs.getString("pwd"), rs.getString("sex"),
-                rs.getString("home"), rs.getString("info")
-        ));
+                        rs.getString("pwd"), rs.getString("sex"),
+                        rs.getString("home"), rs.getString("info")
+                ));
         users.forEach(System.out::println);
     }
 

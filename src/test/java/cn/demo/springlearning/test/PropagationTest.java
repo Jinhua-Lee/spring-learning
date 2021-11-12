@@ -6,7 +6,7 @@ import cn.demo.springlearning.service.PropagationService;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.junit4.SpringRunner;
 
 import java.math.BigDecimal;
 import java.util.Arrays;
@@ -20,16 +20,11 @@ import java.util.List;
  * @version 1.0
  * @date 2021/6/7 20:31
  */
-@RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest
+@RunWith(SpringRunner.class)
 public abstract class PropagationTest {
 
     protected PropagationService propagationService;
-
-    @Autowired
-    public void setPropagationService(PropagationService propagationService) {
-        this.propagationService = propagationService;
-    }
 
     protected List<Commodity> buildCommodities() {
         Commodity c1 = Commodity.builder()
@@ -57,5 +52,10 @@ public abstract class PropagationTest {
                 .age(20)
                 .build();
         return Arrays.asList(cus1, cus2);
+    }
+
+    @Autowired
+    public void setPropagationService(PropagationService propagationService) {
+        this.propagationService = propagationService;
     }
 }

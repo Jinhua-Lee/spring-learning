@@ -6,6 +6,10 @@ import cn.demo.springlearning.service.TxDemoService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -17,11 +21,12 @@ import java.util.List;
  * @version 1.0
  * @date 2021/6/3 23:18
  */
-public class TxTest extends MyApplicationContext {
+@SpringBootTest
+@RunWith(SpringRunner.class)
+public class TxTest {
 
-    private final TxDemoService txService = (TxDemoService) CONTEXT.getBean("txDemoService");
-
-    private final TxDemoMapper txDemoMapper = (TxDemoMapper) CONTEXT.getBean("txDemoMapper");
+    private TxDemoService txDemoService;
+    private TxDemoMapper txDemoMapper;
 
     @Test
     public void testTx() {
@@ -30,7 +35,7 @@ public class TxTest extends MyApplicationContext {
                 .age(24)
                 .balance(BigDecimal.valueOf(2))
                 .build();
-        boolean success = this.txService.updateBalance(account);
+        boolean success = this.txDemoService.updateBalance(account);
         System.out.println("success = " + success);
     }
 
@@ -60,6 +65,16 @@ public class TxTest extends MyApplicationContext {
         Account from = new Account(7, null, null, null);
         Account to = new Account(1, null, null, null);
         BigDecimal amount = BigDecimal.valueOf(3000);
-        this.txService.transfer(from, to, amount);
+        this.txDemoService.transfer(from, to, amount);
+    }
+
+    @Autowired
+    public void setTxDemoService(TxDemoService txDemoService) {
+        this.txDemoService = txDemoService;
+    }
+
+    @Autowired
+    public void setTxDemoMapper(TxDemoMapper txDemoMapper) {
+        this.txDemoMapper = txDemoMapper;
     }
 }

@@ -13,6 +13,6 @@ import org.springframework.stereotype.Component;
 public class AopBean {
 
     public void method() {
-        System.out.println("AopBean.method");
+        System.out.println("execute target method.");
     }
 }

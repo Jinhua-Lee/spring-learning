@@ -26,7 +26,7 @@ public class MyAdvice {
      */
     @Before(value = "pc()")
     public void before() {
-        System.out.println("前置通知");
+        System.out.println("before...");
     }
 
     /**
@@ -34,7 +34,7 @@ public class MyAdvice {
      */
     @AfterReturning(value = "pc()")
     public void afterReturning() {
-        System.out.println("后置通知");
+        System.out.println("after returning...");
     }
 
     /**
@@ -46,10 +46,10 @@ public class MyAdvice {
      */
     @Around(value = "pc()")
     public Object around(ProceedingJoinPoint pjp) throws Throwable {
-        System.out.println("环绕通知之前");
+        System.out.println("before around...");
         // 调用目标方法的代码
         Object proceed = pjp.proceed();
-        System.out.println("环绕通知之后");
+        System.out.println("after around...");
         return proceed;
     }
 
@@ -58,7 +58,7 @@ public class MyAdvice {
      */
     @AfterThrowing(value = "pc()")
     public void afterThrowing() {
-        System.out.println("异常出现");
+        System.out.println("after throwing...");
     }
 
     /**
@@ -66,7 +66,7 @@ public class MyAdvice {
      */
     @After(value = "pc()")
     public void after() {
-        System.out.println("后置通知，无论异常是否出现都调用");
+        System.out.println("after...");
     }
 
 }

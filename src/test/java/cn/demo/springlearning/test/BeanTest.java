@@ -121,14 +121,14 @@ public class BeanTest extends MyApplicationContext {
     }
 
     @Test
-    public void testCircularBean() {
-        BeanA a = (BeanA) context.getBean("a");
-        BeanB b = (BeanB) context.getBean("b");
-        BeanC c = (BeanC) context.getBean("c");
+    public void testCircularDependency() {
+        BeanA beanA = (BeanA) context.getBean("beanA");
+        BeanB beanB = (BeanB) context.getBean("beanB");
+        BeanC beanC = (BeanC) context.getBean("beanC");
 
-        System.out.println(a);
-        System.out.println(b);
-        System.out.println(c);
+        System.out.println(beanA);
+        System.out.println(beanB);
+        System.out.println(beanC);
     }
 
     /**

@@ -1,0 +1,24 @@
+{
+	"properties": [
+		{
+			"name": "spring.datasource.druid.learning.driver-class-name",
+			"type": "java.lang.String",
+			"description": "数据源learning的驱动类."
+		},
+		{
+			"name": "spring.datasource.druid.learning.url",
+			"type": "java.lang.String",
+			"description": "数据源learning的url."
+		},
+		{
+			"name": "spring.datasource.druid.learning.username",
+			"type": "java.lang.String",
+			"description": "数据源learning的username."
+		},
+		{
+			"name": "spring.datasource.druid.learning.password",
+			"type": "java.lang.String",
+			"description": "数据源learning的password."
+		}
+	]
+}

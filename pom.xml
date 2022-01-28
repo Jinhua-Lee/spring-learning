@@ -54,6 +54,14 @@
             <version>${project.parent.version}</version>
         </dependency>
 
+        <!--Spring Boot 配置注解处理器-->
+        <!--自定义配置项 + 配置项说明文件，不让spring继续提示-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-configuration-processor</artifactId>
+            <version>${project.parent.version}</version>
+        </dependency>
+
         <!--分页插件-->
         <dependency>
             <groupId>com.github.pagehelper</groupId>

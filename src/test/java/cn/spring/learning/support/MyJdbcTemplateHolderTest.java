@@ -1,5 +1,7 @@
 package cn.spring.learning.support;
 
+import cn.spring.learning.beans.BeansApplication;
+import cn.spring.learning.tx.TxApplication;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +16,7 @@ import org.springframework.test.context.junit4.SpringRunner;
  * @version 1.0
  * @date 2021/6/1 22:36
  */
-@SpringBootTest
+@SpringBootTest(classes = BeansApplication.class)
 @RunWith(SpringRunner.class)
 public class MyJdbcTemplateHolderTest extends MyApplicationContextHolder {
 
@@ -27,7 +29,7 @@ public class MyJdbcTemplateHolderTest extends MyApplicationContextHolder {
 
     @Test
     public void testJdbcTemplate() {
-        MyJdbcTemplateHolderTest demo = (MyJdbcTemplateHolderTest) context.getBean("myJdbcTemplateTest");
+        MyJdbcTemplateHolderTest demo = (MyJdbcTemplateHolderTest) context.getBean("myJdbcTemplateHolderTest");
         Integer totalCount = demo.getTotalCount();
         System.out.println("totalCount = " + totalCount);
     }

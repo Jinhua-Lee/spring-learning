@@ -2,6 +2,7 @@ package cn.spring.learning.support;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
+import org.springframework.stereotype.Component;
 
 /**
  * 带Spring上下文的抽象类，给子类使用
@@ -10,6 +11,7 @@ import org.springframework.context.ApplicationContextAware;
  * @version 1.0
  * @date 2021/6/3 23:19
  */
+@Component
 public class MyApplicationContextHolder implements ApplicationContextAware {
 
     protected static ApplicationContext CONTEXT;

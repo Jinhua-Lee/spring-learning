@@ -1,24 +1,26 @@
-package cn.spring.learning.support.tx.propagation;
+package cn.spring.learning.tx.propagation;
 
-import cn.spring.learning.support.PropagationTest;
+import cn.spring.learning.tx.PropagationTest;
 import org.junit.Test;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
- * 5. 测试NotSupported：<p>&emsp;
- * 非事务方式执行操作。当前存在事务，就把当前事务挂起
+ * 6. 测试Never：<p>&emsp;
+ * 1) 以非事务方式执行；<p>&emsp;
+ * 2)若当前存在事务，则抛出异常；<p>&emsp;
+ *
  * @author Jinhua
  * @version 1.0
- * @date 2021/6/8 15:51
+ * @date 2021/6/8 15:53
  */
-public class NotSupportedTest extends PropagationTest {
+public class NeverTest extends PropagationTest {
 
     /**
-     * 5.1 不存在，则以非事务方式执行操作
+     * 6.1 以非事务方式执行
      */
     @Test
-    public void testNoTx_NotSupported_NotSupportedEx() {
+    public void testNoTx_Never_Never() {
         boolean comRes = propagationService.addCommodities(buildCommodities());
         if (true) {
             throw new RuntimeException("手动抛出 [运行时异常] ");
@@ -30,16 +32,15 @@ public class NotSupportedTest extends PropagationTest {
     }
 
     /**
-     * 5.2 当前存在事务，就把当前事务挂起（影响上层事务）
+     * 6.2 上层存在事务，则直接抛出异常
      */
     @Test
     @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
-    public void testTx_NotSupported_NotSupportedEx() {
+    public void testTx_Never_Never() {
         boolean comRes = propagationService.addCommodities(buildCommodities());
         boolean cusRes = propagationService.addCustomers(buildCustomers());
         System.out.println("comRes = " + comRes);
         System.out.println("cusRes = " + cusRes);
-        throw new RuntimeException("手动抛出 [运行时异常] ");
-        // 非事务方式，挂起上层事务，商品和顾客都插入成功！（测试成功）
+        // 上层存在事务，直接抛异常，方法不执行，商品和顾客都插入失败！（测试成功）
     }
 }

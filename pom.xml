@@ -26,12 +26,18 @@
             <version>${project.parent.version}</version>
         </dependency>
 
-        <!--Spring web-->
+        <!--Spring Web start-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
             <version>${project.parent.version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-tomcat</artifactId>
+            <version>${project.parent.version}</version>
+        </dependency>
+        <!--Spring Web end-->
 
         <!--AOP 切面-->
         <dependency>
@@ -53,6 +59,14 @@
             <artifactId>spring-boot-starter-data-jpa</artifactId>
             <version>${project.parent.version}</version>
         </dependency>
+
+        <!--Spring Data Redis-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-redis</artifactId>
+            <version>${project.parent.version}</version>
+        </dependency>
+
 
         <!--Spring Boot 配置注解处理器-->
         <!--自定义配置项 + 配置项说明文件，不让spring继续提示-->
@@ -97,14 +111,16 @@
             <version>8.0.27</version>
         </dependency>
 
-        <!--开发者工具-->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-devtools</artifactId>
-            <version>${project.parent.version}</version>
-            <scope>runtime</scope>
-            <optional>true</optional>
-        </dependency>
+        <!--开发者工具
+            有碍于调试，所以先去除
+        -->
+<!--        <dependency>-->
+<!--            <groupId>org.springframework.boot</groupId>-->
+<!--            <artifactId>spring-boot-devtools</artifactId>-->
+<!--            <version>${project.parent.version}</version>-->
+<!--            <scope>runtime</scope>-->
+<!--            <optional>true</optional>-->
+<!--        </dependency>-->
 
         <!--Spring Test-->
         <dependency>
@@ -126,6 +142,19 @@
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
         </dependency>
+
+        <!--Swagger接口工具 start-->
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger2</artifactId>
+            <version>2.9.1</version>
+        </dependency>
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger-ui</artifactId>
+            <version>2.9.1</version>
+        </dependency>
+        <!--Swagger接口工具 end-->
     </dependencies>
 
     <build>

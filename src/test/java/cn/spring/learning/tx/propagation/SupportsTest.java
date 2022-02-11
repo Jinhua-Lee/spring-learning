@@ -1,6 +1,6 @@
-package cn.spring.learning.support.tx.propagation;
+package cn.spring.learning.tx.propagation;
 
-import cn.spring.learning.support.PropagationTest;
+import cn.spring.learning.tx.PropagationTest;
 import org.junit.Test;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;

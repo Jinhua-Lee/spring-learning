@@ -1,7 +1,6 @@
-package cn.spring.learning.support;
+package cn.spring.learning.beans;
 
-import cn.spring.learning.beans.BeansApplication;
-import cn.spring.learning.tx.TxApplication;
+import cn.spring.learning.support.MyApplicationContextHolder;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

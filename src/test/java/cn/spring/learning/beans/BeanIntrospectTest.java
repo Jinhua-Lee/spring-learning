@@ -1,4 +1,4 @@
-package cn.spring.learning.support;
+package cn.spring.learning.beans;
 
 import cn.spring.learning.tx.entity.Account;
 import lombok.SneakyThrows;

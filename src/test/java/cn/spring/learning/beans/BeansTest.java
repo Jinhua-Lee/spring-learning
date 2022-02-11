@@ -1,10 +1,11 @@
-package cn.spring.learning.support;
+package cn.spring.learning.beans;
 
 import cn.spring.learning.beans.BeansApplication;
 import cn.spring.learning.beans.bean.*;
 import cn.spring.learning.beans.bean.circular.BeanA;
 import cn.spring.learning.beans.bean.circular.BeanB;
 import cn.spring.learning.beans.bean.circular.BeanC;
+import cn.spring.learning.support.MyApplicationContextHolder;
 import cn.spring.learning.tx.entity.User;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mchange.v2.c3p0.ComboPooledDataSource;

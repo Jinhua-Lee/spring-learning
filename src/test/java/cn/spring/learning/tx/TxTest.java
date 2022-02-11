@@ -1,4 +1,4 @@
-package cn.spring.learning.support;
+package cn.spring.learning.tx;
 
 import cn.spring.learning.tx.TxApplication;
 import cn.spring.learning.tx.entity.Account;

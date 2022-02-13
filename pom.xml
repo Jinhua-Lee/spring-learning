@@ -36,6 +36,7 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-tomcat</artifactId>
             <version>${project.parent.version}</version>
+            <scope>provided</scope>
         </dependency>
         <!--Spring Web end-->
 
@@ -67,6 +68,13 @@
             <version>${project.parent.version}</version>
         </dependency>
 
+        <!--Jackson 数据类型-jsr310 start-->
+        <dependency>
+            <groupId>com.fasterxml.jackson.datatype</groupId>
+            <artifactId>jackson-datatype-jsr310</artifactId>
+            <version>2.13.1</version>
+        </dependency>
+        <!--Jackson 数据类型-jsr310 end-->
 
         <!--Spring Boot 配置注解处理器-->
         <!--自定义配置项 + 配置项说明文件，不让spring继续提示-->

@@ -27,18 +27,17 @@ public class TestRedisController {
     @Autowired
     private RedisService redisService;
 
-    @RequestMapping(value = "/simpleTest", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    @ResponseBody
+    @GetMapping(value = "/simpleTest", produces = MediaType.APPLICATION_JSON_VALUE)
     public ApiResult<MultiDataTypeEntity> simpleTest() {
-        List<MultiDataTypeEntity> mDataTypes = pmsBrands();
+        List<MultiDataTypeEntity> mDataTypes = multiDataTypes();
         MultiDataTypeEntity multiDataType = mDataTypes.get(0);
         String key = "redis:simple:" + multiDataType.getId();
         redisService.set(key, multiDataType);
-        MultiDataTypeEntity cacheBrand = (MultiDataTypeEntity) redisService.get(key);
-        return ApiResult.success(cacheBrand);
+        MultiDataTypeEntity cacheMultiDataType = (MultiDataTypeEntity) redisService.get(key);
+        return ApiResult.success(cacheMultiDataType);
     }
 
-    private List<MultiDataTypeEntity> pmsBrands() {
+    private List<MultiDataTypeEntity> multiDataTypes() {
         List<MultiDataTypeEntity> mDataTypes = new ArrayList<>();
         mDataTypes.add(MultiDataTypeEntity.builder()
                 .id(1L)

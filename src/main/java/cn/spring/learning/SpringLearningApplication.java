@@ -1,9 +1,7 @@
 package cn.spring.learning;
 
-import cn.spring.learning.event.MyEventPublisher;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
 /**
@@ -12,14 +10,12 @@ import org.springframework.scheduling.annotation.EnableScheduling;
  * @author Jinhua
  */
 @SpringBootApplication(scanBasePackages = {
-        "cn.spring.learning"
+        "cn.spring.learning.redis"
 })
 @EnableScheduling
 public class SpringLearningApplication {
 
     public static void main(String[] args) {
-        ConfigurableApplicationContext run = SpringApplication.run(SpringLearningApplication.class, args);
-        MyEventPublisher eventPublisher = run.getBean(MyEventPublisher.class);
-        eventPublisher.publishEvent();
+        SpringApplication.run(SpringLearningApplication.class, args);
     }
 }

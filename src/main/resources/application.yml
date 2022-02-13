@@ -1,6 +1,8 @@
 spring:
   application:
     name: spring-learning
+  profiles:
+    active: home
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
     druid:
@@ -15,5 +17,8 @@ spring:
     database: 0
     password: cafebabe
     connect-timeout: 1000ms
+  jackson:
+    serialization:
+      WRITE_DATES_AS_TIMESTAMPS: false
 server:
   port: 8080

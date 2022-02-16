@@ -1,3 +1,7 @@
 spring:
   redis:
     host: 192.168.101.30
+  datasource:
+    druid:
+      learning:
+        url: jdbc:mysql://192.168.101.30:3306/test?serverTimezone=UTC

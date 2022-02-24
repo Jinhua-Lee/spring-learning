@@ -20,5 +20,12 @@ spring:
   jackson:
     serialization:
       WRITE_DATES_AS_TIMESTAMPS: false
+  sql:
+    # 初始化配置
+    init:
+      # 始终初始化数据源
+      mode: always
+      # 脚本位置
+      schema-locations: classpath:sql/init.sql
 server:
   port: 8080

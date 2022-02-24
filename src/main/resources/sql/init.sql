@@ -1,5 +1,5 @@
 -- 客户表
-create table customer
+create table if not exists customer
 (
     id     serial primary key auto_increment comment '自增主键',
     name   varchar(100) comment '姓名',
@@ -9,7 +9,7 @@ create table customer
   default charset utf8mb4;
 
 -- 商品表
-create table commodity
+create table if not exists commodity
 (
     id           serial primary key auto_increment comment '自增主键',
     name         varchar(100) comment '名称',
@@ -19,7 +19,7 @@ create table commodity
   default charset utf8mb4;
 
 -- 账户表
-create table account
+create table if not exists account
 (
     id      serial primary key auto_increment comment '自增主键',
     name    varchar(100) comment '姓名',

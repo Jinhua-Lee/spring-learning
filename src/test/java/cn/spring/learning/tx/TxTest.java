@@ -10,6 +10,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.math.BigDecimal;
@@ -23,6 +24,7 @@ import java.util.List;
  * @date 2021/6/3 23:18
  */
 @SpringBootTest(classes = TxApplication.class)
+@ActiveProfiles(profiles = "company")
 @RunWith(SpringRunner.class)
 public class TxTest {
 

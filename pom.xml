@@ -47,6 +47,13 @@
             <version>${project.parent.version}</version>
         </dependency>
 
+        <!--Spring Boot Actuator健康监测-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+            <version>${project.parent.version}</version>
+        </dependency>
+
         <!--Spring JDBC-->
         <dependency>
             <groupId>org.springframework.boot</groupId>

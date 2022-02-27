@@ -47,20 +47,20 @@ public class TxDemoService {
             throw new IllegalArgumentException("转账金额必须大于0");
         }
         // 2. from账户余额校验
-        List<Account> accountDos = demoMapper.getBalanceById(from);
+        List<Account> accountDos = demoMapper.getBalanceById(from.getId());
         if (CollectionUtils.isEmpty(accountDos) || accountDos.get(0).getBalance().compareTo(amount) < 0) {
             throw new RuntimeException("账户不存在，或者账户余额不足！");
         }
         // 3. 开始转账逻辑
         from.setBalance(amount.negate().doubleValue());
         to.setBalance(amount.doubleValue());
-        if (demoMapper.updateBalance(from) < 1) {
+        if (demoMapper.updateBalance(from.getId(), from.getBalance()) < 1) {
             throw new RuntimeException("from 账户更新失败！");
         }
-        if (true) {
-            throw new RuntimeException("手动抛出 [运行时异常] ");
-        }
-        if (demoMapper.updateBalance(to) < 1) {
+//        if (true) {
+//            throw new RuntimeException("手动抛出 [运行时异常] ");
+//        }
+        if (demoMapper.updateBalance(to.getId(), to.getBalance()) < 1) {
             throw new RuntimeException("to 账户更新失败！");
         }
     }

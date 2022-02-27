@@ -3,6 +3,7 @@ package cn.spring.learning.tx.mapper;
 import cn.spring.learning.tx.entity.Account;
 import org.apache.ibatis.annotations.Mapper;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 /**
@@ -29,15 +30,15 @@ public interface TxDemoMapper {
      * @param from 指定账户
      * @return 带余额的
      */
-    List<Account> getBalanceById(Account from);
+    List<Account> getBalanceById(Integer id);
 
     /**
      * 更新指定ID账户的余额
      *
-     * @param from 更新余额
+     * @param balance 更新到的余额
      * @return 受影响的行数
      */
-    int updateBalance(Account from);
+    int updateBalance(Integer id, BigDecimal balance);
 
     /**
      * 查询所有账户

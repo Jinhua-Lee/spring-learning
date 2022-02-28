@@ -1,4 +1,4 @@
-package cn.spring.learning.tx;
+package cn.spring.learning.mybatis;
 
 import cn.spring.learning.tx.entity.Account;
 import cn.spring.learning.util.PropertiesResolver;

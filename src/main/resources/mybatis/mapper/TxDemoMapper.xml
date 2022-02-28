@@ -19,6 +19,13 @@
         where id = #{id}
     </select>
 
+    <!--查询指定账户的余额-->
+    <select id="getBalanceById2" resultType="cn.spring.learning.tx.entity.Account" flushCache="true">
+        select id, balance
+        from account
+        where id = #{id}
+    </select>
+
     <!--查询所有账户-->
     <select id="getAllAccounts" resultType="cn.spring.learning.tx.entity.Account">
         select id, name, age, balance

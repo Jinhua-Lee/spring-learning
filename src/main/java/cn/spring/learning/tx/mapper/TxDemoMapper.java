@@ -27,10 +27,19 @@ public interface TxDemoMapper {
     /**
      * 查询指定ID账户的余额
      *
-     * @param from 指定账户
+     * @param id 指定账户
      * @return 带余额的
      */
     List<Account> getBalanceById(Integer id);
+
+    /**
+     * 【用于测试一级缓存的相同SQL的不同方法】<p>
+     *  查询指定ID账户的余额
+     *
+     * @param id 指定账户
+     * @return 带余额的
+     */
+    List<Account> getBalanceById2(Integer id);
 
     /**
      * 更新指定ID账户的余额

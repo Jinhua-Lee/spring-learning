@@ -3,7 +3,7 @@
         PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
-<!--    <properties resource="mysql.properties"/>-->
+    <properties resource="mysql.properties"/>
 
 <!--    <settings>-->
 <!--        &lt;!&ndash; 使全局的映射器启用或禁用缓存。 &ndash;&gt;-->
@@ -47,10 +47,10 @@
         <environment id="development">
             <transactionManager type="JDBC"/>
             <dataSource type="POOLED">
-                <property name="driver" value="com.mysql.cj.jdbc.Driver"/>
-                <property name="url" value="jdbc:mysql://192.168.101.30:3306/test?useSSL=false&amp;serverTimezone=UTC"/>
-                <property name="username" value="root"/>
-                <property name="password" value="cafebabe"/>
+                <property name="driver" value="${jdbc.driver}"/>
+                <property name="url" value="${jdbc.url}"/>
+                <property name="username" value="${jdbc.user}"/>
+                <property name="password" value="${jdbc.password}"/>
             </dataSource>
         </environment>
     </environments>

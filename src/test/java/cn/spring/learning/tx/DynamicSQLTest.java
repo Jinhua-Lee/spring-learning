@@ -21,7 +21,7 @@ import java.util.List;
 @SpringBootTest(classes = TxApplication.class)
 @ActiveProfiles(profiles = "company")
 @RunWith(SpringRunner.class)
-public class MyBatisTest {
+public class DynamicSQLTest {
 
     @Autowired
     CustomerMapper customerMapper;

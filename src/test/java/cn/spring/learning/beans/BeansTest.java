@@ -1,6 +1,5 @@
 package cn.spring.learning.beans;
 
-import cn.spring.learning.beans.BeansApplication;
 import cn.spring.learning.beans.bean.*;
 import cn.spring.learning.beans.bean.circular.BeanA;
 import cn.spring.learning.beans.bean.circular.BeanB;

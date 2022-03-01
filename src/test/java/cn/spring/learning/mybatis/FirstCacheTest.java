@@ -21,13 +21,12 @@ import java.util.List;
  */
 public class FirstCacheTest {
 
-    private SqlSessionFactory sqlSessionFactory;
     private SqlSession session;
 
     @Before
     public void init() {
         SqlSessionFactoryBuilder factoryBuilder = new SqlSessionFactoryBuilder();
-        this.sqlSessionFactory = factoryBuilder.build(
+        SqlSessionFactory sqlSessionFactory = factoryBuilder.build(
                 this.getClass().getResourceAsStream("/mybatis/SqlMapConfig.xml")
         );
         this.session = sqlSessionFactory.openSession();

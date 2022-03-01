@@ -62,7 +62,7 @@ public class ExecutorTest {
      */
     @Test
     @SneakyThrows
-    public void testBaseExecutor() {
+    public void testSimpleExecutor() {
         SimpleExecutor executor = new SimpleExecutor(configuration, jdbcTransaction);
         MappedStatement getBalanceById =
                 configuration.getMappedStatement("cn.spring.learning.tx.mapper.TxDemoMapper.getBalanceById");
@@ -100,8 +100,8 @@ public class ExecutorTest {
     @SneakyThrows
     public void testBatchExecutor() {
         BatchExecutor executor = new BatchExecutor(configuration, jdbcTransaction);
-        MappedStatement getBalanceById =
-                configuration.getMappedStatement("cn.spring.learning.tx.mapper.TxDemoMapper.getBalanceById");
+        MappedStatement addAccount =
+                configuration.getMappedStatement("cn.spring.learning.tx.mapper.TxDemoMapper.addAccount");
 
         Account account = Account.builder()
                 .name("testBatch")
@@ -109,15 +109,10 @@ public class ExecutorTest {
                 .balance(BigDecimal.ZERO)
                 .build();
 
-        List<Account> accounts = executor.doQuery(getBalanceById, 1, RowBounds.DEFAULT,
-                SimpleExecutor.NO_RESULT_HANDLER, getBalanceById.getBoundSql(1)
-        );
-        // 第二次执行，观察预编译次数 -> 只会预编译一次
-        executor.doQuery(getBalanceById, 1, RowBounds.DEFAULT,
-                SimpleExecutor.NO_RESULT_HANDLER, getBalanceById.getBoundSql(1)
-        );
-        for (Account acc : accounts) {
-            System.err.println(objectMapper.writeValueAsString(acc));
-        }
+        executor.doUpdate(addAccount, account);
+        executor.doUpdate(addAccount, account);
+        executor.doUpdate(addAccount, account);
+        // 必须执行刷新，才会将所有的语句提交到数据库。
+//        executor.doFlushStatements(false);
     }
 }

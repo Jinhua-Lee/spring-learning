@@ -8,39 +8,43 @@
     <insert id="upsertBalance" useGeneratedKeys="true" parameterType="cn.spring.learning.tx.entity.Account">
         insert into account(name, age, balance)
         values (#{name}, #{age}, #{balance})
-        on duplicate key update
-        balance = balance + #{balance}
+        on duplicate key update balance = balance + #{balance};
+    </insert>
+
+    <insert id="addAccount">
+        insert into account(name, age, balance)
+        values (#{name}, #{age}, #{balance});
     </insert>
 
     <!--查询指定账户的余额-->
     <select id="getBalanceById" resultType="cn.spring.learning.tx.entity.Account">
         select id, balance
         from account
-        where id = #{id}
+        where id = #{id};
     </select>
 
     <!--查询指定账户的余额-->
     <select id="getBalanceById2" resultType="cn.spring.learning.tx.entity.Account" flushCache="true">
         select id, balance
         from account
-        where id = #{id}
+        where id = #{id};
     </select>
 
     <!--查询所有账户-->
     <select id="getAllAccounts" resultType="cn.spring.learning.tx.entity.Account">
         select id, name, age, balance
-        from account
+        from account;
     </select>
 
-    <!--分页查询账户-->
+    <!--分页查询账户，利用PageHelper来控制查询参数-->
     <select id="getAccountsByPage" resultType="cn.spring.learning.tx.entity.Account">
         select id, name, age, balance
-        from account
+        from account;
     </select>
 
     <update id="updateBalance">
         update account
         set balance = balance + #{balance}
-        where id = #{id}
+        where id = #{id};
     </update>
 </mapper>

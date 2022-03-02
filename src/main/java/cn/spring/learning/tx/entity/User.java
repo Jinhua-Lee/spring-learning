@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
+import java.io.Serializable;
 import java.lang.reflect.Field;
 
 /**
@@ -16,7 +17,7 @@ import java.lang.reflect.Field;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class User {
+public class User implements Serializable {
 
     /**
      * 用户Id
@@ -48,25 +49,4 @@ public class User {
      */
     private String info;
 
-    public static void main(String[] args) {
-
-        User user = new User();
-        user.setName("ljh");
-        user.setId(1);
-
-        Class<? extends User> uClass = user.getClass();
-
-        System.out.println("uClass = " + uClass);
-
-        for (Field field : uClass.getDeclaredFields()) {
-            Class<?> fieldType = field.getType();
-
-            if (fieldType.equals(int.class)) {
-                // do something
-            }
-
-            String name = field.getName();
-            System.out.println("fieldType = " + fieldType + "\n name = " + name);
-        }
-    }
 }

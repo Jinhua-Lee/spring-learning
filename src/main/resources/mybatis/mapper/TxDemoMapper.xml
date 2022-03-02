@@ -5,6 +5,9 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.spring.learning.tx.mapper.TxDemoMapper">
 
+    <!-- 开启二级缓存，或者在Mapper接口上加注解 @@CacheNamespace -->
+<!--    <cache/>-->
+
     <insert id="upsertBalance" useGeneratedKeys="true" parameterType="cn.spring.learning.tx.entity.Account">
         insert into account(name, age, balance)
         values (#{name}, #{age}, #{balance})

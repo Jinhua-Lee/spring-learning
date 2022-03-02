@@ -33,6 +33,7 @@ public class SecondCacheTest {
     @Test
     public void cacheTest1() {
         Cache cache = configuration.getCache("cn.spring.learning.tx.mapper.TxDemoMapper");
+        // 缓存类必须实现Serializable接口
         Account account = Account.builder()
                 .name("testBatch")
                 .age(11)

@@ -1,6 +1,7 @@
 package cn.spring.learning.tx.mapper;
 
 import cn.spring.learning.tx.entity.Account;
+import org.apache.ibatis.annotations.CacheNamespace;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.math.BigDecimal;
@@ -14,6 +15,7 @@ import java.util.List;
  * @date 2021/6/3 21:36
  */
 @Mapper
+@CacheNamespace
 public interface TxDemoMapper {
 
     /**

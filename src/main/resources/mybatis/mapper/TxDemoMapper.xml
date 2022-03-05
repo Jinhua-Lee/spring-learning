@@ -6,7 +6,8 @@
 <mapper namespace="cn.spring.learning.tx.mapper.TxDemoMapper">
 
     <!-- 开启二级缓存，或者在Mapper接口上加注解 @@CacheNamespace -->
-<!--    <cache/>-->
+    <!-- 单元测试的时候没有Mapper扫描，所以必须在此处开启-->
+    <cache/>
 
     <insert id="upsertBalance" useGeneratedKeys="true" parameterType="cn.spring.learning.tx.entity.Account">
         insert into account(name, age, balance)

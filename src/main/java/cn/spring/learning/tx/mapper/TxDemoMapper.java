@@ -15,7 +15,7 @@ import java.util.List;
  * @date 2021/6/3 21:36
  */
 @Mapper
-@CacheNamespace
+//@CacheNamespace
 public interface TxDemoMapper {
 
     /**

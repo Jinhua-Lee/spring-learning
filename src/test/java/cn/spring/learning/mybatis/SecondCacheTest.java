@@ -3,21 +3,20 @@ package cn.spring.learning.mybatis;
 import cn.spring.learning.tx.entity.Account;
 import cn.spring.learning.tx.mapper.TxDemoMapper;
 import org.apache.ibatis.cache.Cache;
-import org.apache.ibatis.cache.CacheKey;
-import org.apache.ibatis.cache.decorators.TransactionalCache;
-import org.apache.ibatis.logging.Log;
-import org.apache.ibatis.logging.LogFactory;
-import org.apache.ibatis.mapping.BoundSql;
-import org.apache.ibatis.mapping.MappedStatement;
-import org.apache.ibatis.session.*;
-import org.apache.ibatis.util.MapUtil;
+import org.apache.ibatis.cache.decorators.LruCache;
+import org.apache.ibatis.cache.impl.PerpetualCache;
+import org.apache.ibatis.mapping.CacheBuilder;
+import org.apache.ibatis.session.Configuration;
+import org.apache.ibatis.session.SqlSession;
+import org.apache.ibatis.session.SqlSessionFactory;
+import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
-import java.sql.SQLException;
-import java.util.*;
+import java.util.List;
+import java.util.Properties;
 
 /**
  * 二级缓存的测试
@@ -63,13 +62,13 @@ public class SecondCacheTest {
 
         TxDemoMapper mapperA = sessionA.getMapper(TxDemoMapper.class);
         // 调试它是否将查询结果放入二级缓存
-        List<Account> accountsA = mapperA.getBalanceById(1);
+        mapperA.getBalanceById(1);
         // 会话必须提交
         sessionA.commit();
 
         TxDemoMapper mapperB = sessionB.getMapper(TxDemoMapper.class);
         // 调试它是否从二级缓存中来（会的）
-        List<Account> accountsB = mapperB.getBalanceById(1);
+        mapperB.getBalanceById(1);
         sessionB.commit();
     }
 
@@ -83,23 +82,23 @@ public class SecondCacheTest {
         SqlSession sessionD = sqlSessionFactory.openSession();
 
         TxDemoMapper mapperA = sessionA.getMapper(TxDemoMapper.class);
-        List<Account> accountsA = mapperA.getBalanceById(1);
+        mapperA.getBalanceById(1);
         // 会话必须提交
         sessionA.commit();
 
         TxDemoMapper mapperB = sessionB.getMapper(TxDemoMapper.class);
         // 不会覆盖sessionA放入的缓存,Cache接口其实维护的是一系列缓存，具体的实现类维护CacheKey -> Cache的Map
-        List<Account> accountsB = mapperB.getBalanceById(7);
+        mapperB.getBalanceById(7);
         sessionB.commit();
 
         TxDemoMapper mapperC = sessionC.getMapper(TxDemoMapper.class);
         // 命中sessionA的缓存
-        List<Account> accountsC = mapperC.getBalanceById(1);
+        mapperC.getBalanceById(1);
         sessionC.commit();
 
         TxDemoMapper mapperD = sessionD.getMapper(TxDemoMapper.class);
         // 命中sessionB的缓存
-        List<Account> accountsD = mapperD.getBalanceById(7);
+        mapperD.getBalanceById(7);
         sessionD.commit();
     }
 

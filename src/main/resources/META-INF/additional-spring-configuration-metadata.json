@@ -19,6 +19,26 @@
 			"name": "spring.datasource.druid.learning.password",
 			"type": "java.lang.String",
 			"description": "数据源learning的password."
+		},
+		{
+			"name": "learning.val.intVal",
+			"type": "java.lang.String",
+			"description": "Value注解注入int值测试."
+		},
+		{
+			"name": "learning.val.strVal",
+			"type": "java.lang.String",
+			"description": "Value注解注入string值测试."
+		},
+		{
+			"name": "learning.val.boolVal",
+			"type": "java.lang.String",
+			"description": "Value注解注入bool值测试."
+		},
+		{
+			"name": "learning.val.decimalVal",
+			"type": "java.lang.String",
+			"description": "Value注解注入decimal值测试."
 		}
 	]
 }

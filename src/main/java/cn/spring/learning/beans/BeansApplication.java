@@ -1,6 +1,5 @@
 package cn.spring.learning.beans;
 
-import cn.spring.learning.event.EventApplication;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -17,6 +16,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class BeansApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(EventApplication.class, args);
+        SpringApplication.run(BeansApplication.class, args);
     }
 }

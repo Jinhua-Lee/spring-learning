@@ -2,7 +2,7 @@ spring:
   application:
     name: spring-learning
   profiles:
-    active: home
+    active: company
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
     druid:
@@ -27,5 +27,14 @@ spring:
       mode: always
       # 脚本位置
       schema-locations: classpath:sql/init.sql
+  main:
+    allow-circular-references: true
 server:
   port: 8080
+
+learning:
+  val:
+    intVal: 12
+    strVal: 'hello'
+    boolVal: true
+    decimalVal: 5.4

@@ -1,6 +1,5 @@
 package cn.spring.learning.redis;
 
-import cn.spring.learning.event.EventApplication;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -21,6 +20,6 @@ import org.springframework.cache.annotation.EnableCaching;
 public class RedisApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(EventApplication.class, args);
+        SpringApplication.run(RedisApplication.class, args);
     }
 }

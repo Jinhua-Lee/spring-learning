@@ -10,6 +10,7 @@ import org.apache.ibatis.jdbc.SQL;
  * @version 1.0
  * @date 2022/2/23 21:18
  */
+@SuppressWarnings("unused")
 public class CustomerSql {
 
     public String getCustomersByNameAndAge(@Param("name") String namePart, @Param("age") Integer age) {

@@ -15,8 +15,20 @@ import java.util.List;
  * @date 2021/6/3 21:36
  */
 @Mapper
+// 此处需要注解扫描才开启CacheNamespace
 //@CacheNamespace
 public interface TxDemoMapper {
+
+    /**
+     * 测试Java8接口默认方法
+     *
+     * @return 账户
+     */
+    default Account getNonQueryAccount() {
+        return Account.builder()
+                .id(-1)
+                .build();
+    }
 
     /**
      * 添加用户
@@ -54,10 +66,11 @@ public interface TxDemoMapper {
     /**
      * 更新指定ID账户的余额
      *
+     * @param accountId      账户ID
      * @param balance 更新到的余额
      * @return 受影响的行数
      */
-    int updateBalance(Integer id, BigDecimal balance);
+    int updateBalance(Integer accountId, BigDecimal balance);
 
     /**
      * 查询所有账户

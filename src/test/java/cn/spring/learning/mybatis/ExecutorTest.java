@@ -15,7 +15,8 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import org.apache.ibatis.transaction.jdbc.JdbcTransaction;
 import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.junit4.SpringRunner;
 
@@ -57,10 +58,8 @@ public class ExecutorTest {
         objectMapper = new ObjectMapper().setSerializationInclusion(JsonInclude.Include.NON_NULL);
     }
 
-    /**
-     * 简单执行器测试
-     */
     @Test
+    @DisplayName(value = "简单执行器测试")
     @SneakyThrows
     public void testSimpleExecutor() {
         SimpleExecutor executor = new SimpleExecutor(configuration, jdbcTransaction);
@@ -79,6 +78,7 @@ public class ExecutorTest {
     }
 
     @Test
+    @DisplayName(value = "可重用执行器测试")
     @SneakyThrows
     public void testReuseExecutor() {
         ReuseExecutor executor = new ReuseExecutor(configuration, jdbcTransaction);
@@ -97,6 +97,7 @@ public class ExecutorTest {
     }
 
     @Test
+    @DisplayName(value = "批量执行器测试")
     @SneakyThrows
     public void testBatchExecutor() {
         BatchExecutor executor = new BatchExecutor(configuration, jdbcTransaction);

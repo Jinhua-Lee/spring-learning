@@ -24,13 +24,20 @@ import java.util.List;
  * @date 2021/6/3 23:18
  */
 @SpringBootTest(classes = TxApplication.class)
-@ActiveProfiles(profiles = "home")
+@ActiveProfiles(profiles = "company")
 @RunWith(SpringRunner.class)
 @Transactional
 public class TxTest {
 
     private TxDemoService txDemoService;
     private TxDemoMapper txDemoMapper;
+
+    @Test
+    public void testDefaultMethod() {
+        Account account = txDemoMapper.getNonQueryAccount();
+
+        System.out.println("account = " + account);
+    }
 
     @Test
     public void testTxUpsert() {
@@ -53,7 +60,7 @@ public class TxTest {
     public void testPageQuery() {
         PageHelper.startPage(1, 1);
         List<Account> accountsByPage = txDemoMapper.getAccountsByPage();
-        PageInfo<Account> pageInfo =  new PageInfo<>(accountsByPage);
+        PageInfo<Account> pageInfo = new PageInfo<>(accountsByPage);
 
         List<Account> list = pageInfo.getList();
         list.forEach(System.out::println);

@@ -89,6 +89,15 @@ public interface TxDemoMapper {
     List<Account> getAccountsByPage();
 
     /**
+     * 根据ID和姓名片段来进行查询
+     *
+     * @param accountId 账户ID
+     * @param namePart  姓名片段
+     * @return 账户列表
+     */
+    List<Account> getAccountByIdAndNamePart(@Param(value = "id") Integer accountId, @Param(value = "name") String namePart);
+
+    /**
      * 根据入参Map来查询对象
      *
      * @param argMap 入参Map

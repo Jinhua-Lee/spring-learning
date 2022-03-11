@@ -78,4 +78,14 @@ public class ParameterTest {
             log.debug("{}", objectMapper.writeValueAsString(account));
         }
     }
+
+    @Test
+    @DisplayName(value = "普通参数和占位参数的处理")
+    @SneakyThrows
+    public void testParamHandle() {
+        List<Account> accounts = this.txDemoMapper.getAccountByIdAndNamePart(1, "jh");
+        for (Account account : accounts) {
+            log.debug("{}", objectMapper.writeValueAsString(account));
+        }
+    }
 }

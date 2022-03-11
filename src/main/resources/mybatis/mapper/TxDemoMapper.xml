@@ -59,7 +59,23 @@
                     and name like '%${argMap.name}%'
                 </if>
             </where>
-        </if>
+        </if>;
+    </select>
+
+    <!--根据ID和姓名片段来查询账户-->
+    <select id="getAccountByIdAndNamePart" resultType="cn.spring.learning.tx.entity.Account">
+        select id, name, age, balance
+        from account
+        <if test="id != null or name != null">
+            <where>
+                <if test="id != null">
+                    and id = #{id}
+                </if>
+                <if test="name != null">
+                    and name like '%${name}%'
+                </if>
+            </where>
+        </if>;
     </select>
 
     <update id="updateBalance">

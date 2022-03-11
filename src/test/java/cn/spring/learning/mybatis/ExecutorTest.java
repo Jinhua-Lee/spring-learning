@@ -14,11 +14,9 @@ import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import org.apache.ibatis.transaction.jdbc.JdbcTransaction;
-import org.junit.Before;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.runner.RunWith;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
 import java.sql.Connection;
@@ -32,8 +30,6 @@ import java.util.List;
  * @version 1.0
  * @date 2022/2/27 22:06
  */
-
-@RunWith(SpringRunner.class)
 public class ExecutorTest {
 
     private Configuration configuration;
@@ -42,7 +38,7 @@ public class ExecutorTest {
     //    @Autowired
     private ObjectMapper objectMapper;
 
-    @Before
+    @BeforeEach
     @SneakyThrows
     public void init() {
         SqlSessionFactoryBuilder ssfBuilder = new SqlSessionFactoryBuilder();

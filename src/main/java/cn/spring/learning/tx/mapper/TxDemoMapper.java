@@ -3,9 +3,11 @@ package cn.spring.learning.tx.mapper;
 import cn.spring.learning.tx.entity.Account;
 import org.apache.ibatis.annotations.CacheNamespace;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 事务模拟的数据访问类
@@ -66,8 +68,8 @@ public interface TxDemoMapper {
     /**
      * 更新指定ID账户的余额
      *
-     * @param accountId      账户ID
-     * @param balance 更新到的余额
+     * @param accountId 账户ID
+     * @param balance   更新到的余额
      * @return 受影响的行数
      */
     int updateBalance(Integer accountId, BigDecimal balance);
@@ -85,4 +87,12 @@ public interface TxDemoMapper {
      * @return 分页查询账户
      */
     List<Account> getAccountsByPage();
+
+    /**
+     * 根据入参Map来查询对象
+     *
+     * @param argMap 入参Map
+     * @return 查询出的账户
+     */
+    List<Account> getAccountByArgMap(@Param(value = "argMap") Map<String, Object> argMap);
 }

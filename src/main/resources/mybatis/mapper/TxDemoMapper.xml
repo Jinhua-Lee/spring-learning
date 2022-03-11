@@ -46,6 +46,22 @@
         from account;
     </select>
 
+    <!--根据入参Map来查询账户-->
+    <select id="getAccountByArgMap" resultType="cn.spring.learning.tx.entity.Account">
+        select id, name, age, balance
+        from account
+        <if test="argMap != null and !argMap.isEmpty()">
+            <where>
+                <if test="argMap.id != null">
+                    and id = #{argMap.id}
+                </if>
+                <if test="argMap.name != null">
+                    and name like '%${argMap.name}%'
+                </if>
+            </where>
+        </if>
+    </select>
+
     <update id="updateBalance">
         update account
         set balance = balance + #{balance}

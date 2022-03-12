@@ -3,9 +3,6 @@ package cn.spring.learning.mybatis;
 import cn.spring.learning.tx.entity.Account;
 import cn.spring.learning.tx.mapper.TxDemoMapper;
 import org.apache.ibatis.cache.Cache;
-import org.apache.ibatis.cache.decorators.LruCache;
-import org.apache.ibatis.cache.impl.PerpetualCache;
-import org.apache.ibatis.mapping.CacheBuilder;
 import org.apache.ibatis.session.Configuration;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -15,8 +12,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
-import java.util.List;
-import java.util.Properties;
 
 /**
  * 二级缓存的测试

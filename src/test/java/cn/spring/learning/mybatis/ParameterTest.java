@@ -41,11 +41,6 @@ public class ParameterTest {
         SqlSessionFactory ssFactory = ssfBuilder.build(
                 this.getClass().getResourceAsStream("/mybatis/SqlMapConfig.xml")
         );
-        Configuration configuration = ssFactory.getConfiguration();
-        Connection connection = DriverManager.getConnection(
-                PropertiesResolver.getValue("jdbc.url"),
-                PropertiesResolver.getValue("jdbc.user"),
-                PropertiesResolver.getValue("jdbc.password"));
         objectMapper = new ObjectMapper().setSerializationInclusion(JsonInclude.Include.NON_NULL);
         this.sqlSession = ssFactory.openSession();
         this.txDemoMapper = this.sqlSession.getMapper(TxDemoMapper.class);
@@ -72,7 +67,7 @@ public class ParameterTest {
     public void testMetaObject() {
         Map<String, Object> argMap = new HashMap<>();
         argMap.put("id", 1);
-        argMap.put("name", "l");
+        argMap.put("name", "jh");
         List<Account> accounts = this.txDemoMapper.getAccountByArgMap(argMap);
         for (Account account : accounts) {
             log.debug("{}", objectMapper.writeValueAsString(account));

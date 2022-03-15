@@ -76,7 +76,7 @@ public class TxTest {
     @Test
     public void testPageQuery() {
         PageHelper.startPage(1, 1);
-        List<Account> accountsByPage = txDemoMapper.getAccountsByPage();
+        List<Account> accountsByPage = txDemoMapper.getAllAccounts();
         PageInfo<Account> pageInfo = new PageInfo<>(accountsByPage);
 
         List<Account> list = pageInfo.getList();

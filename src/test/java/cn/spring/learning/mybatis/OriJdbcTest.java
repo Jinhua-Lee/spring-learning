@@ -30,7 +30,7 @@ public class OriJdbcTest {
     @DisplayName(value = "测试PreparedStatement")
     public void testPreparedStatement() {
         String preSql = "select * from account where id = ?";
-        printMap(SingleJdbcConnectionUtil.executePstQuery(preSql));
+        printMap(SingleJdbcConnectionUtil.executePstQuery(preSql, 1));
     }
 
     private void printMap(List<Map<String, Object>> table) {

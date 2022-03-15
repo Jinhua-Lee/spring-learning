@@ -10,8 +10,12 @@
     <cache/>
 
     <sql id="selectAccount">
-        select id, name, age, balance
+        select <include refid="selectAccountFields"/>
         from account
+    </sql>
+
+    <sql id="selectAccountFields">
+        id, name, age, balance
     </sql>
 
     <insert id="upsertBalance" useGeneratedKeys="true" parameterType="cn.spring.learning.tx.entity.Account">
@@ -44,11 +48,6 @@
 
     <!--查询所有账户-->
     <select id="getAllAccounts" resultType="cn.spring.learning.tx.entity.Account">
-        <include refid="selectAccount"/>;
-    </select>
-
-    <!--分页查询账户，利用PageHelper来控制查询参数-->
-    <select id="getAccountsByPage" resultType="cn.spring.learning.tx.entity.Account">
         <include refid="selectAccount"/>;
     </select>
 

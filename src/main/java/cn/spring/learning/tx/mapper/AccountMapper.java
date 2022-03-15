@@ -75,18 +75,12 @@ public interface AccountMapper {
     int updateBalance(Integer accountId, BigDecimal balance);
 
     /**
-     * 查询所有账户
+     * 查询所有账户<p>
+     * 支持插件分页
      *
      * @return 所有账户
      */
     List<Account> getAllAccounts();
-
-    /**
-     * 分页查询账户
-     *
-     * @return 分页查询账户
-     */
-    List<Account> getAccountsByPage();
 
     /**
      * 根据ID和姓名片段来进行查询

@@ -50,7 +50,7 @@ public class StatementHandlerTest {
         jdbcTransaction = new JdbcTransaction(connection);
         objectMapper = new ObjectMapper().setSerializationInclusion(JsonInclude.Include.NON_NULL);
         simpleExecutor = new SimpleExecutor(configuration, jdbcTransaction);
-        ms = configuration.getMappedStatement("cn.spring.learning.tx.mapper.TxDemoMapper.getBalanceById");
+        ms = configuration.getMappedStatement("cn.spring.learning.tx.mapper.AccountMapper.getBalanceById");
     }
 
 

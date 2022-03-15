@@ -1,7 +1,7 @@
 package cn.spring.learning.mybatis;
 
 import cn.spring.learning.tx.entity.Account;
-import cn.spring.learning.tx.mapper.TxDemoMapper;
+import cn.spring.learning.tx.mapper.AccountMapper;
 import org.apache.ibatis.cache.Cache;
 import org.apache.ibatis.session.Configuration;
 import org.apache.ibatis.session.SqlSession;
@@ -37,7 +37,7 @@ public class SecondCacheTest {
     @Test
     @DisplayName(value = "查看二级缓存对象的结构")
     public void testCacheStructure() {
-        Cache cache = configuration.getCache("cn.spring.learning.tx.mapper.TxDemoMapper");
+        Cache cache = configuration.getCache("cn.spring.learning.tx.mapper.AccountMapper");
         // 缓存类必须实现Serializable接口
         Account account = Account.builder()
                 .name("testBatch")
@@ -55,13 +55,13 @@ public class SecondCacheTest {
         SqlSession sessionA = sqlSessionFactory.openSession();
         SqlSession sessionB = sqlSessionFactory.openSession();
 
-        TxDemoMapper mapperA = sessionA.getMapper(TxDemoMapper.class);
+        AccountMapper mapperA = sessionA.getMapper(AccountMapper.class);
         // 调试它是否将查询结果放入二级缓存
         mapperA.getBalanceById(1);
         // 会话必须提交
         sessionA.commit();
 
-        TxDemoMapper mapperB = sessionB.getMapper(TxDemoMapper.class);
+        AccountMapper mapperB = sessionB.getMapper(AccountMapper.class);
         // 调试它是否从二级缓存中来（会的）
         mapperB.getBalanceById(1);
         sessionB.commit();
@@ -76,22 +76,22 @@ public class SecondCacheTest {
         SqlSession sessionC = sqlSessionFactory.openSession();
         SqlSession sessionD = sqlSessionFactory.openSession();
 
-        TxDemoMapper mapperA = sessionA.getMapper(TxDemoMapper.class);
+        AccountMapper mapperA = sessionA.getMapper(AccountMapper.class);
         mapperA.getBalanceById(1);
         // 会话必须提交
         sessionA.commit();
 
-        TxDemoMapper mapperB = sessionB.getMapper(TxDemoMapper.class);
+        AccountMapper mapperB = sessionB.getMapper(AccountMapper.class);
         // 不会覆盖sessionA放入的缓存,Cache接口其实维护的是一系列缓存，具体的实现类维护CacheKey -> Cache的Map
         mapperB.getBalanceById(7);
         sessionB.commit();
 
-        TxDemoMapper mapperC = sessionC.getMapper(TxDemoMapper.class);
+        AccountMapper mapperC = sessionC.getMapper(AccountMapper.class);
         // 命中sessionA的缓存
         mapperC.getBalanceById(1);
         sessionC.commit();
 
-        TxDemoMapper mapperD = sessionD.getMapper(TxDemoMapper.class);
+        AccountMapper mapperD = sessionD.getMapper(AccountMapper.class);
         // 命中sessionB的缓存
         mapperD.getBalanceById(7);
         sessionD.commit();

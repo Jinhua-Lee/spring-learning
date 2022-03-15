@@ -1,6 +1,6 @@
 package cn.spring.learning.tx.service;
 
-import cn.spring.learning.tx.mapper.TxDemoMapper;
+import cn.spring.learning.tx.mapper.AccountMapper;
 import cn.spring.learning.tx.entity.Account;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,13 +20,13 @@ import java.util.Objects;
  * @date 2021/6/3 21:16
  */
 @Service
-public class TxDemoService {
+public class AccountTransferService {
 
-    private TxDemoMapper demoMapper;
+    private AccountMapper accountMapper;
 
     @Autowired
-    public void setDemoMapper(TxDemoMapper demoMapper) {
-        this.demoMapper = demoMapper;
+    public void setAccountMapper(AccountMapper accountMapper) {
+        this.accountMapper = accountMapper;
     }
 
     @Transactional(rollbackFor = Exception.class)
@@ -37,7 +37,7 @@ public class TxDemoService {
                 || Objects.isNull(account.getBalance())) {
             throw new IllegalArgumentException("不合法入参");
         }
-        return demoMapper.upsertBalance(account) > 0;
+        return accountMapper.upsertBalance(account) > 0;
     }
 
     @Transactional(propagation = Propagation.REQUIRED, rollbackFor = RuntimeException.class)
@@ -47,20 +47,20 @@ public class TxDemoService {
             throw new IllegalArgumentException("转账金额必须大于0");
         }
         // 2. from账户余额校验
-        List<Account> accountDos = demoMapper.getBalanceById(from.getId());
+        List<Account> accountDos = accountMapper.getBalanceById(from.getId());
         if (CollectionUtils.isEmpty(accountDos) || accountDos.get(0).getBalance().compareTo(amount) < 0) {
             throw new RuntimeException("账户不存在，或者账户余额不足！");
         }
         // 3. 开始转账逻辑
         from.setBalance(amount.negate().doubleValue());
         to.setBalance(amount.doubleValue());
-        if (demoMapper.updateBalance(from.getId(), from.getBalance()) < 1) {
+        if (accountMapper.updateBalance(from.getId(), from.getBalance()) < 1) {
             throw new RuntimeException("from 账户更新失败！");
         }
 //        if (true) {
 //            throw new RuntimeException("手动抛出 [运行时异常] ");
 //        }
-        if (demoMapper.updateBalance(to.getId(), to.getBalance()) < 1) {
+        if (accountMapper.updateBalance(to.getId(), to.getBalance()) < 1) {
             throw new RuntimeException("to 账户更新失败！");
         }
     }

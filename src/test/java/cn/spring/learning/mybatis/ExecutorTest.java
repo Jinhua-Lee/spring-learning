@@ -60,7 +60,7 @@ public class ExecutorTest {
     public void testSimpleExecutor() {
         SimpleExecutor executor = new SimpleExecutor(configuration, jdbcTransaction);
         MappedStatement getBalanceById =
-                configuration.getMappedStatement("cn.spring.learning.tx.mapper.TxDemoMapper.getBalanceById");
+                configuration.getMappedStatement("cn.spring.learning.tx.mapper.AccountMapper.getBalanceById");
         List<Account> accounts = executor.doQuery(getBalanceById, 1, RowBounds.DEFAULT,
                 SimpleExecutor.NO_RESULT_HANDLER, getBalanceById.getBoundSql(1)
         );
@@ -79,7 +79,7 @@ public class ExecutorTest {
     public void testReuseExecutor() {
         ReuseExecutor executor = new ReuseExecutor(configuration, jdbcTransaction);
         MappedStatement getBalanceById =
-                configuration.getMappedStatement("cn.spring.learning.tx.mapper.TxDemoMapper.getBalanceById");
+                configuration.getMappedStatement("cn.spring.learning.tx.mapper.AccountMapper.getBalanceById");
         List<Account> accounts = executor.doQuery(getBalanceById, 1, RowBounds.DEFAULT,
                 SimpleExecutor.NO_RESULT_HANDLER, getBalanceById.getBoundSql(1)
         );
@@ -98,7 +98,7 @@ public class ExecutorTest {
     public void testBatchExecutor() {
         BatchExecutor executor = new BatchExecutor(configuration, jdbcTransaction);
         MappedStatement addAccount =
-                configuration.getMappedStatement("cn.spring.learning.tx.mapper.TxDemoMapper.addAccount");
+                configuration.getMappedStatement("cn.spring.learning.tx.mapper.AccountMapper.addAccount");
 
         Account account = Account.builder()
                 .name("testBatch")

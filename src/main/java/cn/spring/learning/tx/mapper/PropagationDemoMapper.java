@@ -14,7 +14,7 @@ import java.util.List;
  * @date 2021/6/7 20:50
  */
 @Mapper
-public interface PropagationMapper {
+public interface PropagationDemoMapper {
 
     /**
      * 添加商品的方法

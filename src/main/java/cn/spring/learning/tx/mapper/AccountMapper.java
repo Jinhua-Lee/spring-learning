@@ -19,7 +19,7 @@ import java.util.Map;
 @Mapper
 // 此处需要注解扫描才开启CacheNamespace
 //@CacheNamespace
-public interface TxDemoMapper {
+public interface AccountMapper {
 
     /**
      * 测试Java8接口默认方法

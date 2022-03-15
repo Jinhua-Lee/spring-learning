@@ -1,8 +1,8 @@
 package cn.spring.learning.tx;
 
 import cn.spring.learning.tx.entity.Account;
-import cn.spring.learning.tx.mapper.TxDemoMapper;
-import cn.spring.learning.tx.service.TxDemoService;
+import cn.spring.learning.tx.mapper.AccountMapper;
+import cn.spring.learning.tx.service.AccountTransferService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.junit.Test;
@@ -24,13 +24,13 @@ import java.util.List;
  * @date 2021/6/3 23:18
  */
 @SpringBootTest(classes = TxApplication.class)
-@ActiveProfiles(profiles = "company")
+@ActiveProfiles(profiles = "home")
 @RunWith(SpringRunner.class)
 @Transactional
 public class TxTest {
 
-    private TxDemoService txDemoService;
-    private TxDemoMapper txDemoMapper;
+    private AccountTransferService accountTransferService;
+    private AccountMapper txDemoMapper;
 
     @Test
     public void testDefaultMethod() {
@@ -45,7 +45,7 @@ public class TxTest {
                 .age(24)
                 .balance(BigDecimal.valueOf(2))
                 .build();
-        boolean success = this.txDemoService.updateBalance(account);
+        boolean success = this.accountTransferService.updateBalance(account);
         System.out.println("success = " + success);
     }
 
@@ -59,6 +59,18 @@ public class TxTest {
     public void  testGetById() {
         List<Account> accounts = this.txDemoMapper.getBalanceById(1);
         accounts.forEach(System.out::println);
+    }
+
+    @Test
+    public void testAddAccReturnsId() {
+        Account account = Account.builder()
+                .name("测试selectKey返回自增主键ID")
+                .age(11)
+                .balance(BigDecimal.ZERO)
+                .build();
+        int insert = this.txDemoMapper.addAccount(account);
+        System.out.println("insert = " + insert);
+        System.out.println("account.getId() = " + account.getId());
     }
 
     @Test
@@ -81,16 +93,16 @@ public class TxTest {
         Account from = new Account(7, null, null, null);
         Account to = new Account(1, null, null, null);
         BigDecimal amount = BigDecimal.valueOf(3000);
-        this.txDemoService.transfer(from, to, amount);
+        this.accountTransferService.transfer(from, to, amount);
     }
 
     @Autowired
-    public void setTxDemoService(TxDemoService txDemoService) {
-        this.txDemoService = txDemoService;
+    public void setTxDemoService(AccountTransferService accountTransferService) {
+        this.accountTransferService = accountTransferService;
     }
 
     @Autowired
-    public void setTxDemoMapper(TxDemoMapper txDemoMapper) {
+    public void setTxDemoMapper(AccountMapper txDemoMapper) {
         this.txDemoMapper = txDemoMapper;
     }
 }

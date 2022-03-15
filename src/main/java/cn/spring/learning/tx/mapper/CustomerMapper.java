@@ -24,6 +24,6 @@ public interface CustomerMapper {
      * @param age      年龄
      * @return 客户列表
      */
-    @SelectProvider(value = CustomerSql.class, method = "getCustomersByNameAndAge")
+    @SelectProvider(value = CustomerSqlProvider.class, method = "getCustomersByNameAndAge")
     List<Customer> getCustomersByNameAndAge(@Param("name") String namePart, @Param("age") Integer age);
 }

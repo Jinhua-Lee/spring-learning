@@ -1,13 +1,11 @@
 package cn.spring.learning.mybatis;
 
 import cn.spring.learning.tx.entity.Account;
-import cn.spring.learning.tx.mapper.TxDemoMapper;
-import cn.spring.learning.util.PropertiesResolver;
+import cn.spring.learning.tx.mapper.AccountMapper;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.ibatis.session.Configuration;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
@@ -16,8 +14,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -31,7 +27,7 @@ import java.util.Map;
 public class ParameterTest {
 
     private SqlSession sqlSession;
-    private TxDemoMapper txDemoMapper;
+    private AccountMapper accountMapper;
     private ObjectMapper objectMapper;
 
     @BeforeEach
@@ -43,7 +39,7 @@ public class ParameterTest {
         );
         objectMapper = new ObjectMapper().setSerializationInclusion(JsonInclude.Include.NON_NULL);
         this.sqlSession = ssFactory.openSession();
-        this.txDemoMapper = this.sqlSession.getMapper(TxDemoMapper.class);
+        this.accountMapper = this.sqlSession.getMapper(AccountMapper.class);
     }
 
     @AfterEach
@@ -55,7 +51,7 @@ public class ParameterTest {
     @DisplayName(value = "测试接口方法单个参数")
     @SneakyThrows
     public void testSingleParam() {
-        List<Account> balanceById = this.txDemoMapper.getBalanceById(1);
+        List<Account> balanceById = this.accountMapper.getBalanceById(1);
         for (Account account : balanceById) {
             log.debug("{}", objectMapper.writeValueAsString(account));
         }
@@ -68,7 +64,7 @@ public class ParameterTest {
         Map<String, Object> argMap = new HashMap<>();
         argMap.put("id", 1);
         argMap.put("name", "jh");
-        List<Account> accounts = this.txDemoMapper.getAccountByArgMap(argMap);
+        List<Account> accounts = this.accountMapper.getAccountByArgMap(argMap);
         for (Account account : accounts) {
             log.debug("{}", objectMapper.writeValueAsString(account));
         }
@@ -78,7 +74,7 @@ public class ParameterTest {
     @DisplayName(value = "普通参数和占位参数的处理")
     @SneakyThrows
     public void testParamHandle() {
-        List<Account> accounts = this.txDemoMapper.getAccountByIdAndNamePart(1, "jh");
+        List<Account> accounts = this.accountMapper.getAccountByIdAndNamePart(1, "jh");
         for (Account account : accounts) {
             log.debug("{}", objectMapper.writeValueAsString(account));
         }

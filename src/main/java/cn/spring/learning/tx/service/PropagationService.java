@@ -1,6 +1,6 @@
 package cn.spring.learning.tx.service;
 
-import cn.spring.learning.tx.mapper.PropagationMapper;
+import cn.spring.learning.tx.mapper.PropagationDemoMapper;
 import cn.spring.learning.tx.entity.Commodity;
 import cn.spring.learning.tx.entity.Customer;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,11 +22,11 @@ import java.util.List;
 @Service
 public class PropagationService {
 
-    private PropagationMapper propagationMapper;
+    private PropagationDemoMapper propagationDemoMapper;
 
     @Autowired
-    public void setPropagationMapper(PropagationMapper propagationMapper) {
-        this.propagationMapper = propagationMapper;
+    public void setPropagationMapper(PropagationDemoMapper propagationDemoMapper) {
+        this.propagationDemoMapper = propagationDemoMapper;
     }
 
     @Transactional(propagation = Propagation.NESTED, rollbackFor = Exception.class)
@@ -34,7 +34,7 @@ public class PropagationService {
         if (CollectionUtils.isEmpty(commodities)) {
             throw new RuntimeException("待插入集合不能为空！");
         }
-        int insert = propagationMapper.addCommodities(commodities);
+        int insert = propagationDemoMapper.addCommodities(commodities);
         System.out.println("insert = " + insert);
         return insert > 0;
     }
@@ -44,7 +44,7 @@ public class PropagationService {
         if (CollectionUtils.isEmpty(customers)) {
             throw new RuntimeException("待插入集合不能为空！");
         }
-        int insert = propagationMapper.addCustomers(customers);
+        int insert = propagationDemoMapper.addCustomers(customers);
         System.out.println("insert = " + insert);
         return insert > 0;
     }
@@ -54,7 +54,7 @@ public class PropagationService {
         if (CollectionUtils.isEmpty(customers)) {
             throw new RuntimeException("待插入集合不能为空！");
         }
-        int insert = propagationMapper.addCustomers(customers);
+        int insert = propagationDemoMapper.addCustomers(customers);
         System.out.println("insert = " + insert);
         if (true) {
             throw new RuntimeException("手动抛出 [运行时异常] ");

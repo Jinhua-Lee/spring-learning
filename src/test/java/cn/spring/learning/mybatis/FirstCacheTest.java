@@ -1,7 +1,7 @@
 package cn.spring.learning.mybatis;
 
 import cn.spring.learning.tx.entity.Account;
-import cn.spring.learning.tx.mapper.TxDemoMapper;
+import cn.spring.learning.tx.mapper.AccountMapper;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
@@ -34,7 +34,7 @@ public class FirstCacheTest {
 
     @Test
     public void test1() {
-        TxDemoMapper mapper = session.getMapper(TxDemoMapper.class);
+        AccountMapper mapper = session.getMapper(AccountMapper.class);
         // 能命中缓存：
         //      1. 同一session，
         //      2. 同一sql，
@@ -57,7 +57,7 @@ public class FirstCacheTest {
         //      2. 中间调用了一个flushCache = true的sql；
         //      3. 执行了update
         //      4. 缓存作用域Scope != Statement，配置文件统一更改
-        TxDemoMapper mapper = session.getMapper(TxDemoMapper.class);
+        AccountMapper mapper = session.getMapper(AccountMapper.class);
 
         List<Account> firstList = mapper.getBalanceById(1);
 

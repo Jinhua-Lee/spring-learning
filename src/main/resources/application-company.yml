@@ -1,4 +1,6 @@
 spring:
+  redis:
+    host: 172.17.6.117
   datasource:
     druid:
       learning:

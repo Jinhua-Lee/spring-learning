@@ -10,7 +10,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
  * @author Jinhua
  */
 @SpringBootApplication(scanBasePackages = {
-        "cn.spring.learning.redis"
+        "cn.spring.learning"
 })
 @EnableScheduling
 public class SpringLearningApplication {

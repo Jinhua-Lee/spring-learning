@@ -126,6 +126,13 @@
             <version>8.0.28</version>
         </dependency>
 
+        <!--单点登录工具-->
+        <dependency>
+            <groupId>org.jasig.cas.client</groupId>
+            <artifactId>cas-client-core</artifactId>
+            <version>3.6.4</version>
+        </dependency>
+
         <!--开发者工具
             有碍于调试，所以先去除
         -->

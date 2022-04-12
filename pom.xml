@@ -19,14 +19,14 @@
     </properties>
 
     <dependencies>
-        <!--定时任务-->
+        <!-- 定时任务 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-quartz</artifactId>
             <version>${project.parent.version}</version>
         </dependency>
 
-        <!--Spring Web start-->
+        <!-- Spring Web start -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
@@ -40,42 +40,42 @@
         </dependency>
         <!--Spring Web end-->
 
-        <!--AOP 切面-->
+        <!-- AOP 切面 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-aop</artifactId>
             <version>${project.parent.version}</version>
         </dependency>
 
-        <!--Spring Boot Actuator健康监测-->
+        <!-- Spring Boot Actuator健康监测 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-actuator</artifactId>
             <version>${project.parent.version}</version>
         </dependency>
 
-        <!--Spring JDBC-->
+        <!-- Spring JDBC -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-jdbc</artifactId>
             <version>${project.parent.version}</version>
         </dependency>
 
-        <!--Spring Data JPA-->
+        <!-- Spring Data JPA -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>
             <version>${project.parent.version}</version>
         </dependency>
 
-        <!--Spring Data Redis-->
+        <!-- Spring Data Redis -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-redis</artifactId>
             <version>${project.parent.version}</version>
         </dependency>
 
-        <!--Jackson 数据类型-jsr310 start-->
+        <!-- Jackson 数据类型-jsr310 start -->
         <dependency>
             <groupId>com.fasterxml.jackson.datatype</groupId>
             <artifactId>jackson-datatype-jsr310</artifactId>
@@ -83,50 +83,50 @@
         </dependency>
         <!--Jackson 数据类型-jsr310 end-->
 
-        <!--Spring Boot 配置注解处理器-->
-        <!--自定义配置项 + 配置项说明文件，不让spring继续提示-->
+        <!-- Spring Boot 配置注解处理器 -->
+        <!-- 自定义配置项 + 配置项说明文件，不让spring继续提示 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-configuration-processor</artifactId>
             <version>${project.parent.version}</version>
         </dependency>
 
-        <!--分页插件-->
+        <!-- 分页插件 -->
         <dependency>
             <groupId>com.github.pagehelper</groupId>
             <artifactId>pagehelper</artifactId>
             <version>5.3.0</version>
         </dependency>
 
-        <!--Spring 整合Mybatis-->
+        <!-- Spring 整合Mybatis -->
         <dependency>
             <groupId>org.mybatis.spring.boot</groupId>
             <artifactId>mybatis-spring-boot-starter</artifactId>
             <version>2.2.1</version>
         </dependency>
 
-        <!--Druid 连接池-->
+        <!-- Druid 连接池 -->
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>druid</artifactId>
             <version>1.2.8</version>
         </dependency>
 
-        <!--C3P0 连接池-->
+        <!-- C3P0 连接池 -->
         <dependency>
             <groupId>com.mchange</groupId>
             <artifactId>c3p0</artifactId>
             <version>0.9.5.5</version>
         </dependency>
 
-        <!--MySQL 连接驱动-->
+        <!-- MySQL 连接驱动 -->
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
             <version>8.0.28</version>
         </dependency>
 
-        <!--单点登录工具-->
+        <!-- 单点登录工具-->
         <dependency>
             <groupId>org.jasig.cas.client</groupId>
             <artifactId>cas-client-core</artifactId>
@@ -144,7 +144,7 @@
 <!--            <optional>true</optional>-->
 <!--        </dependency>-->
 
-        <!--Spring Test-->
+        <!-- Spring Test -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
@@ -152,20 +152,20 @@
             <scope>test</scope>
         </dependency>
 
-        <!--Lombok Bean简化工具-->
+        <!-- Lombok Bean简化工具 -->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <optional>true</optional>
         </dependency>
 
-        <!--单元测试工具-->
+        <!-- 单元测试工具 -->
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
         </dependency>
 
-        <!--Swagger接口工具 start-->
+        <!-- Swagger接口工具 start -->
         <dependency>
             <groupId>io.springfox</groupId>
             <artifactId>springfox-swagger2</artifactId>
@@ -176,7 +176,7 @@
             <artifactId>springfox-swagger-ui</artifactId>
             <version>2.9.1</version>
         </dependency>
-        <!--Swagger接口工具 end-->
+        <!-- Swagger接口工具 end -->
     </dependencies>
 
     <build>

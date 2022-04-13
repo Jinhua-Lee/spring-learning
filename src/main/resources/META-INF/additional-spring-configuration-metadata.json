@@ -39,6 +39,26 @@
 			"name": "learning.val.decimalVal",
 			"type": "java.lang.String",
 			"description": "Value注解注入decimal值测试."
+		},
+		{
+			"name": "zuul.routes.cas-auth.path",
+			"type": "java.lang.String",
+			"description": "Description for zuul.routes.cas-auth.path."
+		},
+		{
+			"name": "zuul.routes.cas-auth.url",
+			"type": "java.lang.String",
+			"description": "Description for zuul.routes.cas-auth.url."
+		},
+		{
+			"name": "zuul.routes.cas-check-ticket.path",
+			"type": "java.lang.String",
+			"description": "Description for zuul.routes.cas-check-ticket.path."
+		},
+		{
+			"name": "zuul.routes.cas-check-ticket.url",
+			"type": "java.lang.String",
+			"description": "Description for zuul.routes.cas-check-ticket.url."
 		}
 	]
 }

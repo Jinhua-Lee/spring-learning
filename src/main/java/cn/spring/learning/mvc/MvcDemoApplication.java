@@ -15,9 +15,9 @@ import org.springframework.boot.web.servlet.ServletComponentScan;
 @SpringBootApplication(scanBasePackages = {
         "cn.spring.learning.config", "cn.spring.learning.mvc"
 })
-public class FilterApplication {
+public class MvcDemoApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(FilterApplication.class, args);
+        SpringApplication.run(MvcDemoApplication.class, args);
     }
 }

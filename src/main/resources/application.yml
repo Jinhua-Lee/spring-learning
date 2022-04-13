@@ -1,3 +1,6 @@
+server:
+  port: 8081
+
 spring:
   application:
     name: spring-learning
@@ -29,8 +32,6 @@ spring:
       schema-locations: classpath:sql/init.sql
   main:
     allow-circular-references: true
-server:
-  port: 8080
 
 learning:
   val:

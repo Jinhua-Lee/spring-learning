@@ -9,9 +9,14 @@ import org.springframework.web.bind.annotation.RestController;
  * @date 2022/3/30 10:19
  */
 @RestController
-public class FilterDemoController {
+public class MvcDemoController {
 
-    @GetMapping(value = "/testFilter")
+    @GetMapping(value = "/hello")
+    public String hello() {
+        return "hello";
+    }
+
+    @GetMapping(value = "/test-filter-order")
     public boolean testFilterOrder() {
         return false;
     }

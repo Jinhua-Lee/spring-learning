@@ -59,6 +59,11 @@
 			"name": "zuul.routes.cas-check-ticket.url",
 			"type": "java.lang.String",
 			"description": "Description for zuul.routes.cas-check-ticket.url."
+		},
+		{
+			"name": "learning.complex.int-arr",
+			"type": "java.lang.String",
+			"description": "int数组配置演示."
 		}
 	]
 }

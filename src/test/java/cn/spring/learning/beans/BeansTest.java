@@ -94,10 +94,12 @@ public class BeansTest extends MyApplicationContextHolder {
      */
     @Test
     public void testComplexInjection() {
-        ComplexInjectionBean complexBean = (ComplexInjectionBean) context.getBean("complexBean");
+        ComplexInjectionBean complexBean = (ComplexInjectionBean) context.getBean("complexInjectionBean");
         Arrays.stream(complexBean.getIntArray()).forEach(System.out::println);
         complexBean.getIntegers().forEach(System.out::println);
+        Arrays.stream(complexBean.getStrArray()).forEach(System.out::println);
         complexBean.getInt2Str().forEach((k, v) -> System.out.println(k + "-->" + v));
+        Arrays.stream(complexBean.getIntArrByValue()).forEach(System.out::println);
     }
 
     /**

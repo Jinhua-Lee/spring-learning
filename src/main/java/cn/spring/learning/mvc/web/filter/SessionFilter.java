@@ -20,7 +20,11 @@ public class SessionFilter implements Filter {
         HttpServletRequest req = (HttpServletRequest) request;
         HttpServletResponse resp = (HttpServletResponse) response;
 
-        log.info("session filter");
+        log.info("===== session filter start =====");
+        log.info("remote address = {}", request.getRemoteAddr());
+        log.info("remote host = {}", request.getRemoteHost());
+        log.info("remote port = {}", request.getRemotePort());
+        log.info("===== session filter end =====");
         chain.doFilter(req, resp);
     }
 }

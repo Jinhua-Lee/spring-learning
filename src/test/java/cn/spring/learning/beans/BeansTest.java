@@ -9,6 +9,7 @@ import cn.spring.learning.tx.entity.User;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mchange.v2.c3p0.ComboPooledDataSource;
 import lombok.SneakyThrows;
+import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.BeanFactory;
@@ -29,6 +30,7 @@ import java.util.List;
  */
 @SpringBootTest(classes = BeansApplication.class)
 @RunWith(SpringRunner.class)
+@Slf4j
 public class BeansTest extends MyApplicationContextHolder {
 
     /**
@@ -95,11 +97,29 @@ public class BeansTest extends MyApplicationContextHolder {
     @Test
     public void testComplexInjection() {
         ComplexInjectionBean complexBean = (ComplexInjectionBean) context.getBean("complexInjectionBean");
-        Arrays.stream(complexBean.getIntArray()).forEach(System.out::println);
-        complexBean.getIntegers().forEach(System.out::println);
-        Arrays.stream(complexBean.getStrArray()).forEach(System.out::println);
-        complexBean.getInt2Str().forEach((k, v) -> System.out.println(k + "-->" + v));
+        log.info("===== int array yml start =====");
+        Arrays.stream(complexBean.getIntArrayYml()).forEach(System.out::println);
+        log.info("===== int array yml end =====");
+
+        log.info("===== int array props start =====");
+        Arrays.stream(complexBean.getIntArrayProps()).forEach(System.out::println);
+        log.info("===== int array props end =====");
+
+        log.info("===== integer list csv start =====");
+        complexBean.getIntegerListCsv().forEach(System.out::println);
+        log.info("===== integer list csv end =====");
+
+        log.info("===== int array by value start =====");
         Arrays.stream(complexBean.getIntArrByValue()).forEach(System.out::println);
+        log.info("===== int array by value start =====");
+
+        log.info("===== str array yml start =====");
+        Arrays.stream(complexBean.getStrArrayYml()).forEach(System.out::println);
+        log.info("===== str array yml end =====");
+
+        log.info("===== map yml start =====");
+        complexBean.getInt2StrYml().forEach((k, v) -> System.out.println(k + "-->" + v));
+        log.info("===== map yml end =====");
     }
 
     /**

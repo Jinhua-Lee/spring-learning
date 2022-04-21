@@ -61,9 +61,29 @@
 			"description": "Description for zuul.routes.cas-check-ticket.url."
 		},
 		{
-			"name": "learning.complex.int-arr",
+			"name": "learning.complex.int-arr-yml",
+			"type": "java.lang.Integer",
+			"description": "int数组配置yml格式演示."
+		},
+		{
+			"name": "learning.complex.int-array-props",
+			"type": "java.lang.Integer",
+			"description": "int数组配置properties格式演示."
+		},
+		{
+			"name": "learning.complex.int-arr-by-value",
 			"type": "java.lang.String",
-			"description": "int数组配置演示."
+			"description": "int数组，Value注解演示."
+		},
+		{
+			"name": "learning.complex.str-array-yml",
+			"type": "java.lang.String",
+			"description": "str数组配置yml格式演示."
+		},
+		{
+			"name": "learning.complex.integer-list-csv",
+			"type": "java.lang.String",
+			"description": "Integer列表，逗号分隔符演示."
 		}
 	]
 }

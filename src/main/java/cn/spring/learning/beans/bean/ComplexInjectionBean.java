@@ -25,11 +25,13 @@ import java.util.Map;
 @ConfigurationProperties(prefix = "learning.complex")
 @Configuration
 public class ComplexInjectionBean {
-    private int[] intArray;
-    private String[] strArray;
-    private List<Integer> integers;
-    private Map<Integer, String> int2Str;
+    private int[] intArrayYml;
+    private int[] intArrayProps;
+    private List<Integer> integerListCsv;
 
-    @Value(value = "${learning.complex.int-arr}")
+    @Value(value = "${learning.complex.int-arr-by-value}")
     private int[] intArrByValue;
+
+    private String[] strArrayYml;
+    private Map<Integer, String> int2StrYml;
 }

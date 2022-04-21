@@ -40,18 +40,19 @@ learning:
     boolVal: true
     decimalVal: 5.4
   complex:
-    intArray:
+    int-array-yml:
       - 1
       - 2
-      - 3
-    strArray:
+    int-array-props[0]: 3
+    int-array-props[1]: 4
+    integer-list-csv: 5, 6
+    int-arr-by-value: 7, 8
+    str-array-yml:
       - 'hi'
       - 'hello'
-    integers: 4, 5, 6
-    int2str:
+    int-2-str-yml:
       1: ljh
       2: lwk
-    int-arr: 7, 8, 9
 
 zuul:
   routes:

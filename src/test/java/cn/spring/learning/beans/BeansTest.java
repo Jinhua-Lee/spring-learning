@@ -16,6 +16,7 @@ import org.springframework.beans.factory.BeanFactory;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.support.AbstractApplicationContext;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.Arrays;
@@ -29,6 +30,7 @@ import java.util.List;
  * @date 2021/5/24 21:14
  */
 @SpringBootTest(classes = BeansApplication.class)
+@ActiveProfiles(profiles = "home")
 @RunWith(SpringRunner.class)
 @Slf4j
 public class BeansTest extends MyApplicationContextHolder {

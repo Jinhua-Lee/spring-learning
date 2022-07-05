@@ -1,7 +1,9 @@
 package cn.spring.learning.beans;
 
+import cn.spring.learning.beans.bean.method.replace.ReplaceableMethodMain;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.ConfigurableApplicationContext;
 
 /**
  * 【bean相关】的测试依赖启动类
@@ -16,6 +18,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class BeansApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(BeansApplication.class, args);
+        ConfigurableApplicationContext context = SpringApplication.run(BeansApplication.class, args);
+        ReplaceableMethodMain.BeanA beanA = context.getBean(ReplaceableMethodMain.BeanA.class);
+        System.out.println(beanA.method());
     }
 }

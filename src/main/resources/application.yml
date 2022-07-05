@@ -5,7 +5,7 @@ spring:
   application:
     name: spring-learning
   profiles:
-    active: company
+    active: home
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
     druid:

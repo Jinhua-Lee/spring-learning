@@ -11,7 +11,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @date 2022/1/27 19:17
  */
 @SpringBootApplication(scanBasePackages = {
-        "cn.spring.learning.config", "cn.spring.learning.beans"
+        "cn.spring.learning.config",
+        "cn.spring.learning.beans.config",
+        "cn.spring.learning.beans.bean.lifecycle",
+        "cn.spring.learning.beans.processor"
 })
 public class BeansApplication {
 

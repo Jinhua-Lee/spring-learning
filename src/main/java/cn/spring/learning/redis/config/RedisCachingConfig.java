@@ -1,4 +1,4 @@
-package cn.spring.learning.config;
+package cn.spring.learning.redis.config;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.PropertyAccessor;
@@ -36,7 +36,7 @@ import java.time.format.DateTimeFormatter;
  * @version 1.0
  * @date 2022/2/11 14:59
  */
-@Configuration
+//@Configuration
 public class RedisCachingConfig extends CachingConfigurerSupport {
 
     public static final String REDIS_KEY_DATABASE = "mall";

@@ -1,5 +1,6 @@
 package cn.spring.learning.beans.bean;
 
+import cn.spring.learning.beans.bean.scope.SingletonBean;
 import org.springframework.beans.factory.FactoryBean;
 import org.springframework.stereotype.Component;
 

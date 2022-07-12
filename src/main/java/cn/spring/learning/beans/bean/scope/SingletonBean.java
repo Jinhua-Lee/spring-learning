@@ -1,4 +1,4 @@
-package cn.spring.learning.beans.bean;
+package cn.spring.learning.beans.bean.scope;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -30,31 +30,7 @@ import javax.annotation.PreDestroy;
 @AllArgsConstructor
 @Scope(scopeName = "singleton")
 @Slf4j
-public class SingletonBean implements InitializingBean {
-
+public class SingletonBean {
     private Integer id;
     private String name;
-
-    @PostConstruct
-    public void postConstruct() {
-        log.info("post construct...");
-    }
-
-    @PreDestroy
-    public void preDestroy() {
-        log.info("before destroy...");
-    }
-
-    @Override
-    public void afterPropertiesSet() {
-        log.info("initializing bean...");
-    }
-
-    public void initMethod() {
-        log.info("init method...");
-    }
-
-    public void destroyMethod() {
-        log.info("destroy method...");
-    }
 }

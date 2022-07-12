@@ -1,4 +1,4 @@
-package cn.spring.learning.beans.bean;
+package cn.spring.learning.beans.bean.inject;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

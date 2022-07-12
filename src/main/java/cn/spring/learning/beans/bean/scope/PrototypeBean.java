@@ -1,4 +1,4 @@
-package cn.spring.learning.beans.bean;
+package cn.spring.learning.beans.bean.scope;
 
 import lombok.Getter;
 import lombok.Setter;

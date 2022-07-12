@@ -1,4 +1,4 @@
-package cn.spring.learning.beans.bean;
+package cn.spring.learning.beans.bean.inject;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.ObjectMapper;

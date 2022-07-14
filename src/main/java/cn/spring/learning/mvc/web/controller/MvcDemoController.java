@@ -1,6 +1,7 @@
 package cn.spring.learning.mvc.web.controller;
 
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -11,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class MvcDemoController {
 
-    @GetMapping(value = "/hello")
+    @PutMapping(value = "/hello")
     public String hello() {
         return "hello";
     }

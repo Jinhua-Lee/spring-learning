@@ -4,13 +4,17 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * <p> 一般Api返回结果结构
  * @author ZX
  * @date 2020/7/24 11:42
  */
+@Data
 @Builder
+@NoArgsConstructor
 @AllArgsConstructor
 @ApiModel("API返回结果")
 public class ApiResult<T> {

@@ -29,7 +29,7 @@ spring:
       # 始终初始化数据源
       mode: always
       # 脚本位置
-      schema-locations: classpath:sql/init.sql
+      schema-locations: classpath:sql/init_mysql.sql
   main:
     allow-circular-references: true
 

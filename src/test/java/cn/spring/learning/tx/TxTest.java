@@ -90,7 +90,7 @@ public class TxTest {
 
     @Test
     public void testTransfer() {
-        Account from = new Account(7, null, null, null);
+        Account from = new Account(2, null, null, null);
         Account to = new Account(1, null, null, null);
         BigDecimal amount = BigDecimal.valueOf(3000);
         this.accountTransferService.transfer(from, to, amount);

@@ -7,10 +7,23 @@ show transaction_isolation;
 select *
 from account;
 
--- 在事务会话2.2的步骤分别执行两个过程，观察查询结果
+-- 设置RU级别
+start transaction ;
 set default_transaction_isolation = 'read uncommitted';
-set default_transaction_isolation = 'repeatable read';
-set default_transaction_isolation = 'serializable';
+show transaction_isolation;
+commit;
 
--- 恢复隔离级别
-set default_transaction_isolation = 'read committed';
+-- 设置RR级别
+start transaction;
+set transaction_isolation = 'repeatable read';
+commit;
+
+-- 设置串行化级别
+start transaction;
+set transaction_isolation = 'serializable';
+commit;
+
+-- 恢复隔离级别RC
+start transaction;
+set transaction_isolation = 'read committed';
+commit;

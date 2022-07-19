@@ -2,6 +2,7 @@
 
 -- 1. 开启事务
 start transaction;
+show transaction_isolation;
 
 -- 2. 操作
 

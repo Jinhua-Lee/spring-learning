@@ -4,6 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.support.MethodReplacer;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.lang.NonNull;
 
 import java.lang.reflect.Method;
 
@@ -42,7 +43,8 @@ public class ReplaceableMethodMain {
     public static class MyMethodReplacer implements MethodReplacer {
 
         @Override
-        public Object reimplement(Object obj, Method method, Object[] args) throws Throwable {
+        @NonNull
+        public Object reimplement(@NonNull Object obj, @NonNull Method method, @NonNull Object[] args) {
             log.info("[replaced method] I am reimplement method.");
             return "replace method";
         }

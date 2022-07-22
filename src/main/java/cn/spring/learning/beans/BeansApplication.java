@@ -1,9 +1,8 @@
 package cn.spring.learning.beans;
 
-import cn.spring.learning.beans.bean.method.replace.ReplaceableMethodMain;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.ConfigurableApplicationContext;
 
 /**
  * 【bean相关】的测试依赖启动类
@@ -15,14 +14,13 @@ import org.springframework.context.ConfigurableApplicationContext;
 @SpringBootApplication(scanBasePackages = {
         "cn.spring.learning.config",
         "cn.spring.learning.beans.config",
-        "cn.spring.learning.beans.bean.lifecycle",
+        "cn.spring.learning.beans.bean.circular",
         "cn.spring.learning.beans.processor"
 })
+@Slf4j
 public class BeansApplication {
 
     public static void main(String[] args) {
-        ConfigurableApplicationContext context = SpringApplication.run(BeansApplication.class, args);
-        ReplaceableMethodMain.BeanA beanA = context.getBean(ReplaceableMethodMain.BeanA.class);
-        System.out.println(beanA.method());
+        SpringApplication.run(BeansApplication.class, args);
     }
 }

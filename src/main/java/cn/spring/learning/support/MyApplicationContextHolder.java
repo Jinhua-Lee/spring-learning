@@ -2,6 +2,7 @@ package cn.spring.learning.support;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
+import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Component;
 
 /**
@@ -18,7 +19,7 @@ public class MyApplicationContextHolder implements ApplicationContextAware {
     protected ApplicationContext context;
 
     @Override
-    public void setApplicationContext(ApplicationContext applicationContext) {
+    public void setApplicationContext(@NonNull ApplicationContext applicationContext) {
         CONTEXT = applicationContext;
         this.context = applicationContext;
     }

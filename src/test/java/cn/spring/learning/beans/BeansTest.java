@@ -33,7 +33,7 @@ import java.util.List;
  * @date 2021/5/24 21:14
  */
 @SpringBootTest(classes = BeansApplication.class)
-@ActiveProfiles(profiles = "home")
+@ActiveProfiles(profiles = "company")
 @RunWith(SpringRunner.class)
 @Slf4j
 public class BeansTest extends MyApplicationContextHolder {

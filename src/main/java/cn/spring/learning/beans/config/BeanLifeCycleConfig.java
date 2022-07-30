@@ -1,6 +1,6 @@
 package cn.spring.learning.beans.config;
 
-import cn.spring.learning.beans.bean.lifecycle.MyLifeCycleBean;
+import cn.spring.learning.beans.bean.lifecycle.MyLifecycleBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -15,7 +15,7 @@ import org.springframework.context.annotation.Configuration;
 public class BeanLifeCycleConfig {
 
     @Bean(initMethod = "initMethod", destroyMethod = "destroyMethod")
-    public MyLifeCycleBean myLifecycleBean() {
-        return new MyLifeCycleBean(1, "my lifecycle bean");
+    public MyLifecycleBean myLifecycleBean() {
+        return new MyLifecycleBean(1, "my lifecycle bean");
     }
 }

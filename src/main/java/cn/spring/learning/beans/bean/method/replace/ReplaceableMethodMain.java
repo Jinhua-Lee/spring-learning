@@ -4,6 +4,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.support.MethodReplacer;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.lang.NonNull;
+import org.springframework.stereotype.Component;
 
 import java.lang.reflect.Method;
 
@@ -26,12 +28,13 @@ public class ReplaceableMethodMain {
     }
 
     @Slf4j
-    public static class BeanA implements ReplaceableMethod {
+    @Component
+    public static class ReplaceMethodBean implements ReplaceableMethod {
 
         @Override
         public String method() {
-            log.info("[origin method] I am BeanA#method.");
-            return "BeanA#method";
+            log.info("[origin method] I am ReplaceMethodBean#method.");
+            return "ReplaceMethodBean#method: origin method.";
         }
     }
 
@@ -42,15 +45,16 @@ public class ReplaceableMethodMain {
     public static class MyMethodReplacer implements MethodReplacer {
 
         @Override
-        public Object reimplement(Object obj, Method method, Object[] args) throws Throwable {
+        @NonNull
+        public Object reimplement(@NonNull Object obj, @NonNull Method method, @NonNull Object[] args) {
             log.info("[replaced method] I am reimplement method.");
-            return "replace method";
+            return "this is replaced method";
         }
     }
 
     public static void main(String[] args) {
         ApplicationContext context = new ClassPathXmlApplicationContext("replace-method.xml");
-        BeanA beanA = context.getBean(BeanA.class);
+        ReplaceMethodBean beanA = context.getBean(ReplaceMethodBean.class);
         // 输出replacer中的内容
         System.out.println(beanA.method());
     }

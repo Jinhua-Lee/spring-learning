@@ -27,10 +27,20 @@ public class OriJdbcTest {
     }
 
     @Test
-    @DisplayName(value = "测试PreparedStatement")
+    @DisplayName(value = "测试PreparedStatement查询语句")
     public void testPreparedStatement() {
         String preSql = "select * from account where id = ?";
         printMap(SingleJdbcConnectionUtil.executePstQuery(preSql, 1));
+    }
+
+    @Test
+    @DisplayName(value = "测试Pst插入语句")
+    public void testPreparedStatementUpsert() {
+        String preSql = "        insert into account(name, age, balance)\n" +
+                "        values (?, ?, ?)\n" +
+                "        on duplicate key update balance = balance + ?;";
+        int rowCount = SingleJdbcConnectionUtil.executePstUpdate(preSql, "李金华", 24, 2, 2);
+        System.out.println("rowCount = " + rowCount);
     }
 
     private void printMap(List<Map<String, Object>> table) {

@@ -5,12 +5,12 @@ import cn.spring.learning.tx.mapper.AccountMapper;
 import cn.spring.learning.tx.service.AccountTransferService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
@@ -25,38 +25,43 @@ import java.util.List;
  */
 @SpringBootTest(classes = TxApplication.class)
 @ActiveProfiles(profiles = "home")
-@RunWith(SpringRunner.class)
-@Transactional
+//@Transactional
 public class TxTest {
 
     private AccountTransferService accountTransferService;
     private AccountMapper txDemoMapper;
 
     @Test
+    @DisplayName(value = "Java8接口默认方法")
     public void testDefaultMethod() {
         Account account = txDemoMapper.getNonQueryAccount();
         System.out.println("account = " + account);
     }
 
     @Test
+    @DisplayName(value = "插入或更新")
     public void testTxUpsert() {
         Account account = Account.builder()
+                .id(7)
                 .name("李金华")
                 .age(24)
                 .balance(BigDecimal.valueOf(2))
                 .build();
         boolean success = this.accountTransferService.updateBalance(account);
-        System.out.println("success = " + success);
+        Assertions.assertTrue(success);
+        System.out.println("account.getId() = " + account.getId());
     }
 
     @Test
+    @DisplayName(value = "获取所有账户")
     public void testGetAllAccounts() {
         List<Account> accounts = this.txDemoMapper.getAllAccounts();
         accounts.forEach(System.out::println);
     }
 
     @Test
-    public void  testGetById() {
+    @DisplayName(value = "根据账户ID获取")
+    public void testGetById() {
         List<Account> accounts = this.txDemoMapper.getBalanceById(1);
         accounts.forEach(System.out::println);
     }

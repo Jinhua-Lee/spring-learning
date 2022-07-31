@@ -27,7 +27,7 @@ spring:
     # 初始化配置
     init:
       # 始终初始化数据源
-      mode: always
+      mode: never
       # 脚本位置
       schema-locations: classpath:sql/init_mysql.sql
   main:

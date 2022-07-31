@@ -7,7 +7,7 @@
 
     <!-- 开启二级缓存，或者在Mapper接口上加注解 @@CacheNamespace -->
     <!-- 单元测试的时候没有Mapper扫描，所以必须在此处开启-->
-    <cache/>
+<!--    <cache/>-->
 
     <sql id="selectAccount">
         select <include refid="selectAccountFields"/>
@@ -18,7 +18,8 @@
         id, name, age, balance
     </sql>
 
-    <insert id="upsertBalance" useGeneratedKeys="true" parameterType="cn.spring.learning.tx.entity.Account">
+    <insert id="upsertBalance" useGeneratedKeys="true" keyProperty="id"
+            parameterType="cn.spring.learning.tx.entity.Account">
         insert into account(name, age, balance)
         values (#{name}, #{age}, #{balance})
         on duplicate key update balance = balance + #{balance};

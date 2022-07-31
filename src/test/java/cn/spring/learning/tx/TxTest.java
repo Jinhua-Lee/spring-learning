@@ -25,7 +25,7 @@ import java.util.List;
  */
 @SpringBootTest(classes = TxApplication.class)
 @ActiveProfiles(profiles = "home")
-//@Transactional
+@Transactional
 public class TxTest {
 
     private AccountTransferService accountTransferService;

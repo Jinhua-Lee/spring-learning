@@ -1,12 +1,17 @@
 package cn.spring.learning.beans.bean.inject;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.Map;
@@ -23,8 +28,9 @@ import java.util.Map;
 @NoArgsConstructor
 @AllArgsConstructor
 @ConfigurationProperties(prefix = "learning.complex")
-@Configuration
-public class ComplexInjectionBean {
+@Component
+@Slf4j
+public class ComplexInjectionBean implements InitializingBean {
     private int[] intArrayYml;
     private int[] intArrayProps;
     private List<Integer> integerListCsv;
@@ -34,4 +40,11 @@ public class ComplexInjectionBean {
 
     private String[] strArrayYml;
     private Map<Integer, String> int2StrYml;
+
+    @Override
+    public void afterPropertiesSet() throws Exception {
+        ObjectMapper mapper = new ObjectMapper()
+                .setSerializationInclusion(JsonInclude.Include.NON_NULL);
+        log.info("complexInjectionBean信息：{}", mapper.writeValueAsString(this));
+    }
 }

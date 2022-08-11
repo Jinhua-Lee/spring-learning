@@ -5,3 +5,8 @@ spring:
     druid:
       learning:
         url: jdbc:mysql://192.168.101.30:3306/test?serverTimezone=UTC
+
+rocketmq:
+  name-server: 192.168.101.30:9876
+  producer:
+    group: group2

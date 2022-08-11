@@ -56,6 +56,13 @@
             <artifactId>spring-boot-starter-data-redis</artifactId>
         </dependency>
 
+        <!-- Rocket MQ -->
+        <dependency>
+            <groupId>org.apache.rocketmq</groupId>
+            <artifactId>rocketmq-spring-boot-starter</artifactId>
+            <version>2.2.2</version>
+        </dependency>
+
         <!-- Spring Boot 配置注解处理器 -->
         <!-- 自定义配置项 + 配置项说明文件，不让spring继续提示 -->
         <dependency>

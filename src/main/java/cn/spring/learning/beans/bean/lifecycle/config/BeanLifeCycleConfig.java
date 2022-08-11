@@ -1,4 +1,4 @@
-package cn.spring.learning.beans.config;
+package cn.spring.learning.beans.bean.lifecycle.config;
 
 import cn.spring.learning.beans.bean.lifecycle.MyLifecycleBean;
 import org.springframework.context.annotation.Bean;

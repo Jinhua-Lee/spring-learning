@@ -13,7 +13,7 @@ import org.springframework.boot.web.servlet.ServletComponentScan;
 @EnableConfigurationProperties
 @ServletComponentScan(basePackages = "cn.spring.learning.mvc")
 @SpringBootApplication(scanBasePackages = {
-        "cn.spring.learning.config",
+        "cn.spring.learning.conf",
         "cn.spring.learning.mvc"
 })
 public class MvcDemoApplication {

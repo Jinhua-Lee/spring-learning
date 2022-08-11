@@ -11,7 +11,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
  */
 @EnableScheduling
 @SpringBootApplication(scanBasePackages = {
-        "cn.spring.learning.config", "cn.spring.learning.scheduled"
+        "cn.spring.learning.conf", "cn.spring.learning.scheduled"
 })
 public class ScheduledApplication {
 

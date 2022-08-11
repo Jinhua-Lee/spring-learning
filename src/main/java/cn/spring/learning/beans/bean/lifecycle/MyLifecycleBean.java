@@ -1,14 +1,10 @@
 package cn.spring.learning.beans.bean.lifecycle;
 
-import cn.spring.learning.beans.config.BeanLifeCycleConfig;
+import cn.spring.learning.beans.bean.lifecycle.config.BeanLifeCycleConfig;
 import lombok.*;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.DisposableBean;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.context.annotation.DependsOn;
-
-import javax.annotation.PostConstruct;
-import javax.annotation.PreDestroy;
 
 /**
  * 【Bean生命周期】测试<p>

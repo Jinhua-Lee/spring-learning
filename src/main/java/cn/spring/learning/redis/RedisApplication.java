@@ -15,7 +15,7 @@ import org.springframework.cache.annotation.EnableCaching;
 @ServletComponentScan
 @EnableConfigurationProperties
 @SpringBootApplication(scanBasePackages = {
-        "cn.spring.learning.config", "cn.spring.learning.redis"
+        "cn.spring.learning.conf", "cn.spring.learning.redis"
 })
 public class RedisApplication {
 

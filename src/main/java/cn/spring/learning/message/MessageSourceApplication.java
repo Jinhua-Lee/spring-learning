@@ -13,7 +13,7 @@ import org.springframework.context.ConfigurableApplicationContext;
  * @date 2022/8/4 15:46
  */
 @SpringBootApplication(scanBasePackages = {
-        "cn.spring.learning.config",
+        "cn.spring.learning.conf",
         "cn.spring.learning.message.source"
 })
 public class MessageSourceApplication {

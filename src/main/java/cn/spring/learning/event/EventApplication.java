@@ -10,7 +10,7 @@ import org.springframework.context.ConfigurableApplicationContext;
  * @author Jinhua
  */
 @SpringBootApplication(scanBasePackages = {
-        "cn.spring.learning.config", "cn.spring.learning.event"
+        "cn.spring.learning.conf", "cn.spring.learning.event"
 })
 public class EventApplication {
 

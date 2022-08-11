@@ -1,4 +1,4 @@
-package cn.spring.learning.beans.bean.circular;
+package cn.spring.learning.beans.bean.circular.plain;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -15,12 +15,12 @@ import org.springframework.stereotype.Component;
 @Getter
 @NoArgsConstructor
 @Component
-public class BeanC {
+public class BeanB {
 
-    private BeanA a;
+    private BeanC c;
 
     @Autowired
-    public void setA(BeanA a) {
-        this.a = a;
+    public void setC(BeanC c) {
+        this.c = c;
     }
 }

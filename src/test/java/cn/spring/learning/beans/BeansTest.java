@@ -1,9 +1,8 @@
 package cn.spring.learning.beans;
 
 import cn.spring.learning.beans.bean.*;
-import cn.spring.learning.beans.bean.circular.BeanA;
-import cn.spring.learning.beans.bean.circular.BeanB;
-import cn.spring.learning.beans.bean.circular.BeanC;
+import cn.spring.learning.beans.bean.circular.plain.BeanA;
+import cn.spring.learning.beans.bean.circular.plain.BeanB;
 import cn.spring.learning.beans.bean.inject.ComplexInjectionBean;
 import cn.spring.learning.beans.bean.scope.PrototypeBean;
 import cn.spring.learning.beans.bean.scope.SingletonBean;
@@ -152,11 +151,9 @@ public class BeansTest extends MyApplicationContextHolder {
     public void testCircularDependency() {
         BeanA beanA = (BeanA) context.getBean("beanA");
         BeanB beanB = (BeanB) context.getBean("beanB");
-        BeanC beanC = (BeanC) context.getBean("beanC");
 
         System.out.println(beanA);
         System.out.println(beanB);
-        System.out.println(beanC);
     }
 
     /**

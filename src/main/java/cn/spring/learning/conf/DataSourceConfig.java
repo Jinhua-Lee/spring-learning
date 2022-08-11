@@ -1,4 +1,4 @@
-package cn.spring.learning.config;
+package cn.spring.learning.conf;
 
 import com.alibaba.druid.pool.DruidDataSource;
 import com.github.pagehelper.PageInterceptor;

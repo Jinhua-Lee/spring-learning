@@ -15,7 +15,7 @@ import org.springframework.test.context.ActiveProfiles;
  * @date 2022/8/11 20:34
  */
 @SpringBootTest
-@ActiveProfiles(value = "company")
+@ActiveProfiles(value = "home")
 public class RocketMqProducerTest {
 
     @Autowired

@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
  * @date 2022/7/30 22:21
  */
 @Component
-public class DependencyBean extends AbstractLifeCycleBean {
+public class DependencyBean extends AbstractLifecycleBean {
 
     private static final String BEAN_NAME = "dependencyBean";
 

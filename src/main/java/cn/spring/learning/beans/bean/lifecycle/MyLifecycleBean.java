@@ -19,7 +19,7 @@ import org.springframework.context.annotation.DependsOn;
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = true)
 @DependsOn(value = "dependencyBean")
-public class MyLifecycleBean extends AbstractLifeCycleBean implements InitializingBean, DisposableBean {
+public class MyLifecycleBean extends AbstractLifecycleBean implements InitializingBean, DisposableBean {
 
     private Integer id;
     private String name;

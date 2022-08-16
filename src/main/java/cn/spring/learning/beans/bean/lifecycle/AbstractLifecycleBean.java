@@ -15,7 +15,7 @@ import javax.annotation.PreDestroy;
  * @date 2022/7/30 22:27
  */
 @Slf4j
-public abstract class AbstractLifeCycleBean implements InitializingBean, DisposableBean {
+public abstract class AbstractLifecycleBean implements InitializingBean, DisposableBean {
 
     /**
      * 获取BeanName

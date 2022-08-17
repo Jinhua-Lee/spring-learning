@@ -5,9 +5,10 @@ import cn.spring.learning.tx.mapper.AccountMapper;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -23,7 +24,8 @@ public class FirstCacheTest {
 
     private SqlSession session;
 
-    @Before
+    @BeforeEach
+    @DisplayName(value = "初始化session工厂")
     public void init() {
         SqlSessionFactoryBuilder factoryBuilder = new SqlSessionFactoryBuilder();
         SqlSessionFactory sqlSessionFactory = factoryBuilder.build(
@@ -45,9 +47,9 @@ public class FirstCacheTest {
         List<Account> secondList = mapper.getBalanceById(1);
 
         // 如果第一个元素相等，则说明命中了一级缓存
-        Assert.assertNotNull(firstList);
-        Assert.assertNotNull(secondList);
-        Assert.assertSame(firstList.get(0), secondList.get(0));
+        Assertions.assertNotNull(firstList);
+        Assertions.assertNotNull(secondList);
+        Assertions.assertEquals(firstList.get(0), secondList.get(0));
     }
 
     @Test
@@ -68,8 +70,8 @@ public class FirstCacheTest {
 
         List<Account> secondList = mapper.getBalanceById(1);
 
-        Assert.assertNotNull(firstList);
-        Assert.assertNotNull(secondList);
-        Assert.assertNotSame(firstList.get(0), secondList.get(0));
+        Assertions.assertNotNull(firstList);
+        Assertions.assertNotNull(secondList);
+        Assertions.assertEquals(firstList.get(0), secondList.get(0));
     }
 }

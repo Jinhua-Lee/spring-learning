@@ -1,7 +1,7 @@
 package cn.spring.learning.tx.propagation;
 
 import cn.spring.learning.tx.PropagationTest;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 

@@ -27,8 +27,6 @@ import java.sql.DriverManager;
  */
 public class StatementHandlerTest {
 
-    private Configuration configuration;
-    private JdbcTransaction jdbcTransaction;
     private SimpleExecutor simpleExecutor;
     private MappedStatement ms;
 
@@ -42,12 +40,12 @@ public class StatementHandlerTest {
         SqlSessionFactory ssFactory = ssfBuilder.build(
                 this.getClass().getResourceAsStream("/mybatis/SqlMapConfig.xml")
         );
-        configuration = ssFactory.getConfiguration();
+        Configuration configuration = ssFactory.getConfiguration();
         Connection connection = DriverManager.getConnection(
                 PropertiesResolver.getValue("jdbc.url"),
                 PropertiesResolver.getValue("jdbc.user"),
                 PropertiesResolver.getValue("jdbc.password"));
-        jdbcTransaction = new JdbcTransaction(connection);
+        JdbcTransaction jdbcTransaction = new JdbcTransaction(connection);
         objectMapper = new ObjectMapper().setSerializationInclusion(JsonInclude.Include.NON_NULL);
         simpleExecutor = new SimpleExecutor(configuration, jdbcTransaction);
         ms = configuration.getMappedStatement("cn.spring.learning.tx.mapper.AccountMapper.getBalanceById");

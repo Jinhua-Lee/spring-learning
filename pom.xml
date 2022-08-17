@@ -130,12 +130,6 @@
             <optional>true</optional>
         </dependency>
 
-        <!-- 单元测试工具 -->
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-        </dependency>
-
         <!-- Swagger接口工具 start -->
         <dependency>
             <groupId>io.springfox</groupId>

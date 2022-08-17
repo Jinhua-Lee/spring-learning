@@ -2,7 +2,7 @@ package cn.spring.learning.beans;
 
 import cn.spring.learning.tx.entity.Account;
 import lombok.SneakyThrows;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.beans.BeanInfo;
 import java.beans.Introspector;

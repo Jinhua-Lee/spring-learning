@@ -1,6 +1,7 @@
 package cn.spring.learning.beans;
 
-import cn.spring.learning.beans.bean.*;
+import cn.spring.learning.beans.bean.AopBean;
+import cn.spring.learning.beans.bean.MyFactoryBean;
 import cn.spring.learning.beans.bean.circular.plain.BeanA;
 import cn.spring.learning.beans.bean.circular.plain.BeanB;
 import cn.spring.learning.beans.bean.inject.ComplexInjectionBean;
@@ -12,14 +13,12 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mchange.v2.c3p0.ComboPooledDataSource;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.support.AbstractApplicationContext;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.Arrays;
 import java.util.List;
@@ -33,7 +32,6 @@ import java.util.List;
  */
 @SpringBootTest(classes = BeansApplication.class)
 @ActiveProfiles(profiles = "company")
-@RunWith(SpringRunner.class)
 @Slf4j
 public class BeansTest extends MyApplicationContextHolder {
 

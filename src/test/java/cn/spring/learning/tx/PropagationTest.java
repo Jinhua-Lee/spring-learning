@@ -3,10 +3,8 @@ package cn.spring.learning.tx;
 import cn.spring.learning.tx.entity.Commodity;
 import cn.spring.learning.tx.entity.Customer;
 import cn.spring.learning.tx.service.PropagationService;
-import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
 
 import java.math.BigDecimal;
 import java.util.Arrays;
@@ -21,7 +19,6 @@ import java.util.List;
  * @date 2021/6/7 20:31
  */
 @SpringBootTest(classes = TxApplication.class)
-@RunWith(SpringRunner.class)
 public abstract class PropagationTest {
 
     protected PropagationService propagationService;

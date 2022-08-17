@@ -1,12 +1,10 @@
 package cn.spring.learning.beans;
 
 import cn.spring.learning.support.MyApplicationContextHolder;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.test.context.junit4.SpringRunner;
 
 /**
  * JDBC模板使用演示
@@ -16,7 +14,6 @@ import org.springframework.test.context.junit4.SpringRunner;
  * @date 2021/6/1 22:36
  */
 @SpringBootTest(classes = BeansApplication.class)
-@RunWith(SpringRunner.class)
 public class MyJdbcTemplateHolderTest extends MyApplicationContextHolder {
 
     private JdbcTemplate template;

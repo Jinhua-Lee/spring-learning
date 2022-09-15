@@ -1,6 +1,7 @@
 package cn.spring.learning.conf;
 
 import com.alibaba.druid.pool.DruidDataSource;
+import com.baomidou.mybatisplus.extension.spring.MybatisSqlSessionFactoryBean;
 import com.github.pagehelper.PageInterceptor;
 import lombok.SneakyThrows;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -51,7 +52,8 @@ public class DataSourceConfig {
     @Bean(name = DATASOURCE_SESSION_FACTORY)
     public SqlSessionFactory sqlSessionFactory(@Qualifier(DATASOURCE_NAME) DataSource dataSource,
                                                PageInterceptor pageInterceptor) throws Exception {
-        final SqlSessionFactoryBean sessionFactoryBean = new SqlSessionFactoryBean();
+        // mybatis-plus，BaseMapper完成基础的实现，需要替换为该会话工厂
+        final MybatisSqlSessionFactoryBean sessionFactoryBean = new MybatisSqlSessionFactoryBean();
         sessionFactoryBean.setDataSource(dataSource);
         sessionFactoryBean.setMapperLocations(new PathMatchingResourcePatternResolver()
                 .getResources("classpath:mybatis/mapper/**.xml"));

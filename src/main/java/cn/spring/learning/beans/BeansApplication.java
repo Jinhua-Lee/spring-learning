@@ -12,9 +12,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  */
 @SpringBootApplication(scanBasePackages = {
         "cn.spring.learning.conf",
-        "cn.spring.learning.beans.bean.lifecycle",
-        "cn.spring.learning.beans.processor"
-//        "cn.spring.learning.beans.bean.circular.depend"
+//        "cn.spring.learning.beans.bean.lifecycle",
+//        "cn.spring.learning.beans.processor",
+//        "cn.spring.learning.beans.bean.circular.depend",
+        "cn.spring.learning.beans.bean.circular.plain"
 })
 public class BeansApplication {
 

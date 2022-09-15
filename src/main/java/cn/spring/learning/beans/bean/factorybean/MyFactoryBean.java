@@ -1,4 +1,4 @@
-package cn.spring.learning.beans.bean;
+package cn.spring.learning.beans.bean.factorybean;
 
 import cn.spring.learning.beans.bean.scope.SingletonBean;
 import org.springframework.beans.factory.FactoryBean;
@@ -13,6 +13,7 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class MyFactoryBean implements FactoryBean<SingletonBean> {
+
     @Override
     public SingletonBean getObject() {
         return new SingletonBean(21, "factoryBeanSingleton");

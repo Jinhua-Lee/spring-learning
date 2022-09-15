@@ -1,6 +1,7 @@
 package cn.spring.learning.tx.mapper;
 
 import cn.spring.learning.tx.entity.Customer;
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.SelectProvider;
@@ -15,7 +16,7 @@ import java.util.List;
  * @date 2022/2/23 21:15
  */
 @Mapper
-public interface CustomerMapper {
+public interface CustomerMapper extends BaseMapper<Customer> {
 
     /**
      * 获取所有客户

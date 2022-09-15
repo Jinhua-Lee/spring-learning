@@ -38,6 +38,11 @@ spring:
     # - 目录.资源名
     basename: i18n.message
 
+mybatis-plus:
+  type-aliases-package: cn.spring.learning.tx.mapper
+  mapper-locations: classpath*:mybatis/mapper/*.xml
+
+# 自定义配置
 learning:
   val:
     intVal: 12

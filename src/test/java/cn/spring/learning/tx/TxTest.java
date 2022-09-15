@@ -3,11 +3,13 @@ package cn.spring.learning.tx;
 import cn.spring.learning.tx.entity.Account;
 import cn.spring.learning.tx.mapper.AccountMapper;
 import cn.spring.learning.tx.service.AccountTransferService;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
@@ -29,12 +31,12 @@ import java.util.List;
 public class TxTest {
 
     private AccountTransferService accountTransferService;
-    private AccountMapper txDemoMapper;
+    private AccountMapper accountMapper;
 
     @Test
     @DisplayName(value = "Java8接口默认方法")
     public void testDefaultMethod() {
-        Account account = txDemoMapper.getNonQueryAccount();
+        Account account = accountMapper.getNonQueryAccount();
         System.out.println("account = " + account);
     }
 
@@ -55,14 +57,23 @@ public class TxTest {
     @Test
     @DisplayName(value = "获取所有账户")
     public void testGetAllAccounts() {
-        List<Account> accounts = this.txDemoMapper.getAllAccounts();
+        List<Account> accounts = this.accountMapper.getAllAccounts();
         accounts.forEach(System.out::println);
+    }
+
+    @Test
+    @DisplayName(value = "测试根据mybatis-plus的条件构造进行查询")
+    public void testGetAccountByIdAndName() {
+        QueryWrapper<Account> accountQueryWrapper = new QueryWrapper<>(
+                Account.builder().build()
+        );
+        List<Account> accounts = accountMapper.selectList(accountQueryWrapper);
     }
 
     @Test
     @DisplayName(value = "根据账户ID获取")
     public void testGetById() {
-        List<Account> accounts = this.txDemoMapper.getBalanceById(1);
+        List<Account> accounts = this.accountMapper.getBalanceById(1);
         accounts.forEach(System.out::println);
     }
 
@@ -73,7 +84,7 @@ public class TxTest {
                 .age(11)
                 .balance(BigDecimal.ZERO)
                 .build();
-        int insert = this.txDemoMapper.addAccount(account);
+        int insert = this.accountMapper.insert(account);
         System.out.println("insert = " + insert);
         System.out.println("account.getId() = " + account.getId());
     }
@@ -81,7 +92,7 @@ public class TxTest {
     @Test
     public void testPageQuery() {
         PageHelper.startPage(1, 1);
-        List<Account> accountsByPage = txDemoMapper.getAllAccounts();
+        List<Account> accountsByPage = accountMapper.getAllAccounts();
         PageInfo<Account> pageInfo = new PageInfo<>(accountsByPage);
 
         List<Account> list = pageInfo.getList();
@@ -107,7 +118,7 @@ public class TxTest {
     }
 
     @Autowired
-    public void setTxDemoMapper(AccountMapper txDemoMapper) {
-        this.txDemoMapper = txDemoMapper;
+    public void setAccountMapper(AccountMapper accountMapper) {
+        this.accountMapper = accountMapper;
     }
 }

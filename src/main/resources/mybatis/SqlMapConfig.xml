@@ -57,6 +57,5 @@
     <mappers>
 <!--        <package name="cn.demo.springlearning.test.tx"/>-->
         <mapper resource="mybatis/mapper/AccountMapper.xml"/>
-        <mapper resource="mybatis/mapper/PropagationDemoMapper.xml"/>
     </mappers>
 </configuration>

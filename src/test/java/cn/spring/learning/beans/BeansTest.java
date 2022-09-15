@@ -1,7 +1,7 @@
 package cn.spring.learning.beans;
 
 import cn.spring.learning.beans.bean.AopBean;
-import cn.spring.learning.beans.bean.MyFactoryBean;
+import cn.spring.learning.beans.bean.factorybean.MyFactoryBean;
 import cn.spring.learning.beans.bean.circular.plain.BeanA;
 import cn.spring.learning.beans.bean.circular.plain.BeanB;
 import cn.spring.learning.beans.bean.inject.ComplexInjectionBean;

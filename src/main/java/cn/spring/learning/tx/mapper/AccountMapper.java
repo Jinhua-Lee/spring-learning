@@ -1,6 +1,7 @@
 package cn.spring.learning.tx.mapper;
 
 import cn.spring.learning.tx.entity.Account;
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.CacheNamespace;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -19,7 +20,7 @@ import java.util.Map;
 @Mapper
 // 此处需要注解扫描才开启CacheNamespace
 //@CacheNamespace
-public interface AccountMapper {
+public interface AccountMapper extends BaseMapper<Account> {
 
     /**
      * 测试Java8接口默认方法
@@ -89,7 +90,8 @@ public interface AccountMapper {
      * @param namePart  姓名片段
      * @return 账户列表
      */
-    List<Account> getAccountByIdAndNamePart(@Param(value = "id") Integer accountId, @Param(value = "name") String namePart);
+    List<Account> getAccountByIdAndNamePart(@Param(value = "id") Integer accountId,
+                                            @Param(value = "name") String namePart);
 
     /**
      * 根据入参Map来查询对象

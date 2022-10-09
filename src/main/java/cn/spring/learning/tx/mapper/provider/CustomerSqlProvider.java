@@ -1,4 +1,4 @@
-package cn.spring.learning.tx.mapper;
+package cn.spring.learning.tx.mapper.provider;
 
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.jdbc.SQL;

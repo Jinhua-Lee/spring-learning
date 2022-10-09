@@ -1,6 +1,7 @@
 package cn.spring.learning.tx.mapper;
 
 import cn.spring.learning.tx.entity.Customer;
+import cn.spring.learning.tx.mapper.provider.CustomerSqlProvider;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;

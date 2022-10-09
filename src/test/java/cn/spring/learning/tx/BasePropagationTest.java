@@ -19,7 +19,7 @@ import java.util.List;
  * @date 2021/6/7 20:31
  */
 @SpringBootTest(classes = TxApplication.class)
-public abstract class PropagationTest {
+public abstract class BasePropagationTest {
 
     protected PropagationService propagationService;
 

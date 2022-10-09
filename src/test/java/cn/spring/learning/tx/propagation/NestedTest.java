@@ -1,6 +1,6 @@
 package cn.spring.learning.tx.propagation;
 
-import cn.spring.learning.tx.PropagationTest;
+import cn.spring.learning.tx.BasePropagationTest;
 import org.junit.jupiter.api.Test;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -14,7 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
  * @version 1.0
  * @date 2021/6/8 15:56
  */
-public class NestedTest extends PropagationTest {
+public class NestedTest extends BasePropagationTest {
 
     /**
      * 7.1 上层无事务，创建新事务

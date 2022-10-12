@@ -1,6 +1,6 @@
 package cn.spring.learning.tx.propagation;
 
-import cn.spring.learning.tx.PropagationTest;
+import cn.spring.learning.tx.BasePropagationTest;
 import org.junit.jupiter.api.Test;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -14,7 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
  * @version 1.0
  * @date 2021/6/8 15:53
  */
-public class NeverTest extends PropagationTest {
+public class NeverTest extends BasePropagationTest {
 
     /**
      * 6.1 以非事务方式执行

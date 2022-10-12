@@ -1,6 +1,6 @@
 package cn.spring.learning.tx.propagation;
 
-import cn.spring.learning.tx.PropagationTest;
+import cn.spring.learning.tx.BasePropagationTest;
 import org.junit.jupiter.api.Test;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -14,7 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
  * @version 1.0
  * @date 2021/6/8 15:46
  */
-public class MandatoryTest extends PropagationTest {
+public class MandatoryTest extends BasePropagationTest {
 
     /**
      * 3.1 调用方法不存在事务，就抛出异常，不执行

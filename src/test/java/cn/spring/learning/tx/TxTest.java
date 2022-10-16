@@ -9,7 +9,6 @@ import com.github.pagehelper.PageInfo;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
@@ -68,6 +67,7 @@ public class TxTest {
                 Account.builder().build()
         );
         List<Account> accounts = accountMapper.selectList(accountQueryWrapper);
+        accounts.forEach(System.out::println);
     }
 
     @Test

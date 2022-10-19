@@ -34,7 +34,7 @@ public interface AccountMapper extends BaseMapper<Account> {
     }
 
     /**
-     * 添加用户
+     * 新增用户并初始化余额，或更新用户让其增加指定的余额
      *
      * @param account 账户
      * @return 添加结果
@@ -55,7 +55,7 @@ public interface AccountMapper extends BaseMapper<Account> {
      * @param id 指定账户
      * @return 带余额的
      */
-    List<Account> getBalanceById(Integer id);
+    List<Account> getBalanceById(Integer accountId);
 
     /**
      * 【用于测试一级缓存的相同SQL的不同方法】<p>
@@ -64,7 +64,7 @@ public interface AccountMapper extends BaseMapper<Account> {
      * @param id 指定账户
      * @return 带余额的
      */
-    List<Account> getBalanceById2(Integer id);
+    List<Account> getBalanceById2(Integer accountId);
 
     /**
      * 更新指定ID账户的余额

@@ -37,14 +37,14 @@
     <select id="getBalanceById" resultType="cn.spring.learning.tx.entity.Account">
         select id, balance
         from account
-        where id = #{id};
+        where id = #{accountId};
     </select>
 
     <!--查询指定账户的余额-->
     <select id="getBalanceById2" resultType="cn.spring.learning.tx.entity.Account" flushCache="true">
         select id, balance
         from account
-        where id = #{id};
+        where id = #{accountId};
     </select>
 
     <!--查询所有账户-->
@@ -85,6 +85,6 @@
     <update id="updateBalance">
         update account
         set balance = balance + #{balance}
-        where id = #{id};
+        where id = #{accountId};
     </update>
 </mapper>

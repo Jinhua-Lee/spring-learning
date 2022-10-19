@@ -3,13 +3,13 @@ package cn.spring.learning.tx;
 import cn.spring.learning.tx.entity.Account;
 import cn.spring.learning.tx.mapper.AccountMapper;
 import cn.spring.learning.tx.service.AccountTransferService;
+import cn.spring.learning.tx.service.impl.AccountTransferServiceImpl;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
@@ -49,8 +49,7 @@ public class TxTest {
                 .age(24)
                 .balance(BigDecimal.valueOf(2))
                 .build();
-        boolean success = this.accountTransferService.updateBalance(account);
-        Assertions.assertTrue(success);
+        this.accountTransferService.updateBalance(account);
         System.out.println("account.getId() = " + account.getId());
     }
 
@@ -113,8 +112,8 @@ public class TxTest {
     }
 
     @Autowired
-    public void setTxDemoService(AccountTransferService accountTransferService) {
-        this.accountTransferService = accountTransferService;
+    public void setTxDemoService(AccountTransferServiceImpl accountTransferServiceImpl) {
+        this.accountTransferService = accountTransferServiceImpl;
     }
 
     @Autowired

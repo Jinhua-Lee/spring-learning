@@ -67,6 +67,7 @@ public class TxTest {
                 Account.builder().build()
         );
         List<Account> accounts = accountMapper.selectList(accountQueryWrapper);
+        accounts.forEach(System.out::println);
     }
 
     @Test

@@ -1,4 +1,4 @@
-package cn.spring.learning.beans.bean;
+package cn.spring.learning.beans.aop.bean;
 
 import org.springframework.stereotype.Component;
 

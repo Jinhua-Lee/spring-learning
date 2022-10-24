@@ -1,5 +1,6 @@
 package cn.spring.learning.beans.aop.bean;
 
+import cn.spring.learning.beans.aop.annotation.TimeRecord;
 import org.springframework.stereotype.Component;
 
 /**
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class AopBean {
 
+    @TimeRecord
     public void method() {
         System.out.println("execute target method.");
     }

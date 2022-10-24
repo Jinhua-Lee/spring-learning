@@ -113,8 +113,8 @@ public class TxTest {
     }
 
     @Autowired
-    public void setTxDemoService(AccountTransferServiceImpl accountTransferServiceImpl) {
-        this.accountTransferService = accountTransferServiceImpl;
+    public void setTxDemoService(AccountTransferService accountTransferService) {
+        this.accountTransferService = accountTransferService;
     }
 
     @Autowired

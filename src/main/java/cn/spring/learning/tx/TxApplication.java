@@ -10,7 +10,8 @@ import org.springframework.scheduling.annotation.EnableScheduling;
  * @author Jinhua
  */
 @SpringBootApplication(scanBasePackages = {
-        "cn.spring.learning.conf", "cn.spring.learning.tx"
+        "cn.spring.learning.conf",
+        "cn.spring.learning.tx"
 })
 @EnableScheduling
 public class TxApplication {

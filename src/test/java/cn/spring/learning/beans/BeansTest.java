@@ -1,6 +1,8 @@
 package cn.spring.learning.beans;
 
 import cn.spring.learning.beans.aop.bean.AopBean;
+import cn.spring.learning.beans.aop.bean.MyFunction;
+import cn.spring.learning.beans.aop.bean.MyFunctionImpl;
 import cn.spring.learning.beans.bean.factorybean.MyFactoryBean;
 import cn.spring.learning.beans.bean.circular.plain.BeanA;
 import cn.spring.learning.beans.bean.circular.plain.BeanB;
@@ -141,8 +143,13 @@ public class BeansTest extends MyApplicationContextHolder {
      */
     @Test
     public void testAop() {
+        // 1. 测试常规环绕自定义注解，自定义通知的PointcutAdvisor
         AopBean aopBean = (AopBean) context.getBean("aopBean");
         aopBean.method();
+
+        // 2. 测试IntroductionAdvisor
+        MyFunctionImpl functionBean = (MyFunctionImpl) context.getBean("myFunctionImpl");
+        functionBean.doSomething();
     }
 
     @Test

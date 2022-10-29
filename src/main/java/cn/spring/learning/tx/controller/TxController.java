@@ -1,4 +1,4 @@
-package cn.spring.learning.tx.coontroller;
+package cn.spring.learning.tx.controller;
 
 import cn.spring.learning.tx.entity.Account;
 import cn.spring.learning.tx.service.AccountTransferService;

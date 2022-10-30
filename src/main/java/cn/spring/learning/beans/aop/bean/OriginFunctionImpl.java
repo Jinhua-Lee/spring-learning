@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
  */
 @Slf4j
 @Component
-public class MyFunctionImpl implements MyFunction {
+public class OriginFunctionImpl implements OriginFunction {
 
     @Override
     public void doSomething() {

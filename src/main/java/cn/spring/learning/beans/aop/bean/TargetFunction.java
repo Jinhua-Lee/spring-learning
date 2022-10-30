@@ -5,10 +5,10 @@ package cn.spring.learning.beans.aop.bean;
  * @version 1.0
  * @date 2022/10/25 10:36
  */
-public interface MyFunction {
+public interface TargetFunction {
 
     /**
-     * 做一些事
+     * 目标方法
      */
-    void doSomething();
+    void doTarget();
 }

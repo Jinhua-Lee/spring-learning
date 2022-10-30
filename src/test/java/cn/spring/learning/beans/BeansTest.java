@@ -1,7 +1,7 @@
 package cn.spring.learning.beans;
 
 import cn.spring.learning.beans.aop.bean.AopBean;
-import cn.spring.learning.beans.aop.bean.MyFunction;
+import cn.spring.learning.beans.aop.bean.TargetFunction;
 import cn.spring.learning.beans.bean.circular.plain.BeanA;
 import cn.spring.learning.beans.bean.circular.plain.BeanB;
 import cn.spring.learning.beans.bean.factorybean.MyFactoryBean;
@@ -141,8 +141,10 @@ public class BeansTest extends MyApplicationContextHolder {
     @DisplayName(value = "测试IntroductionAdvisor")
     public void testIntroductionAdvisor() {
         // 2. 测试IntroductionAdvisor
-        MyFunction functionBean = (MyFunction) context.getBean("myFunctionImpl");
-        functionBean.doSomething();
+
+        // 这里的替换，是bean名称到bean的对应关系，将bean替换为了代理对象
+        TargetFunction functionBean = (TargetFunction) context.getBean("originFunctionImpl");
+        functionBean.doTarget();
     }
 
     @Test

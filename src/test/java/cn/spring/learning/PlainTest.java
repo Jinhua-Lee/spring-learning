@@ -1,7 +1,7 @@
 package cn.spring.learning;
 
-import cn.spring.learning.beans.aop.bean.MyFunction;
-import cn.spring.learning.beans.aop.bean.MyFunctionImpl;
+import cn.spring.learning.beans.aop.bean.TargetFunction;
+import cn.spring.learning.beans.aop.bean.OriginFunctionImpl;
 
 /**
  * @author Jinhua
@@ -11,6 +11,6 @@ import cn.spring.learning.beans.aop.bean.MyFunctionImpl;
 public class PlainTest {
 
     public static void main(String[] args) {
-        System.out.println(MyFunction.class.isAssignableFrom(MyFunctionImpl.class));
+        System.out.println(TargetFunction.class.isAssignableFrom(OriginFunctionImpl.class));
     }
 }

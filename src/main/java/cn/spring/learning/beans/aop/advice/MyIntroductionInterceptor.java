@@ -17,9 +17,9 @@ import org.springframework.stereotype.Component;
 public class MyIntroductionInterceptor implements IntroductionInterceptor, MyFunction {
     @Override
     public Object invoke(@NonNull MethodInvocation invocation) throws Throwable {
-        log.info("I am IntroductionInterceptor");
         // 判断实现了目标类的接口，才执行当前类的方法调用
         if (implementsInterface(invocation.getMethod().getDeclaringClass())) {
+            log.info("I am IntroductionInterceptor");
             return invocation.getMethod().invoke(this, invocation.getArguments());
         }
         // 否则执行原始调用

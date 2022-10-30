@@ -2,10 +2,9 @@ package cn.spring.learning.beans;
 
 import cn.spring.learning.beans.aop.bean.AopBean;
 import cn.spring.learning.beans.aop.bean.MyFunction;
-import cn.spring.learning.beans.aop.bean.MyFunctionImpl;
-import cn.spring.learning.beans.bean.factorybean.MyFactoryBean;
 import cn.spring.learning.beans.bean.circular.plain.BeanA;
 import cn.spring.learning.beans.bean.circular.plain.BeanB;
+import cn.spring.learning.beans.bean.factorybean.MyFactoryBean;
 import cn.spring.learning.beans.bean.inject.ComplexInjectionBean;
 import cn.spring.learning.beans.bean.scope.PrototypeBean;
 import cn.spring.learning.beans.bean.scope.SingletonBean;
@@ -15,6 +14,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mchange.v2.c3p0.ComboPooledDataSource;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -37,10 +37,8 @@ import java.util.List;
 @Slf4j
 public class BeansTest extends MyApplicationContextHolder {
 
-    /**
-     * 修改XML中的scope，测试单例和原型
-     */
     @Test
+    @DisplayName(value = "修改XML中的scope，测试单例和原型")
     public void testScope() {
         // 单例 => 返回同一个对象，true
         SingletonBean s1 = (SingletonBean) context.getBean("singletonBean");
@@ -53,10 +51,8 @@ public class BeansTest extends MyApplicationContextHolder {
         System.out.println(s3.equals(s4));
     }
 
-    /**
-     * 测试Bean的静态工厂、实例工厂创建方式【是否能创建成功】
-     */
     @Test
+    @DisplayName(value = "测试Bean的静态工厂、实例工厂创建方式【是否能创建成功】")
     public void testCreate() {
         // 1. 静态工厂
         SingletonBean staticBean = (SingletonBean) context.getBean("beanStatic");
@@ -76,29 +72,23 @@ public class BeansTest extends MyApplicationContextHolder {
         System.out.println(factoryBeanSingleton);
     }
 
-    /**
-     * 测试构造器注入
-     */
     @Test
     @SneakyThrows
+    @DisplayName(value = "测试构造器注入")
     public void testCtorInject() {
         SingletonBean cBean = (SingletonBean) context.getBean("cBean");
         System.out.println(toString(cBean));
     }
 
-    /**
-     * 测试p名称空间注入
-     */
     @Test
+    @DisplayName(value = "测试p名称空间注入")
     public void pNameInject() {
         SingletonBean pNameBean = (SingletonBean) context.getBean("pNameBean");
         System.out.println(toString(pNameBean));
     }
 
-    /**
-     * 测试复杂类型注入
-     */
     @Test
+    @DisplayName(value = "测试复杂类型注入")
     public void testComplexInjection() {
         ComplexInjectionBean complexBean = (ComplexInjectionBean) context.getBean("complexInjectionBean");
         log.info("===== int array yml start =====");
@@ -126,10 +116,8 @@ public class BeansTest extends MyApplicationContextHolder {
         log.info("===== map yml end =====");
     }
 
-    /**
-     * 测试初始化及销毁方法
-     */
     @Test
+    @DisplayName(value = "测试初始化及销毁方法")
     public void testInitDestroy() {
         SingletonBean initDestroy = (SingletonBean) context.getBean("initDestroy");
         System.out.println(initDestroy);
@@ -142,13 +130,18 @@ public class BeansTest extends MyApplicationContextHolder {
      * 测试AOP方法增强
      */
     @Test
-    public void testAop() {
+    @DisplayName(value = "测试PointcutAdvisor方式的增强")
+    public void testAopPointcutAdvisor() {
         // 1. 测试常规环绕自定义注解，自定义通知的PointcutAdvisor
         AopBean aopBean = (AopBean) context.getBean("aopBean");
         aopBean.method();
+    }
 
+    @Test
+    @DisplayName(value = "测试IntroductionAdvisor")
+    public void testIntroductionAdvisor() {
         // 2. 测试IntroductionAdvisor
-        MyFunctionImpl functionBean = (MyFunctionImpl) context.getBean("myFunctionImpl");
+        MyFunction functionBean = (MyFunction) context.getBean("myFunctionImpl");
         functionBean.doSomething();
     }
 
@@ -161,10 +154,8 @@ public class BeansTest extends MyApplicationContextHolder {
         System.out.println(beanB);
     }
 
-    /**
-     * 测试JDBC
-     */
     @Test
+    @DisplayName(value = "测试JDBC")
     public void testJdbc() {
         ComboPooledDataSource c3p0dataSource = new ComboPooledDataSource("c3p0-config.xml");
         JdbcTemplate template = new JdbcTemplate(c3p0dataSource);

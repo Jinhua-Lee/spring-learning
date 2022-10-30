@@ -18,7 +18,7 @@ import org.springframework.context.annotation.EnableAspectJAutoProxy;
 //        "cn.spring.learning.beans.processor",
 //        "cn.spring.learning.beans.bean.circular.depend",
 //        "cn.spring.learning.beans.aop",
-        "cn.spring.learning.beans.bean.circular.plain"
+//        "cn.spring.learning.beans.bean.circular.plain"
 })
 @EnableAspectJAutoProxy
 public class BeansApplication {

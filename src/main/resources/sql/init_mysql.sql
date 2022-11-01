@@ -7,7 +7,7 @@ use test;
 drop table if exists customer;
 create table if not exists customer
 (
-    id     serial primary key auto_increment comment '自增主键',
+    id     bigint primary key auto_increment comment '自增主键',
     name   varchar(100) comment '姓名',
     gender varchar(20) comment '性别',
     age    int comment '年龄'
@@ -21,7 +21,7 @@ values ('ljh', '男', 26);
 drop table if exists commodity;
 create table if not exists commodity
 (
-    id           serial primary key auto_increment comment '自增主键',
+    id           bigint primary key auto_increment comment '自增主键',
     name         varchar(100) comment '名称',
     price        decimal comment '价格',
     produce_city varchar(100) comment '产地'
@@ -32,7 +32,7 @@ create table if not exists commodity
 drop table if exists account;
 create table if not exists account
 (
-    id      serial primary key auto_increment comment '自增主键',
+    id      bigint primary key auto_increment comment '自增主键',
     name    varchar(100) comment '姓名',
     age     int comment '年龄',
     balance decimal comment '余额'

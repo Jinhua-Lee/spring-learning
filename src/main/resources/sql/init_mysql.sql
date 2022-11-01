@@ -1,3 +1,8 @@
+
+-- 确保数据库存在并切换
+create database if not exists test;
+use test;
+
 -- 客户表
 drop table if exists customer;
 create table if not exists customer

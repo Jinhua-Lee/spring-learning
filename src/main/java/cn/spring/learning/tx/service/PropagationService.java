@@ -42,7 +42,7 @@ public class PropagationService {
         return insert > 0;
     }
 
-    @Transactional(propagation = Propagation.NESTED, rollbackFor = Exception.class)
+    @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public boolean addCustomers(List<Customer> customers) {
         if (CollectionUtils.isEmpty(customers)) {
             throw new RuntimeException("待插入集合不能为空！");
@@ -57,7 +57,7 @@ public class PropagationService {
         return insert > 0;
     }
 
-    @Transactional(propagation = Propagation.NESTED, rollbackFor = Exception.class)
+    @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public boolean addCustomersException(List<Customer> customers) {
         if (CollectionUtils.isEmpty(customers)) {
             throw new RuntimeException("待插入集合不能为空！");

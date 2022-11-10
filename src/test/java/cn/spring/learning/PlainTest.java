@@ -1,7 +1,7 @@
 package cn.spring.learning;
 
-import cn.spring.learning.beans.aop.bean.TargetFunction;
 import cn.spring.learning.beans.aop.bean.OriginFunctionImpl;
+import cn.spring.learning.beans.aop.bean.TargetFunction;
 
 /**
  * @author Jinhua

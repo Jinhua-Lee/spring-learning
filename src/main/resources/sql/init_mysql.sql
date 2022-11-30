@@ -33,7 +33,7 @@ drop table if exists account;
 create table if not exists account
 (
     id      bigint primary key auto_increment comment '自增主键',
-    name    varchar(100) comment '姓名',
+    name    varchar(100) unique comment '姓名',
     age     int comment '年龄',
     balance decimal comment '余额'
 ) engine = InnoDB

@@ -66,7 +66,7 @@ public class FirstCacheTest {
         // test1：中间调用了一个flushCache = true的sql；
 //        mapper.getBalanceById2(1);
         // test2：执行了update
-        mapper.updateBalance(7, BigDecimal.valueOf(6000));
+        mapper.increaseBalance(7, BigDecimal.valueOf(6000));
 
         List<Account> secondList = mapper.getBalanceById(1);
 

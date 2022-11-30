@@ -47,7 +47,7 @@ public class TxTest {
                 .age(24)
                 .balance(BigDecimal.valueOf(2))
                 .build();
-        this.accountTransferService.updateBalance(account);
+        this.accountTransferService.increaseBalance(account);
         System.out.println("account.getId() = " + account.getId());
     }
 

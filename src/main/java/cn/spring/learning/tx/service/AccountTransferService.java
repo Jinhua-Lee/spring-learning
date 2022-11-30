@@ -16,7 +16,7 @@ public interface AccountTransferService {
      *
      * @param account 账户及应该更新到的余额
      */
-    void updateBalance(Account account);
+    void increaseBalance(Account account);
 
     /**
      * 转账

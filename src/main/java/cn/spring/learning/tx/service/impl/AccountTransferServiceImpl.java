@@ -32,14 +32,12 @@ public class AccountTransferServiceImpl implements AccountTransferService {
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public void updateBalance(Account account) throws IllegalArgumentException {
+    public void increaseBalance(Account account) throws IllegalArgumentException {
         if (Objects.isNull(account)
-                || Objects.isNull(account.getName())
-                || Objects.isNull(account.getAge())
                 || Objects.isNull(account.getBalance())) {
             throw new IllegalArgumentException("不合法入参");
         }
-        int effectedRows = accountMapper.upsertBalance(account);
+        int effectedRows = accountMapper.increaseBalance(account.getId(), account.getBalance());
         if (effectedRows != 1) {
             throw new RuntimeException("转账失败！");
         }
@@ -54,19 +52,20 @@ public class AccountTransferServiceImpl implements AccountTransferService {
         }
         // 2. from账户余额校验
         List<Account> accountDos = accountMapper.getBalanceById(from.getId());
-        if (CollectionUtils.isEmpty(accountDos) || accountDos.get(0).getBalance().compareTo(amount) < 0) {
+        if (CollectionUtils.isEmpty(accountDos)
+                || accountDos.get(0).getBalance().compareTo(amount) < 0) {
             throw new RuntimeException("账户不存在，或者账户余额不足！");
         }
         // 3. 开始转账逻辑
         from.setBalance(amount.negate().doubleValue());
         to.setBalance(amount.doubleValue());
-        if (accountMapper.updateBalance(from.getId(), from.getBalance()) < 1) {
+        if (accountMapper.increaseBalance(from.getId(), from.getBalance()) < 1) {
             throw new RuntimeException("from 账户更新失败！");
         }
 //        if (true) {
 //            throw new RuntimeException("手动抛出 [运行时异常] ");
 //        }
-        if (accountMapper.updateBalance(to.getId(), to.getBalance()) < 1) {
+        if (accountMapper.increaseBalance(to.getId(), to.getBalance()) < 1) {
             throw new RuntimeException("to 账户更新失败！");
         }
     }

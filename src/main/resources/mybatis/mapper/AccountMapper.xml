@@ -18,7 +18,7 @@
         id, name, age, balance
     </sql>
 
-    <insert id="upsertBalance" useGeneratedKeys="true" keyProperty="id"
+    <insert id="insertAccountOrIncreaseBalance" useGeneratedKeys="true" keyProperty="id"
             parameterType="cn.spring.learning.tx.entity.Account">
         insert into account(name, age, balance)
         values (#{name}, #{age}, #{balance})
@@ -82,7 +82,7 @@
         </if>;
     </select>
 
-    <update id="updateBalance">
+    <update id="increaseBalance">
         update account
         set balance = balance + #{balance}
         where id = #{accountId};

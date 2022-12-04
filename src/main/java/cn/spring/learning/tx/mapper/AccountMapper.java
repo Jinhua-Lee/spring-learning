@@ -2,7 +2,6 @@ package cn.spring.learning.tx.mapper;
 
 import cn.spring.learning.tx.entity.Account;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import org.apache.ibatis.annotations.CacheNamespace;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -56,6 +55,14 @@ public interface AccountMapper extends BaseMapper<Account> {
      * @return 带余额的
      */
     List<Account> getBalanceById(Integer accountId);
+
+    /**
+     * 根据名字增加账户余额
+     *
+     * @param account 账户
+     * @return 受影响的行数
+     */
+    int increaseBalanceByName(Account account);
 
     /**
      * 【用于测试一级缓存的相同SQL的不同方法】<p>

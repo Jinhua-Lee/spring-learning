@@ -87,4 +87,10 @@
         set balance = balance + #{balance}
         where id = #{accountId};
     </update>
+
+    <update id="increaseBalanceByName">
+        update account
+        set balance = balance + #{balance}
+        where name = #{name}
+    </update>
 </mapper>

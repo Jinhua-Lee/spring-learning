@@ -11,6 +11,8 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
+ * 账户业务过程类
+ *
  * @author Jinhua
  * @version 1.0
  * @date 2022/11/30 19:39
@@ -21,19 +23,30 @@ public class AccountServiceImpl implements AccountService {
     private AccountMapper accountMapper;
 
     @Override
-    @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+    @Transactional(propagation = Propagation.NESTED, rollbackFor = Exception.class)
     public void createAccount(Account account) {
-        int insertNum = this.accountMapper.addAccount(account);
-        if (insertNum != 1) {
+        try {
+            int insertNum = this.accountMapper.addAccount(account);
+            if (insertNum != 1) {
+                throw new AccountException("创建账户异常.");
+            }
+        } catch (Exception ex) {
+            // 翻译为业务异常
             throw new AccountException("创建账户异常.");
         }
     }
 
     @Override
-    @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+    @Transactional(propagation = Propagation.NESTED, rollbackFor = Exception.class)
     public void updateAccount(Account account) {
-        int updateRowNum = this.accountMapper.updateById(account);
-        if (updateRowNum != 1) {
+        // 当前事务过程要被复用时候，需要将已有的REQUIRED传播行为改为NESTED
+        try {
+            int updateRowNum = this.accountMapper.increaseBalanceByName(account);
+            if (updateRowNum != 1) {
+                throw new AccountException("更新账户异常.");
+            }
+        } catch (Exception sex) {
+            // 翻译为业务异常
             throw new AccountException("更新账户异常.");
         }
     }
@@ -46,6 +59,7 @@ public class AccountServiceImpl implements AccountService {
         try {
             curProxy.createAccount(account);
         } catch (AccountException aex) {
+            // 翻译为业务异常
             curProxy.updateAccount(account);
         }
     }

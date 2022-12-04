@@ -42,6 +42,17 @@ mybatis-plus:
   type-aliases-package: cn.spring.learning.tx.mapper
   mapper-locations: classpath*:mybatis/mapper/*.xml
 
+logging:
+  #  级别依次为【从高到低】：FATAL > ERROR > WARN > INFO > DEBUG > TRACE
+  level:
+    root: info
+    cn.spring.learning.tx.**: debug
+  file:
+    path: 'log'
+  pattern:
+    file: '%d{yyyy-MM-dd HH:mm:ss.SSS} %yellow(-%5p) - [%ip] - %blue(${PID}) --- traceId:[%X{X-B3-TraceId:-},%X{X-B3-SpanId:-},%X{X-B3-ParentSpanId}] %yellow([%t]) %green(%-40.40logger{39}) - [%file:%line] : %m%n '
+    console: '%d{yyyy-MM-dd HH:mm:ss.SSS} %yellow(-%5p) - [%ip] - %blue(${PID}) --- traceId:[%X{X-B3-TraceId:-},%X{X-B3-SpanId:-},%X{X-B3-ParentSpanId}] %yellow([%t]) %green(%-40.40logger{39}) - [%file:%line] : %m%n '
+
 # 自定义配置
 learning:
   val:

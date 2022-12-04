@@ -27,7 +27,7 @@ public class ServiceMethodTimerAspect {
         String methodName = joinPoint.getSignature().getName();
         StopWatch watch = new StopWatch();
         watch.start();
-        if (log.isInfoEnabled()) {
+        if (log.isDebugEnabled()) {
             log.debug("service method {} started at time = {}",
                     clazzName + "#" + methodName,
                     LocalDateTime.now()
@@ -38,7 +38,7 @@ public class ServiceMethodTimerAspect {
             proceed = joinPoint.proceed();
         } finally {
             watch.stop();
-            if (log.isInfoEnabled()) {
+            if (log.isDebugEnabled()) {
                 log.debug("service method {} stopped, time cost = {} ms",
                         clazzName + "#" + methodName,
                         watch.getTotalTimeMillis()

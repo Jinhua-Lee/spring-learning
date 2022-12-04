@@ -16,7 +16,7 @@ import java.math.BigDecimal;
  * @date 2022/12/4 15:41
  */
 @SpringBootTest
-@ActiveProfiles(value = "company")
+@ActiveProfiles(value = "home")
 public class AccountServiceImplTest {
 
     private AccountService accountService;

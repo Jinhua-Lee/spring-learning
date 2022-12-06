@@ -1,8 +1,8 @@
-package cn.spring.learning.scheduled;
+package cn.spring.learning.scheduled.bean;
 
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
 
@@ -11,12 +11,12 @@ import java.time.LocalDateTime;
  * @version 1.0
  * @date 19/04/2022 17:41
  */
-@Configuration
 @Slf4j
+@Component
 public class ScheduledBean {
 
     @Scheduled(cron = "0 0/1 * * * ?")
-    public void scheduledPerQuarter() {
+    public void scheduledRun() {
         log.info("scheduled run: now = {}", LocalDateTime.now());
     }
 }

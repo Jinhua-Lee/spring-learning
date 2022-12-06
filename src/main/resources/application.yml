@@ -50,8 +50,8 @@ logging:
   file:
     path: 'log'
   pattern:
-    file: '%d{yyyy-MM-dd HH:mm:ss.SSS} %yellow(-%5p) - [%ip] - %blue(${PID}) --- traceId:[%X{X-B3-TraceId:-},%X{X-B3-SpanId:-},%X{X-B3-ParentSpanId}] %yellow([%t]) %green(%-40.40logger{39}) - [%file:%line] : %m%n '
-    console: '%d{yyyy-MM-dd HH:mm:ss.SSS} %yellow(-%5p) - [%ip] - %blue(${PID}) --- traceId:[%X{X-B3-TraceId:-},%X{X-B3-SpanId:-},%X{X-B3-ParentSpanId}] %yellow([%t]) %green(%-40.40logger{39}) - [%file:%line] : %m%n '
+    file: '%d{yyyy-MM-dd HH:mm:ss.SSS} %yellow(-%5p) - %blue(${PID}) --- traceId:[%X{X-B3-TraceId:-},%X{X-B3-SpanId:-},%X{X-B3-ParentSpanId}] %yellow([%t]) %green(%-40.40logger{39}) - [%file:%line] : %m%n '
+    console: '%d{yyyy-MM-dd HH:mm:ss.SSS} %yellow(-%5p) - %blue(${PID}) --- traceId:[%X{X-B3-TraceId:-},%X{X-B3-SpanId:-},%X{X-B3-ParentSpanId}] %yellow([%t]) %green(%-40.40logger{39}) - [%file:%line] : %m%n '
 
 # 自定义配置
 learning:

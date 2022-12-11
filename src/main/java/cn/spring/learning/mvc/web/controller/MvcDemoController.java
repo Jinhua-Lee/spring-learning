@@ -1,9 +1,11 @@
 package cn.spring.learning.mvc.web.controller;
 
 import cn.spring.learning.common.ApiResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RestController;
+import cn.spring.learning.mvc.dto.ValidParamDTO;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
+
+import javax.validation.constraints.NotNull;
 
 /**
  * @author Jinhua
@@ -21,5 +23,9 @@ public class MvcDemoController {
     @GetMapping(value = "/test-filter-order")
     public boolean testFilterOrder() {
         return false;
+    }
+
+    @PostMapping(value = "/test-valid")
+    public void testValidate(@RequestBody @Validated @NotNull ValidParamDTO validParam) {
     }
 }

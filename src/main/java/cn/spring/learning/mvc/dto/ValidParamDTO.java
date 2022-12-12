@@ -19,9 +19,9 @@ import javax.validation.constraints.NotBlank;
 @Validated
 public class ValidParamDTO {
 
-    @Min(value = 0,  message = "不允许小于0")
+    @Min(value = 0,  message = "intVal不允许小于0")
     private Integer intVal;
 
-    @NotBlank(message = "不允许空串")
+    @NotBlank(message = "strVal不允许空串")
     private String strVal;
 }

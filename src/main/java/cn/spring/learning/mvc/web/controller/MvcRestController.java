@@ -13,7 +13,7 @@ import javax.validation.constraints.NotNull;
  * @date 2022/3/30 10:19
  */
 @RestController
-public class MvcDemoController {
+public class MvcRestController {
 
     @PutMapping(value = "/hello")
     public ApiResult<String> hello() {

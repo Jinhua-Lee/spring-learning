@@ -27,7 +27,7 @@ public class PropagationService {
     private CustomerMapper customerMapper;
     private CommodityMapper commodityMapper;
 
-    @Transactional(propagation = Propagation.NESTED, rollbackFor = Exception.class)
+    @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public boolean addCommodities(List<Commodity> commodities) {
         if (CollectionUtils.isEmpty(commodities)) {
             throw new RuntimeException("待插入集合不能为空！");

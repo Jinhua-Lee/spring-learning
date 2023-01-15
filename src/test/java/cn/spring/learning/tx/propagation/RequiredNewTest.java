@@ -2,18 +2,20 @@ package cn.spring.learning.tx.propagation;
 
 import cn.spring.learning.tx.BasePropagationTest;
 import org.junit.jupiter.api.Test;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
  * 4. 测试RequiresNew：<p>&emsp;
- * 一律创建新事务。与父事务无关。
+ * 一律创建新事务。与外层事务无关。
  *
  * @author Jinhua
  * @version 1.0
  * @date 2021/6/8 15:49
  */
-public class RequiresNewTest extends BasePropagationTest {
+@Service
+public class RequiredNewTest extends BasePropagationTest {
 
     /**
      * 4.1 上层无事务，创建独立事务，事务间不受影响

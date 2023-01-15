@@ -2,6 +2,7 @@ package cn.spring.learning.tx.propagation;
 
 import cn.spring.learning.tx.BasePropagationTest;
 import org.junit.jupiter.api.Test;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -14,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
  * @version 1.0
  * @date 2021/6/8 15:46
  */
+@Service
 public class MandatoryTest extends BasePropagationTest {
 
     /**

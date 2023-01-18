@@ -1,15 +1,13 @@
 package cn.spring.learning.mvc.web.handler;
 
 import cn.spring.learning.common.ApiResult;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.ObjectError;
+import cn.spring.learning.util.ExceptionUtil;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import javax.validation.ConstraintViolationException;
-import java.util.List;
 
 /**
  * Controller层的全局异常处理器<p>&emsp;
@@ -30,18 +28,11 @@ public class GlobalExceptionHandler {
      */
     @ExceptionHandler(value = MethodArgumentNotValidException.class)
     public ApiResult<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex) {
-        BindingResult result = ex.getBindingResult();
-        if (result.hasErrors()) {
-            List<ObjectError> allErrors = result.getAllErrors();
-            StringBuilder builder = new StringBuilder();
-            allErrors.forEach(error -> builder
-                    .append("[").append(error.getObjectName())
-                    .append("] ").append(error.getDefaultMessage()).append(";")
-            );
-            return new ApiResult<>(-1, builder.toString(), null);
-        }
-
-        return new ApiResult<>(-1, ex.getMessage(), null);
+        String exMsg = ExceptionUtil.buildArgValidExceptMsg(ex);
+        return ApiResult.builder()
+                .code(-1)
+                .msg(exMsg == null ? ex.getMessage() : exMsg)
+                .build();
     }
 
     /**

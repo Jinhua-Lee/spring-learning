@@ -21,11 +21,12 @@ public class MvcRestController {
     }
 
     @GetMapping(value = "/test-filter-order")
-    public boolean testFilterOrder() {
-        return false;
+    public ApiResult<Boolean> testFilterOrder() {
+        return ApiResult.success(false);
     }
 
     @PostMapping(value = "/test-valid")
-    public void testValidate(@RequestBody @Validated @NotNull ValidParamDTO validParam) {
+    public ApiResult<Object> testValidate(@RequestBody @Validated @NotNull ValidParamDTO validParam) {
+        return ApiResult.success(validParam);
     }
 }

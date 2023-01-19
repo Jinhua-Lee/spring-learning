@@ -1,7 +1,9 @@
-package cn.spring.learning.mvc.web.handler;
+package cn.spring.learning.mvc.web.controller.handler;
 
 import cn.spring.learning.common.ApiResult;
+import cn.spring.learning.mvc.web.controller.MvcRestController;
 import cn.spring.learning.util.ExceptionUtil;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -17,7 +19,8 @@ import javax.validation.ConstraintViolationException;
  * @version 1.0
  * @date 2022/12/11 17:43
  */
-@RestControllerAdvice()
+@Slf4j
+@RestControllerAdvice(basePackageClasses = MvcRestController.class)
 public class GlobalExceptionHandler {
 
     /**
@@ -29,6 +32,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(value = MethodArgumentNotValidException.class)
     public ApiResult<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex) {
         String exMsg = ExceptionUtil.buildArgValidExceptMsg(ex);
+        log.error(exMsg);
         return ApiResult.builder()
                 .code(-1)
                 .msg(exMsg == null ? ex.getMessage() : exMsg)
@@ -43,11 +47,14 @@ public class GlobalExceptionHandler {
      */
     @ExceptionHandler(value = ConstraintViolationException.class)
     public ApiResult<Object> handleException(ConstraintViolationException ex) {
+        log.error(ex.getMessage());
         return new ApiResult<>(-2, ex.getMessage(), null);
     }
 
     @ExceptionHandler({HttpRequestMethodNotSupportedException.class})
     public ApiResult<String> handleException(HttpRequestMethodNotSupportedException ex) {
-        return new ApiResult<>(-3, "[不支持的请求类型] " + ex.getMethod(), null);
+        String msg = "[不支持的请求类型] " + ex.getMethod();
+        log.error(msg);
+        return new ApiResult<>(-3, msg, null);
     }
 }

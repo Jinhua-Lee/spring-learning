@@ -14,6 +14,14 @@ spring:
         url: jdbc:mysql://localhost:3306/test?serverTimezone=UTC
         username: root
         password: cafebabe
+  rabbitmq:
+    listener:
+      simple:
+        retry:
+          enabled: true
+          max-attempts: 5
+          initial-interval: 1000
+    virtual-host: '/'
 #  mvc:
     # 静态资源路径，暂未调试成功，先不用该配置项吧
 #    static-path-pattern: classpath:/static/

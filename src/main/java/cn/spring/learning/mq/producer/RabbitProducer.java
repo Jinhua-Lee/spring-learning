@@ -1,10 +1,10 @@
 package cn.spring.learning.mq.producer;
 
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.annotation.Resource;
 import java.time.Instant;
 
 /**
@@ -24,7 +24,7 @@ public class RabbitProducer {
         );
     }
 
-    @Resource
+    @Autowired
     public void setRabbitTemplate(RabbitTemplate rabbitTemplate) {
         this.rabbitTemplate = rabbitTemplate;
     }

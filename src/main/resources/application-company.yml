@@ -5,6 +5,18 @@ spring:
     druid:
       learning:
         url: jdbc:mysql://my.vm:3306/test?serverTimezone=UTC
+  rabbitmq:
+    host: my.vm
+    port: 5672
+    listener:
+      simple:
+        retry:
+          enabled: true
+          max-attempts: 5
+          initial-interval: 1000
+    virtual-host: '/'
+    username: user
+    password: password
 
 rocketmq:
   name-server: my.vm:9876

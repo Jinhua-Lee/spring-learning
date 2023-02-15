@@ -18,8 +18,10 @@ public class RabbitProducer {
     @GetMapping("/send")
     public void sendMsg() {
         rabbitTemplate.convertAndSend(
-                "ex",
-                "rk",
+                // 必须通过新的fanout交换机，才能实现多队列同时消费功能
+                //"topicExA",
+                "fanExAb",
+                "rkA",
                 "test_repeatedly_consume_" + Instant.now().toEpochMilli()
         );
     }

@@ -17,9 +17,11 @@ public class RabbitConsumerA {
 
     @RabbitHandler
     @RabbitListener(bindings = {
-            @QueueBinding(value = @Queue(value = "ex", durable = "true"),
-                    exchange = @Exchange(value = "ex", type = ExchangeTypes.TOPIC),
-                    key = "rk")
+            @QueueBinding(
+                    value = @Queue(value = "queueA", durable = "true"),
+                    exchange = @Exchange(value = "topicExA", type = ExchangeTypes.TOPIC),
+                    key = "rkA"
+            )
     })
     public void process(Message massage) {
         String msg = new String(massage.getBody(), StandardCharsets.UTF_8);

@@ -19,8 +19,10 @@ public class RabbitConsumerB {
     @RabbitListener(bindings = {
             @QueueBinding(
                     value = @Queue(value = "queueB", durable = "true"),
-                    exchange = @Exchange(value = "fanExAb", type = ExchangeTypes.FANOUT),
-                    key = "rkAB"
+                    exchange = @Exchange(value = "topicExA", type = ExchangeTypes.TOPIC),
+                    // fanout方式实现重复消费
+                    //exchange = @Exchange(value = "fanExAb", type = ExchangeTypes.FANOUT),
+                    key = "rkA"
             )
     })
     public void process(Message massage) {

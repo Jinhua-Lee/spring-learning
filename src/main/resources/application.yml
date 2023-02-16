@@ -45,6 +45,7 @@ spring:
       schema-locations: classpath:sql/init_mysql.sql
   main:
     allow-circular-references: true
+    allow-bean-definition-overriding: true
   messages:
     # 格式可以为以下两种：
     # - 目录/资源名

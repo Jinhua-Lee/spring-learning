@@ -18,9 +18,10 @@ public class RabbitProducer {
     @GetMapping("/send")
     public void sendMsg() {
         rabbitTemplate.convertAndSend(
-                // 必须通过新的fanout交换机，才能实现多队列同时消费功能
-                //"topicExA",
-                "fanExAb",
+                // 原有topic交换机，相同routingKey实现多队列同时消费功能
+                "topicExA",
+                // 通过新的fanout交换机，才能实现多队列同时消费功能
+                //"fanExAb",
                 "rkA",
                 "test_repeatedly_consume_" + Instant.now().toEpochMilli()
         );

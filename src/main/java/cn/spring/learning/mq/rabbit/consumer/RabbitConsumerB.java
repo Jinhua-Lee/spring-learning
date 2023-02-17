@@ -1,4 +1,4 @@
-package cn.spring.learning.mq.consumer;
+package cn.spring.learning.mq.rabbit.consumer;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.core.ExchangeTypes;
@@ -13,13 +13,15 @@ import java.nio.charset.StandardCharsets;
  */
 @Slf4j
 @Component
-public class RabbitConsumerA {
+public class RabbitConsumerB {
 
     @RabbitHandler
     @RabbitListener(bindings = {
             @QueueBinding(
-                    value = @Queue(value = "queueA", durable = "true"),
+                    value = @Queue(value = "queueB", durable = "true"),
                     exchange = @Exchange(value = "topicExA", type = ExchangeTypes.TOPIC),
+                    // fanout方式实现重复消费
+                    //exchange = @Exchange(value = "fanExAb", type = ExchangeTypes.FANOUT),
                     key = "rkA"
             )
     })

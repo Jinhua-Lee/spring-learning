@@ -1,4 +1,4 @@
-package cn.spring.learning.mq.config;
+package cn.spring.learning.mq.rabbit.config;
 
 import com.rabbitmq.client.ConnectionFactory;
 import lombok.Data;

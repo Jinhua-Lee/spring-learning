@@ -1,4 +1,4 @@
-package cn.spring.learning.mq.consumer;
+package cn.spring.learning.mq.rocket.consumer;
 
 import lombok.extern.slf4j.Slf4j;
 import org.apache.rocketmq.spring.annotation.RocketMQMessageListener;

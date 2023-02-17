@@ -1,4 +1,4 @@
-package cn.spring.learning.mq.producer;
+package cn.spring.learning.mq.rabbit.producer;
 
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;

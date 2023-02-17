@@ -1,4 +1,4 @@
-package cn.spring.learning.mq.config;
+package cn.spring.learning.mq.rabbit.config;
 
 import org.springframework.amqp.core.*;
 import org.springframework.beans.factory.annotation.Value;

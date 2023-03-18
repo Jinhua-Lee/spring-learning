@@ -3,6 +3,7 @@ package cn.spring.learning.mq.rocket.producer;
 import org.apache.rocketmq.spring.core.RocketMQTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -12,7 +13,8 @@ import org.springframework.web.bind.annotation.RestController;
  * @version 1.0
  * @date 2023/3/18 23:41
  */
-@RestController(value = "/mq/rocket/producer")
+@RestController
+@RequestMapping(value = "/mq/rocket/producer")
 public class ProducerController {
 
     @SuppressWarnings(value = "all")

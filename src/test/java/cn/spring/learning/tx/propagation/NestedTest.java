@@ -8,7 +8,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 /**
  * 7. 测试Nested：<p>&emsp;
- * 1) 存在事务，则以嵌套事务方式执行；<p>&emsp;
+ * 1) 存在事务，则以嵌套事务方式执行；<p>&emsp;&emsp;
+ *      - 当前PlatformTransactionManager下单数据库，采用savePoint保存点去实现伪嵌套事务。<p>&emsp;&emsp;
+ *      - 分布式事务JTA情况下才会真正开启nested嵌套事务。<p>&emsp;
  * 2) 不存在事务，则按Required方式执行；<p>&emsp;
  *
  * @author Jinhua
@@ -55,7 +57,8 @@ public class NestedTest extends BasePropagationTest {
             boolean cusRes = propagationService.addCustomersException(buildCustomers());
             System.out.println("cusRes = " + cusRes);
         } catch (Exception ignored) {
-            // FIXME: 2021/6/9 顾客事务发生异常回滚，但异常不暴露给上层，上层事务执行成功，则商品插入成功，顾客插入失败！（测试失败！）
+            // 顾客事务发生异常回滚，虽然异常不暴露给上层，但仍然被spring事务管理器检测到了。
+            // 上层事务执行成功，则商品插入成功，顾客插入失败！（测试成功！）
         }
     }
 

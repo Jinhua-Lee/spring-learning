@@ -24,7 +24,6 @@ import java.util.List;
  * @date 2021/6/3 23:18
  */
 @SpringBootTest(classes = TxApplication.class)
-@ActiveProfiles(profiles = "home")
 @Transactional
 public class TxTest {
 

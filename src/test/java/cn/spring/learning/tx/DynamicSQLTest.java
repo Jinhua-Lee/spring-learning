@@ -17,7 +17,6 @@ import java.util.List;
  * @date 2022/2/23 21:27
  */
 @SpringBootTest(classes = TxApplication.class)
-@ActiveProfiles(profiles = "company")
 public class DynamicSQLTest {
 
     @Autowired

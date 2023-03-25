@@ -4,14 +4,12 @@ server:
 spring:
   application:
     name: spring-learning
-  profiles:
-    active: home
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
     druid:
       learning:
         driver-class-name: com.mysql.cj.jdbc.Driver
-        url: jdbc:mysql://localhost:3306/test?serverTimezone=UTC
+        url: jdbc:mysql://my.vm:3306/test?serverTimezone=UTC
         username: root
         password: cafebabe
   rabbitmq:
@@ -28,7 +26,7 @@ spring:
     # 默认值为 classpath:/META-INF/resources/,classpath:/resources/,classpath:/static/,classpath:/public/
 
   redis:
-    host: localhost
+    host: my.vm
     port: 6379
     database: 0
     password: cafebabe
@@ -89,6 +87,12 @@ learning:
       1: ljh
       2: lwk
 
+management:
+  endpoints:
+    web:
+      exposure:
+        include: restart
+
 zuul:
   routes:
     cas-auth:
@@ -97,3 +101,8 @@ zuul:
     cas-check-ticket:
       path: /cas/check-ticket
       url: https://ids.hit.edu.cn/authserver/serviceValidate
+
+rocketmq:
+  name-server: my.vm:9876;my.vm:10876
+  producer:
+    group: group2

@@ -1,10 +1,11 @@
 package cn.spring.learning.tx.propagation;
 
-import cn.spring.learning.tx.BasePropagationTest;
-import org.junit.jupiter.api.Test;
+import cn.spring.learning.tx.BasePropagationTestService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
  * 3. 测试Mandatory：<p>&emsp;
@@ -16,12 +17,13 @@ import org.springframework.transaction.annotation.Transactional;
  * @date 2021/6/8 15:46
  */
 @Service
-public class MandatoryTest extends BasePropagationTest {
+@RequestMapping(value = "/mandatory")
+public class MandatoryTestService extends BasePropagationTestService {
 
     /**
      * 3.1 调用方法不存在事务，就抛出异常，不执行
      */
-    @Test
+    @GetMapping(value = "/testNoTx_Mandatory_Mandatory")
     public void testNoTx_Mandatory_Mandatory() {
         boolean comRes = propagationService.addCommodities(buildCommodities());
         boolean cusRes = propagationService.addCustomers(buildCustomers());
@@ -30,13 +32,12 @@ public class MandatoryTest extends BasePropagationTest {
         // 调用方法未开启事务，不执行，两批数据都插入失败！（测试通过）
         // 直接抛出异常 org.springframework.transaction.IllegalTransactionStateException:
         // No existing transaction found for transaction marked with propagation 'mandatory'
-        throw new RuntimeException("手动抛出 [运行时异常] ");
     }
 
     /**
      * 3.2 调用方法存在事务，就加入该事务；<p>&emsp;
      */
-    @Test
+    @GetMapping(value = "testTx_Mandatory_MandatoryEx")
     @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public void testTx_Mandatory_MandatoryEx() {
         // 该测试方法开启事务，加入事务

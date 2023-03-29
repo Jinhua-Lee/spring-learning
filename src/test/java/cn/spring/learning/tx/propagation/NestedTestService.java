@@ -1,10 +1,11 @@
 package cn.spring.learning.tx.propagation;
 
-import cn.spring.learning.tx.BasePropagationTest;
-import org.junit.jupiter.api.Test;
+import cn.spring.learning.tx.BasePropagationTestService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
  * 7. 测试Nested：<p>&emsp;
@@ -18,12 +19,13 @@ import org.springframework.transaction.annotation.Transactional;
  * @date 2021/6/8 15:56
  */
 @Service
-public class NestedTest extends BasePropagationTest {
+@RequestMapping(value = "nested")
+public class NestedTestService extends BasePropagationTestService {
 
     /**
      * 7.1 上层无事务，创建新事务
      */
-    @Test
+    @GetMapping(value = "testNoTx_Nested_NestedEx")
     public void testNoTx_Nested_NestedEx() {
         boolean comRes = propagationService.addCommodities(buildCommodities());
         boolean cusRes = propagationService.addCustomersException(buildCustomers());
@@ -35,7 +37,7 @@ public class NestedTest extends BasePropagationTest {
     /**
      * 7.2 上层有事务，保留事务依赖性
      */
-    @Test
+    @GetMapping(value = "testTx_Nested_NestedEx")
     @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public void testTx_Nested_NestedEx() {
         boolean comRes = propagationService.addCommodities(buildCommodities());
@@ -48,7 +50,7 @@ public class NestedTest extends BasePropagationTest {
     /**
      * 7.3 上层有事务，对于异常的子事务捕获异常
      */
-    @Test
+    @GetMapping(value = "testTx_Nested_NestedExTry")
     @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public void testTx_Nested_NestedExTry() {
         boolean comRes = propagationService.addCommodities(buildCommodities());
@@ -65,7 +67,7 @@ public class NestedTest extends BasePropagationTest {
     /**
      * 7.4 上层有事务，外围事务方法异常
      */
-    @Test
+    @GetMapping(value = "testTxEx_Nested_Nested")
     @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public void testTxEx_Nested_Nested() {
         boolean comRes = propagationService.addCommodities(buildCommodities());

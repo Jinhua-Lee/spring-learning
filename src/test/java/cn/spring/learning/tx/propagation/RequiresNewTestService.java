@@ -1,10 +1,11 @@
 package cn.spring.learning.tx.propagation;
 
-import cn.spring.learning.tx.BasePropagationTest;
-import org.junit.jupiter.api.Test;
+import cn.spring.learning.tx.BasePropagationTestService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
  * 4. 测试RequiresNew：<p>&emsp;
@@ -15,12 +16,13 @@ import org.springframework.transaction.annotation.Transactional;
  * @date 2021/6/8 15:49
  */
 @Service
-public class RequiredNewTest extends BasePropagationTest {
+@RequestMapping(value = "requiresNew")
+public class RequiresNewTestService extends BasePropagationTestService {
 
     /**
      * 4.1 上层无事务，创建独立事务，事务间不受影响
      */
-    @Test
+    @GetMapping(value = "testNoTx_RequiresNew_RequiresNewEx")
     public void testNoTx_RequiresNew_RequiresNewEx() {
         boolean comRes = propagationService.addCommodities(buildCommodities());
         boolean cusRes = propagationService.addCustomersException(buildCustomers());
@@ -32,7 +34,7 @@ public class RequiredNewTest extends BasePropagationTest {
     /**
      * 4.2 上层有事务，也创建独立事务。
      */
-    @Test
+    @GetMapping(value = "testTx_RequiresNew_RequiresNewEx")
     @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public void testTx_RequiresNew_RequiresNewEx() {
         boolean comRes = propagationService.addCommodities(buildCommodities());
@@ -45,9 +47,9 @@ public class RequiredNewTest extends BasePropagationTest {
     /**
      * 4.3 上层有事务，外围异常抛出
      */
-    @Test
+    @GetMapping(value = "testTxEx_RequiresNew_RequiresNew")
     @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
-    public void testTxTry_RequiresNew_RequiresNew() {
+    public void testTxEx_RequiresNew_RequiresNew() {
         boolean comRes = propagationService.addCommodities(buildCommodities());
         boolean cusRes = propagationService.addCustomers(buildCustomers());
         System.out.println("comRes = " + comRes);

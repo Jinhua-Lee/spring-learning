@@ -1,10 +1,11 @@
 package cn.spring.learning.tx.propagation;
 
-import cn.spring.learning.tx.BasePropagationTest;
-import org.junit.jupiter.api.Test;
+import cn.spring.learning.tx.BasePropagationTestService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
  * 1. 测试Require：<p>&emsp;
@@ -16,12 +17,13 @@ import org.springframework.transaction.annotation.Transactional;
  * @date 2021/6/8 15:29
  */
 @Service
-public class RequiredTest extends BasePropagationTest {
+@RequestMapping(value = "required")
+public class RequiredTestService extends BasePropagationTestService {
 
     /**
      * 1.1 调用方法没有事务，两个事务方法各自独立
      */
-    @Test
+    @GetMapping(value = "testNoTx_Required_RequiredEx")
     public void testNoTx_Required_RequiredEx() {
         boolean comRes = propagationService.addCommodities(buildCommodities());
         boolean cusRes = propagationService.addCustomersException(buildCustomers());
@@ -36,9 +38,9 @@ public class RequiredTest extends BasePropagationTest {
      * 结果：<p>&emsp;
      * 开启事务，外围方法抛异常，商品和顾客都插入失败！
      */
-    @Test
+    @GetMapping(value = "testTxEx_Required_Required")
     @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
-    public void testTxOut_Required_Required() {
+    public void testTxEx_Required_Required() {
         boolean comRes = propagationService.addCommodities(buildCommodities());
         boolean cusRes = propagationService.addCustomers(buildCustomers());
         System.out.println("comRes = " + comRes);
@@ -53,7 +55,7 @@ public class RequiredTest extends BasePropagationTest {
      * 结果：<p>&emsp;
      * 开启事务，其中一个事务抛异常，则商品和顾客都插入失败！
      */
-    @Test
+    @GetMapping(value = "testTx_Required_RequiredEx")
     @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public void testTx_Required_RequiredEx() {
         boolean comRes = propagationService.addCommodities(buildCommodities());
@@ -69,9 +71,9 @@ public class RequiredTest extends BasePropagationTest {
      * 结果：<p>&emsp;
      * 即使被catch不被外部感知，但发生回滚了。整个事务都回滚
      */
-    @Test
+    @GetMapping(value = "testTx_Required_RequiredExTry")
     @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
-    public void testTxOut_Required_RequiredExTry() {
+    public void testTx_Required_RequiredExTry() {
         boolean comRes = propagationService.addCommodities(buildCommodities());
         System.out.println("comRes = " + comRes);
         try {

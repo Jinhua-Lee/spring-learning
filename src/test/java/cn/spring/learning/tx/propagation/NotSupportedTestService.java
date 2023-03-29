@@ -1,28 +1,29 @@
 package cn.spring.learning.tx.propagation;
 
-import cn.spring.learning.tx.BasePropagationTest;
+import cn.spring.learning.tx.BasePropagationTestService;
 import org.junit.jupiter.api.Test;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
- * 6. 测试Never：<p>&emsp;
- * 1) 以非事务方式执行；<p>&emsp;
- * 2)若当前存在事务，则抛出异常；<p>&emsp;
- *
+ * 5. 测试NotSupported：<p>&emsp;
+ * 非事务方式执行操作。当前存在事务，就把当前事务挂起
  * @author Jinhua
  * @version 1.0
- * @date 2021/6/8 15:53
+ * @date 2021/6/8 15:51
  */
 @Service
-public class NeverTest extends BasePropagationTest {
+@RequestMapping(value = "notSupported")
+public class NotSupportedTestService extends BasePropagationTestService {
 
     /**
-     * 6.1 以非事务方式执行
+     * 5.1 不存在，则以非事务方式执行操作
      */
-    @Test
-    public void testNoTx_Never_Never() {
+    @GetMapping(value = "testNoTxEx_NotSupported_NotSupported")
+    public void testNoTxEx_NotSupported_NotSupported() {
         boolean comRes = propagationService.addCommodities(buildCommodities());
         if (true) {
             throw new RuntimeException("手动抛出 [运行时异常] ");
@@ -34,15 +35,16 @@ public class NeverTest extends BasePropagationTest {
     }
 
     /**
-     * 6.2 上层存在事务，则直接抛出异常
+     * 5.2 当前存在事务，就把当前事务挂起（影响上层事务）
      */
-    @Test
+    @GetMapping(value = "testTxEx_NotSupported_NotSupported")
     @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
-    public void testTx_Never_Never() {
+    public void testTxEx_NotSupported_NotSupported() {
         boolean comRes = propagationService.addCommodities(buildCommodities());
         boolean cusRes = propagationService.addCustomers(buildCustomers());
         System.out.println("comRes = " + comRes);
         System.out.println("cusRes = " + cusRes);
-        // 上层存在事务，直接抛异常，方法不执行，商品和顾客都插入失败！（测试成功）
+        throw new RuntimeException("手动抛出 [运行时异常] ");
+        // 非事务方式，挂起上层事务，商品和顾客都插入成功！（测试成功）
     }
 }

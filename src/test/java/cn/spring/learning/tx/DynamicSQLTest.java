@@ -5,7 +5,6 @@ import cn.spring.learning.tx.mapper.CustomerMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.ActiveProfiles;
 
 import java.util.List;
 
@@ -16,7 +15,7 @@ import java.util.List;
  * @version 1.0
  * @date 2022/2/23 21:27
  */
-@SpringBootTest(classes = TxApplication.class)
+@SpringBootTest(classes = TxTestApplication.class)
 public class DynamicSQLTest {
 
     @Autowired

@@ -16,9 +16,9 @@ import org.springframework.scheduling.annotation.EnableScheduling;
         "cn.spring.learning.tx"
 })
 @EnableAspectJAutoProxy(exposeProxy = true)
-public class TxApplication {
+public class TxTestApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(TxApplication.class, args);
+        SpringApplication.run(TxTestApplication.class, args);
     }
 }

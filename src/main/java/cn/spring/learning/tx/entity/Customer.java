@@ -1,5 +1,7 @@
 package cn.spring.learning.tx.entity;
 
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -22,6 +24,7 @@ public class Customer implements Serializable {
     /**
      * 自增主键
      */
+    @TableId(type = IdType.AUTO)
     private Integer id;
 
     /**
@@ -38,17 +41,4 @@ public class Customer implements Serializable {
      * 客户年龄
      */
     private Integer age;
-
-    /**
-     * 除去唯一主键的构造方法
-     *
-     * @param name   姓名
-     * @param gender 性别
-     * @param age    年龄
-     */
-    public Customer(String name, String gender, Integer age) {
-        this.name = name;
-        this.gender = gender;
-        this.age = age;
-    }
 }

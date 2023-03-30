@@ -14,8 +14,8 @@ create table if not exists customer
 ) engine = InnoDB
   default charset utf8mb4;
 
-insert into customer(name, gender, age)
-values ('ljh', '男', 26);
+# insert into customer(name, gender, age)
+# values ('ljh', '男', 26);
 
 -- 商品表
 drop table if exists commodity;

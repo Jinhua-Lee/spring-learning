@@ -69,7 +69,7 @@ public class RequiredTestService extends BasePropagationTestService {
      * 1.2.3 调用方法存在事务，就加入该事务<p>&emsp;
      * <p>
      * 结果：<p>&emsp;
-     * 即使被catch不被外部感知，但发生回滚了。整个事务都回滚
+     * 即使被catch不被外部感知，但复用的是同一个事务。整个事务都回滚
      */
     @GetMapping(value = "testTx_Required_RequiredExTry")
     @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
@@ -80,7 +80,8 @@ public class RequiredTestService extends BasePropagationTestService {
             boolean cusRes = propagationService.addCustomersException(buildCustomers());
             System.out.println("cusRes = " + cusRes);
         } catch (Exception ignored) {
-            // 即使被catch不被外部感知，但发生回滚了，会被事务管理器监测到。整个事务都回滚。（测试成功）
+            // 即使被catch不被外部感知，但Required复用的是已有的事务。
+            // 内部事务发生回滚了，会被事务管理器监测到。整个事务都回滚。（测试成功）
         }
     }
 }

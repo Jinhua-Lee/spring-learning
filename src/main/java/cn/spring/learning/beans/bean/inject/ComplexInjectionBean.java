@@ -2,10 +2,7 @@ package cn.spring.learning.beans.bean.inject;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Value;
@@ -40,10 +37,21 @@ public class ComplexInjectionBean implements InitializingBean {
     private String[] strArrayYml;
     private Map<Integer, String> int2StrYml;
 
+    /**
+     * 引用复杂类型
+     */
+    private InnerInjectionBean innerInjection;
+
     @Override
     public void afterPropertiesSet() throws Exception {
         ObjectMapper mapper = new ObjectMapper()
                 .setSerializationInclusion(JsonInclude.Include.NON_NULL);
         log.info("complexInjectionBean信息：{}", mapper.writeValueAsString(this));
+    }
+
+    @Data
+    public static class InnerInjectionBean {
+        private String innerStr;
+        private Integer innerInt;
     }
 }

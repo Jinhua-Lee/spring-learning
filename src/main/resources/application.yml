@@ -90,6 +90,9 @@ learning:
     int-2-str-yml:
       1: ljh
       2: lwk
+    inner-injection:
+      inner-str: 'hello-inner'
+      inner-int: 3
 
 management:
   endpoints:

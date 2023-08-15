@@ -26,11 +26,12 @@ public class ProducerController {
     @SuppressWarnings(value = "all")
     private RocketMQTemplate rocketMQTemplate;
 
+    private static final String SIMPLE_TOPIC = "rocket-simple";
     private static final String SYNC_TOPIC = "rocket-sync";
 
-    @GetMapping(value = "/test")
+    @GetMapping(value = "/simple")
     public void testProduce() {
-        this.rocketMQTemplate.convertAndSend("springboot-rocketmq", "hello springboot mq");
+        this.rocketMQTemplate.convertAndSend(SIMPLE_TOPIC, "hello springboot rocket");
     }
 
     @GetMapping(value = "/sync")
@@ -38,12 +39,12 @@ public class ProducerController {
         final int syncNum = 10;
         for (int i = 0; i < syncNum; i++) {
             Message sycMessage = new Message(SYNC_TOPIC, "sync-tag",
-                    ("Hello RocketMQ " + i).getBytes(StandardCharsets.UTF_8)
+                    ("rocket-sync_" + i).getBytes(StandardCharsets.UTF_8)
             );
             // 利用producer进行发送，并同步等待发送结果
             SendResult syncSendResult = rocketMQTemplate.syncSend(SYNC_TOPIC, sycMessage);
             // FIXME: 2023/3/25 同步发送方式请务必捕获发送异常，并做业务侧失败兜底逻辑
-            // FIXME: 2023/3/25 SendStatus = SLAVE_NOT_AVAILABLE，消息未能同步接收
+            // FIXME: 2023/3/25 SendStatus = SLAVE_NOT_AVAILABLE，消息未能被从节点接收
             log.info("syncSendResult = {}", syncSendResult);
         }
     }

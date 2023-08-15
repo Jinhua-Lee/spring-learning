@@ -24,9 +24,9 @@ spring:
           max-attempts: 5
           initial-interval: 1000
     virtual-host: '/'
-#  mvc:
+    #  mvc:
     # 静态资源路径，暂未调试成功，先不用该配置项吧
-#    static-path-pattern: classpath:/static/
+    #    static-path-pattern: classpath:/static/
     # 默认值为 classpath:/META-INF/resources/,classpath:/resources/,classpath:/static/,classpath:/public/
 
   redis:
@@ -110,6 +110,6 @@ zuul:
       url: https://ids.hit.edu.cn/authserver/serviceValidate
 
 rocketmq:
-  name-server: my.vm:9876;my.vm:10876
+  name-server: my.vm:10876
   producer:
-    group: group2
+    group: rocketmq-group

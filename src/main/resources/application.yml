@@ -93,6 +93,10 @@ learning:
     inner-injection:
       inner-str: 'hello-inner'
       inner-int: 3
+    inner-injections[0]_inner-str: 'hello-inner-1'
+    inner-injections[0]_inner-int: 1
+    inner-injections[1]_inner-str: 'hello-inner-2'
+    inner-injections[1]_inner-int: 2
 
 management:
   endpoints:

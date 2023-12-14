@@ -42,6 +42,8 @@ public class ComplexInjectionBean implements InitializingBean {
      */
     private InnerInjectionBean innerInjection;
 
+    private List<InnerInjectionBean> innerInjections;
+
     @Override
     public void afterPropertiesSet() throws Exception {
         ObjectMapper mapper = new ObjectMapper()

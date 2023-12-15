@@ -1,5 +1,6 @@
 package cn.spring.learning.redis.config;
 
+import cn.spring.learning.conf.ApplicationContextUtil;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.PropertyAccessor;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -11,6 +12,9 @@ import com.fasterxml.jackson.datatype.jsr310.deser.LocalTimeDeserializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalTimeSerializer;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.InitializingBean;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.cache.annotation.CachingConfigurerSupport;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -29,6 +33,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Objects;
 
 /**
  * Redis缓存配置类
@@ -37,8 +42,9 @@ import java.time.format.DateTimeFormatter;
  * @version 1.0
  * @date 2022/2/11 14:59
  */
+@Slf4j
 @Configuration
-public class RedisCachingConfig extends CachingConfigurerSupport {
+public class RedisCachingConfig extends CachingConfigurerSupport implements InitializingBean {
 
     /**
      * 配置Redis模板，默认的k-v是obj - obj
@@ -114,5 +120,14 @@ public class RedisCachingConfig extends CachingConfigurerSupport {
                         RedisSerializationContext.SerializationPair.fromSerializer(redisSerializer())
                 ).entryTtl(Duration.ofDays(1L));
         return new RedisCacheManager(redisCacheWriter, rCacheConfiguration);
+    }
+
+    @Override
+    public void afterPropertiesSet() throws NullPointerException {
+        log.info("redisTemplate@{}",
+                Objects.requireNonNull(
+                        ApplicationContextUtil.getBean("redisTemplate")
+                ).hashCode()
+        );
     }
 }

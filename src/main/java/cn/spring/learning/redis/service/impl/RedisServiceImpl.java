@@ -1,22 +1,29 @@
 package cn.spring.learning.redis.service.impl;
 
+import cn.spring.learning.conf.ApplicationContextUtil;
 import cn.spring.learning.redis.service.RedisService;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 /**
  * redis操作实现类
- * Created by macro on 2020/3/3.
+ *
+ * @author macro
+ * @date 2020/3/3
  */
+@Slf4j
 @Service
 @SuppressWarnings("all")
-public class RedisServiceImpl implements RedisService {
+public class RedisServiceImpl implements RedisService, InitializingBean {
 
     @Autowired
     private RedisTemplate<String, Object> redisTemplate;
@@ -197,5 +204,14 @@ public class RedisServiceImpl implements RedisService {
     @Override
     public Long lRemove(String key, long count, Object value) {
         return redisTemplate.opsForList().remove(key, count, value);
+    }
+
+    @Override
+    public void afterPropertiesSet() throws NullPointerException {
+        log.info("redisTemplate@{}",
+                Objects.requireNonNull(
+                        ApplicationContextUtil.getBean("redisTemplate")
+                ).hashCode()
+        );
     }
 }

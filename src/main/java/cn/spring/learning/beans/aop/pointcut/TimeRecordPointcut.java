@@ -33,7 +33,7 @@ public class TimeRecordPointcut implements Pointcut {
             @Override
             public boolean matches(@NonNull Method method, @NonNull Class<?> targetClass) {
                 // 方法上有TimeRecord注解时候，匹配成功
-                return method.isAnnotationPresent(TimeRecord.class);
+                return this.matches(method, targetClass, new Object[1]);
             }
 
             @Override
@@ -43,7 +43,7 @@ public class TimeRecordPointcut implements Pointcut {
 
             @Override
             public boolean matches(@NonNull Method method, @NonNull Class<?> targetClass, @Nullable Object... args) {
-                return false;
+                return method.isAnnotationPresent(TimeRecord.class);
             }
         };
     }

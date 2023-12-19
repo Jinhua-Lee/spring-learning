@@ -63,6 +63,7 @@ logging:
   level:
     root: info
     cn.spring.learning.tx.**: debug
+    cn.spring.learning.beans.aop.advice: debug
   file:
     path: 'log'
   pattern:

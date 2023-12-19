@@ -20,7 +20,7 @@ public class TimeRecordMethodInterceptor implements MethodInterceptor {
         invocation.proceed();
         long end = Instant.now().toEpochMilli();
 
-        log.debug("运行耗时：{} ms", end - start);
+        log.debug("方法 {} 运行耗时：{} ms", invocation.getMethod().getName(), end - start);
         return null;
     }
 }

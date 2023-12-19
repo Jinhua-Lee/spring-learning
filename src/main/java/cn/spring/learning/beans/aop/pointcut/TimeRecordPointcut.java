@@ -8,7 +8,10 @@ import org.springframework.aop.Pointcut;
 import org.springframework.lang.NonNull;
 import org.springframework.lang.Nullable;
 
+import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
+import java.util.Arrays;
+import java.util.Objects;
 
 /**
  * 【运行时间统计】切点定义：<p>&emsp;
@@ -43,7 +46,22 @@ public class TimeRecordPointcut implements Pointcut {
 
             @Override
             public boolean matches(@NonNull Method method, @NonNull Class<?> targetClass, @Nullable Object... args) {
-                return method.isAnnotationPresent(TimeRecord.class);
+                return recursivelyWithAnnotation(method, TimeRecord.class, targetClass);
+            }
+
+            public boolean recursivelyWithAnnotation(Method method, Class<? extends Annotation> annotationClazz,
+                                                     Class<?> targetClazz) {
+                if (targetClazz == Object.class
+                        || Arrays.stream(targetClazz.getMethods()).noneMatch(me ->
+                        Objects.equals(me.getName(), method.getName()))) {
+                    return false;
+                } else {
+                    if (method.isAnnotationPresent(annotationClazz)) {
+                        return true;
+                    } else {
+                        return recursivelyWithAnnotation(method, annotationClazz, targetClazz.getSuperclass());
+                    }
+                }
             }
         };
     }

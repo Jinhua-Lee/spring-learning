@@ -1,5 +1,6 @@
 package cn.spring.learning.beans.aop.advice;
 
+import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.*;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Component;
  * @version 1.0
  * @date 2021/5/29 20:48
  */
+@Slf4j
 @Aspect
 @Component
 @EnableAspectJAutoProxy
@@ -26,7 +28,7 @@ public class MyAdvice {
      */
     @Before(value = "pc()")
     public void before() {
-        System.out.println("before...");
+        log.debug("before...");
     }
 
     /**
@@ -34,7 +36,7 @@ public class MyAdvice {
      */
     @AfterReturning(value = "pc()")
     public void afterReturning() {
-        System.out.println("after returning...");
+        log.debug("after returning...");
     }
 
     /**
@@ -46,10 +48,10 @@ public class MyAdvice {
      */
     @Around(value = "pc()")
     public Object around(ProceedingJoinPoint pjp) throws Throwable {
-        System.out.println("before around...");
+        log.debug("before around...");
         // 调用目标方法的代码
         Object proceed = pjp.proceed();
-        System.out.println("after around...");
+        log.debug("after around...");
         return proceed;
     }
 
@@ -58,7 +60,7 @@ public class MyAdvice {
      */
     @AfterThrowing(value = "pc()")
     public void afterThrowing() {
-        System.out.println("after throwing...");
+        log.warn("after throwing...");
     }
 
     /**
@@ -66,7 +68,7 @@ public class MyAdvice {
      */
     @After(value = "pc()")
     public void after() {
-        System.out.println("after...");
+        log.debug("after...");
     }
 
 }

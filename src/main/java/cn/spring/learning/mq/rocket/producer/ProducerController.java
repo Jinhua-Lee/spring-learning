@@ -36,7 +36,7 @@ public class ProducerController {
 
     @GetMapping(value = "/sync")
     public void syncProduce() {
-        final int syncNum = 10;
+        final int syncNum = 5;
         for (int i = 0; i < syncNum; i++) {
             Message sycMessage = new Message(SYNC_TOPIC, "sync-tag",
                     ("rocket-sync_" + i).getBytes(StandardCharsets.UTF_8)

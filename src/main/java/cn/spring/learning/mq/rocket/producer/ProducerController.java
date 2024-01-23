@@ -1,6 +1,7 @@
 package cn.spring.learning.mq.rocket.producer;
 
 import lombok.extern.slf4j.Slf4j;
+import org.apache.rocketmq.client.producer.SendCallback;
 import org.apache.rocketmq.client.producer.SendResult;
 import org.apache.rocketmq.common.message.Message;
 import org.apache.rocketmq.spring.core.RocketMQTemplate;
@@ -28,6 +29,7 @@ public class ProducerController {
 
     private static final String SIMPLE_TOPIC = "rocket-simple";
     private static final String SYNC_TOPIC = "rocket-sync";
+    public static final String ASYNC_TOPIC = "rocket-async";
 
     @GetMapping(value = "/simple")
     public void testProduce() {
@@ -46,6 +48,49 @@ public class ProducerController {
             // FIXME: 2023/3/25 同步发送方式请务必捕获发送异常，并做业务侧失败兜底逻辑
             // FIXME: 2023/3/25 SendStatus = SLAVE_NOT_AVAILABLE，消息未能被从节点接收
             log.info("syncSendResult = {}", syncSendResult);
+        }
+    }
+
+    @GetMapping(value = "/async")
+    public void asyncSend() {
+        final int asyncNum = 5;
+        for (int i = 0; i < asyncNum; i++) {
+            Message asyncMessage = new Message(ASYNC_TOPIC, "async-tag",
+                    ("rocket-async_" + i).getBytes(StandardCharsets.UTF_8)
+            );
+            // 利用producer进行发送，并同步等待发送结果
+            rocketMQTemplate.asyncSend(ASYNC_TOPIC, asyncMessage, new MyAsyncCallback());
+        }
+    }
+
+    private static class MyAsyncCallback implements SendCallback {
+
+        @Override
+        public void onSuccess(SendResult sendResult) {
+            switch (sendResult.getSendStatus()) {
+                case FLUSH_DISK_TIMEOUT:
+                case FLUSH_SLAVE_TIMEOUT:
+                case SLAVE_NOT_AVAILABLE:
+                    // 业务回滚操作等.
+                    log.error("[msg consume callback] msgId = {}, sendStatus = {}",
+                            sendResult.getMsgId(), sendResult.getSendStatus()
+                    );
+                    break;
+                case SEND_OK:
+                default:
+                    log.info("[msg consume callback] msgId = {}, sendStatus = {}",
+                            sendResult.getMsgId(), sendResult.getSendStatus()
+                    );
+                    break;
+            }
+        }
+
+        @Override
+        public void onException(Throwable e) {
+            // 业务回滚操作等.
+            log.error("[msg consume callback] an exception occurred when message was asynchronously consumed." +
+                    " message = {}", e.getMessage()
+            );
         }
     }
 

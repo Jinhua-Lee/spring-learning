@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
  */
 @Slf4j
 @Component
-@RocketMQMessageListener(consumerGroup = "rocketmq-group", topic = "rocket-async")
+@RocketMQMessageListener(consumerGroup = "rocket-async-group", topic = "rocket-async")
 public class AsyncMessageConsumer implements RocketMQListener<String> {
 
     @Override

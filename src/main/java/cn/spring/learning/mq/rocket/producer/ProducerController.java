@@ -29,7 +29,7 @@ public class ProducerController {
 
     private static final String SIMPLE_TOPIC = "rocket-simple";
     private static final String SYNC_TOPIC = "rocket-sync";
-    public static final String ASYNC_TOPIC = "rocket-async";
+    private static final String ASYNC_TOPIC = "rocket-async";
 
     @GetMapping(value = "/simple")
     public void testProduce() {

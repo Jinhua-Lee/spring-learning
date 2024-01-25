@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.nio.charset.StandardCharsets;
+import java.security.SecureRandom;
 
 /**
  * rocketmq 生产者测试类
@@ -30,6 +31,7 @@ public class ProducerController {
     private static final String SIMPLE_TOPIC = "rocket-simple";
     private static final String SYNC_TOPIC = "rocket-sync";
     private static final String ASYNC_TOPIC = "rocket-async";
+    private static final String DELAY_TOPIC = "rocket-delay";
 
     @GetMapping(value = "/simple")
     public void testProduce() {
@@ -92,6 +94,20 @@ public class ProducerController {
                     " message = {}", e.getMessage()
             );
         }
+    }
+
+    @GetMapping(value = "/delay")
+    public void delayMessage() {
+        Message delayMessage = new Message(DELAY_TOPIC, "delay-tag",
+                ("rocket-delay-" + new SecureRandom().nextInt())
+                        .getBytes(StandardCharsets.UTF_8)
+        );
+        // 延迟等级
+        //  3 -> 10s
+        //  4 -> 30s
+        delayMessage.setDelayTimeLevel(4);
+        // 利用producer进行发送，并同步等待发送结果
+        rocketMQTemplate.syncSend(DELAY_TOPIC, delayMessage);
     }
 
     @Autowired

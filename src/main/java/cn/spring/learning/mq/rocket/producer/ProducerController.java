@@ -32,6 +32,7 @@ public class ProducerController {
     private static final String SYNC_TOPIC = "rocket-sync";
     private static final String ASYNC_TOPIC = "rocket-async";
     private static final String DELAY_TOPIC = "rocket-delay";
+    private static final String ORDER_TOPIC = "rocket-order";
 
     @GetMapping(value = "/simple")
     public void testProduce() {
@@ -108,6 +109,18 @@ public class ProducerController {
         delayMessage.setDelayTimeLevel(4);
         // 利用producer进行发送，并同步等待发送结果
         rocketMQTemplate.syncSend(DELAY_TOPIC, delayMessage);
+    }
+
+    @GetMapping(value = "/order")
+    public void orderMessage() {
+        final int orderMsgNum = 4;
+        String[] tags = new String[]{"TagA", "TagB", "TagC", "TagD"};
+        for (int i = 0; i < orderMsgNum; i++) {
+            Message msg = new Message(ORDER_TOPIC, tags[i % tags.length],
+                    ("rocket-order_" + i).getBytes(StandardCharsets.UTF_8)
+            );
+            rocketMQTemplate.syncSendOrderly(ORDER_TOPIC, msg, i + "");
+        }
     }
 
     @Autowired

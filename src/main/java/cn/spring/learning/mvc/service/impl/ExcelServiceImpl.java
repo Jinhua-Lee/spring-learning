@@ -31,7 +31,8 @@ public class ExcelServiceImpl implements ExcelService {
                         Collections.singletonMap(2,
                                 Arrays.stream(GenderType.values()).map(GenderType::getText)
                                         .collect(Collectors.toList())
-                        )
+                        ),
+                        null
                 ))
                 .head(DropDownDemoDTO.class)
                 .needHead(true);

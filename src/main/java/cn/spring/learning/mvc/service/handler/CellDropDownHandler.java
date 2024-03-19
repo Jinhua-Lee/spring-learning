@@ -70,7 +70,7 @@ public class CellDropDownHandler implements SheetWriteHandler {
         dropDownOptional.forEach((celIndex, strings) -> {
             // 区间设置
             CellRangeAddressList cellRangeAddressList = new CellRangeAddressList(
-                    withHead ? 2 : 1, rowCount, celIndex, celIndex
+                    withHead ? 1 : 0, rowCount, celIndex, celIndex
             );
             // 下拉内容
             DataValidationConstraint constraint = validationHelper

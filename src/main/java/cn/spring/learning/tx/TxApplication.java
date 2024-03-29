@@ -3,7 +3,6 @@ package cn.spring.learning.tx;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
-import org.springframework.scheduling.annotation.EnableScheduling;
 
 /**
  * 【事务相关】的测试依赖启动类<p>&emsp;

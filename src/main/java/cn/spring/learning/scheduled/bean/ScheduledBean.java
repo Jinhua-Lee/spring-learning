@@ -15,7 +15,7 @@ import java.time.LocalDateTime;
 @Component
 public class ScheduledBean {
 
-    @Scheduled(cron = "0 0/1 * * * ?")
+    @Scheduled(cron = "0/10 * * * * ?")
     public void scheduledRun() {
         log.info("scheduled run: now = {}", LocalDateTime.now());
     }

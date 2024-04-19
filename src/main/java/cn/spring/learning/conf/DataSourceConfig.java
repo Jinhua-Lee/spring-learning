@@ -1,11 +1,11 @@
 package cn.spring.learning.conf;
 
 import com.alibaba.druid.pool.DruidDataSource;
+import com.alibaba.druid.spring.boot.autoconfigure.DruidDataSourceBuilder;
 import com.baomidou.mybatisplus.extension.spring.MybatisSqlSessionFactoryBean;
 import com.github.pagehelper.PageInterceptor;
 import lombok.SneakyThrows;
 import org.apache.ibatis.session.SqlSessionFactory;
-import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -44,7 +44,7 @@ public class DataSourceConfig {
     @SneakyThrows
     @Primary
     public DataSource dateSource() {
-        DruidDataSource dataSource = new DruidDataSource();
+        DruidDataSource dataSource = DruidDataSourceBuilder.create().build();
         dataSource.setFilters("wall,slf4j");
         return dataSource;
     }

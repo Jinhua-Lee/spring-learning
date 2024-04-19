@@ -1,7 +1,9 @@
 package cn.spring.learning.mq.rabbit.config;
 
-import com.rabbitmq.client.ConnectionFactory;
 import lombok.Data;
+import org.springframework.amqp.rabbit.connection.CachingConnectionFactory;
+import org.springframework.amqp.rabbit.connection.ConnectionFactory;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -21,12 +23,17 @@ public class RabbitmqConfig {
 
     @Bean
     public ConnectionFactory connectionFactory() {
-        ConnectionFactory factory = new ConnectionFactory();
+        CachingConnectionFactory factory = new CachingConnectionFactory();
         factory.setHost(this.host);
         factory.setPort(this.port);
         factory.setUsername(this.username);
         factory.setPassword(this.password);
         factory.setVirtualHost(virtualHost);
         return factory;
+    }
+
+    @Bean
+    public RabbitTemplate rabbitTemplate(ConnectionFactory connectionFactory) {
+        return new RabbitTemplate(connectionFactory);
     }
 }

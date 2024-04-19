@@ -10,7 +10,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  */
 @SpringBootApplication(scanBasePackages = {
         "cn.spring.learning.conf",
-        "cn.spring.learning.mq.rocket"
+        "cn.spring.learning.mq.rabbit"
 })
 public class MqApplication {
 

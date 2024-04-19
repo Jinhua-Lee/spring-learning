@@ -1,89 +1,94 @@
 {
-	"properties": [
-		{
-			"name": "spring.datasource.druid.learning.driver-class-name",
-			"type": "java.lang.String",
-			"description": "数据源learning的驱动类."
-		},
-		{
-			"name": "spring.datasource.druid.learning.url",
-			"type": "java.lang.String",
-			"description": "数据源learning的url."
-		},
-		{
-			"name": "spring.datasource.druid.learning.username",
-			"type": "java.lang.String",
-			"description": "数据源learning的username."
-		},
-		{
-			"name": "spring.datasource.druid.learning.password",
-			"type": "java.lang.String",
-			"description": "数据源learning的password."
-		},
-		{
-			"name": "learning.val.intVal",
-			"type": "java.lang.String",
-			"description": "Value注解注入int值测试."
-		},
-		{
-			"name": "learning.val.strVal",
-			"type": "java.lang.String",
-			"description": "Value注解注入string值测试."
-		},
-		{
-			"name": "learning.val.boolVal",
-			"type": "java.lang.String",
-			"description": "Value注解注入bool值测试."
-		},
-		{
-			"name": "learning.val.decimalVal",
-			"type": "java.lang.String",
-			"description": "Value注解注入decimal值测试."
-		},
-		{
-			"name": "zuul.routes.cas-auth.path",
-			"type": "java.lang.String",
-			"description": "Description for zuul.routes.cas-auth.path."
-		},
-		{
-			"name": "zuul.routes.cas-auth.url",
-			"type": "java.lang.String",
-			"description": "Description for zuul.routes.cas-auth.url."
-		},
-		{
-			"name": "zuul.routes.cas-check-ticket.path",
-			"type": "java.lang.String",
-			"description": "Description for zuul.routes.cas-check-ticket.path."
-		},
-		{
-			"name": "zuul.routes.cas-check-ticket.url",
-			"type": "java.lang.String",
-			"description": "Description for zuul.routes.cas-check-ticket.url."
-		},
-		{
-			"name": "learning.complex.int-arr-yml",
-			"type": "java.lang.Integer",
-			"description": "int数组配置yml格式演示."
-		},
-		{
-			"name": "learning.complex.int-array-props",
-			"type": "java.lang.Integer",
-			"description": "int数组配置properties格式演示."
-		},
-		{
-			"name": "learning.complex.int-arr-by-value",
-			"type": "java.lang.String",
-			"description": "int数组，Value注解演示."
-		},
-		{
-			"name": "learning.complex.str-array-yml",
-			"type": "java.lang.String",
-			"description": "str数组配置yml格式演示."
-		},
-		{
-			"name": "learning.complex.integer-list-csv",
-			"type": "java.lang.String",
-			"description": "Integer列表，逗号分隔符演示."
-		}
-	]
+    "properties": [
+        {
+            "name": "spring.datasource.druid.learning.driver-class-name",
+            "type": "java.lang.String",
+            "description": "数据源learning的驱动类."
+        },
+        {
+            "name": "spring.datasource.druid.learning.url",
+            "type": "java.lang.String",
+            "description": "数据源learning的url."
+        },
+        {
+            "name": "spring.datasource.druid.learning.username",
+            "type": "java.lang.String",
+            "description": "数据源learning的username."
+        },
+        {
+            "name": "spring.datasource.druid.learning.password",
+            "type": "java.lang.String",
+            "description": "数据源learning的password."
+        },
+        {
+            "name": "learning.val.intVal",
+            "type": "java.lang.String",
+            "description": "Value注解注入int值测试."
+        },
+        {
+            "name": "learning.val.strVal",
+            "type": "java.lang.String",
+            "description": "Value注解注入string值测试."
+        },
+        {
+            "name": "learning.val.boolVal",
+            "type": "java.lang.String",
+            "description": "Value注解注入bool值测试."
+        },
+        {
+            "name": "learning.val.decimalVal",
+            "type": "java.lang.String",
+            "description": "Value注解注入decimal值测试."
+        },
+        {
+            "name": "zuul.routes.cas-auth.path",
+            "type": "java.lang.String",
+            "description": "Description for zuul.routes.cas-auth.path."
+        },
+        {
+            "name": "zuul.routes.cas-auth.url",
+            "type": "java.lang.String",
+            "description": "Description for zuul.routes.cas-auth.url."
+        },
+        {
+            "name": "zuul.routes.cas-check-ticket.path",
+            "type": "java.lang.String",
+            "description": "Description for zuul.routes.cas-check-ticket.path."
+        },
+        {
+            "name": "zuul.routes.cas-check-ticket.url",
+            "type": "java.lang.String",
+            "description": "Description for zuul.routes.cas-check-ticket.url."
+        },
+        {
+            "name": "learning.complex.int-arr-yml",
+            "type": "java.lang.Integer",
+            "description": "int数组配置yml格式演示."
+        },
+        {
+            "name": "learning.complex.int-array-props",
+            "type": "java.lang.Integer",
+            "description": "int数组配置properties格式演示."
+        },
+        {
+            "name": "learning.complex.int-arr-by-value",
+            "type": "java.lang.String",
+            "description": "int数组，Value注解演示."
+        },
+        {
+            "name": "learning.complex.str-array-yml",
+            "type": "java.lang.String",
+            "description": "str数组配置yml格式演示."
+        },
+        {
+            "name": "learning.complex.integer-list-csv",
+            "type": "java.lang.String",
+            "description": "Integer列表，逗号分隔符演示."
+        },
+        {
+            "name": "learning.scheduling.master",
+            "type": "java.lang.String",
+            "description": "用于控制定时任务执行."
+        }
+    ]
 }

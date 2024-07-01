@@ -1,5 +1,7 @@
 package cn.spring.learning.redis.service;
 
+import org.springframework.data.redis.support.atomic.RedisAtomicLong;
+
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -181,4 +183,6 @@ public interface RedisService {
      * 从List结构中移除属性
      */
     Long lRemove(String key, long count, Object value);
+
+    RedisAtomicLong getRedisAtomicLong(String key, Long initValue);
 }

@@ -4,6 +4,7 @@ import cn.spring.learning.common.ApiResult;
 import cn.spring.learning.redis.entity.MultiDataTypeEntity;
 import cn.spring.learning.redis.service.RedisService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.support.atomic.RedisAtomicLong;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
@@ -54,5 +55,12 @@ public class TestRedisController {
         );
 
         return mDataTypes;
+    }
+
+    @GetMapping(value = "/atomic")
+    public ApiResult<Long> testRedisAtomic() {
+        RedisAtomicLong atomicLong = redisService.getRedisAtomicLong("redis:atomic", 0L);
+        atomicLong.set(2);
+        return ApiResult.success(atomicLong.get());
     }
 }

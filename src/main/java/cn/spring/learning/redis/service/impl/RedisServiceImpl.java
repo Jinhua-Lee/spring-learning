@@ -6,6 +6,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.support.atomic.RedisAtomicLong;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -204,6 +205,11 @@ public class RedisServiceImpl implements RedisService, InitializingBean {
     @Override
     public Long lRemove(String key, long count, Object value) {
         return redisTemplate.opsForList().remove(key, count, value);
+    }
+
+    @Override
+    public RedisAtomicLong getRedisAtomicLong(String key, Long initValue) {
+        return new RedisAtomicLong(key, redisTemplate.getConnectionFactory(), initValue);
     }
 
     @Override

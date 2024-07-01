@@ -1,6 +1,5 @@
 package cn.spring.learning.redis.config;
 
-import cn.spring.learning.conf.ApplicationContextUtil;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.PropertyAccessor;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -13,7 +12,6 @@ import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalTimeSerializer;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.InitializingBean;
 import org.springframework.cache.annotation.CachingConfigurerSupport;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -32,7 +30,6 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Objects;
 
 /**
  * Redis缓存配置类
@@ -43,7 +40,7 @@ import java.util.Objects;
  */
 @Slf4j
 @Configuration
-public class RedisCachingConfig extends CachingConfigurerSupport implements InitializingBean {
+public class RedisCachingConfig extends CachingConfigurerSupport {
 
     /**
      * 配置Redis模板，默认的k-v是obj - obj
@@ -107,26 +104,17 @@ public class RedisCachingConfig extends CachingConfigurerSupport implements Init
     /**
      * Redis的缓存管理器
      *
-     * @param rConnectionFactory redis的连接工厂
+     * @param redisConnectionFactory redis的连接工厂
      * @return Redis的缓存管理器
      */
     @Bean
-    public RedisCacheManager redisCacheManager(RedisConnectionFactory rConnectionFactory) {
-        RedisCacheWriter redisCacheWriter = RedisCacheWriter.nonLockingRedisCacheWriter(rConnectionFactory);
+    public RedisCacheManager redisCacheManager(RedisConnectionFactory redisConnectionFactory) {
+        RedisCacheWriter redisCacheWriter = RedisCacheWriter.nonLockingRedisCacheWriter(redisConnectionFactory);
         // 设置Redis缓存的有效期为1天
         RedisCacheConfiguration rCacheConfiguration = RedisCacheConfiguration.defaultCacheConfig()
                 .serializeValuesWith(
                         RedisSerializationContext.SerializationPair.fromSerializer(redisSerializer())
                 ).entryTtl(Duration.ofDays(1L));
         return new RedisCacheManager(redisCacheWriter, rCacheConfiguration);
-    }
-
-    @Override
-    public void afterPropertiesSet() throws NullPointerException {
-        log.info("redisTemplate@{}",
-                Objects.requireNonNull(
-                        ApplicationContextUtil.getBean("redisTemplate")
-                ).hashCode()
-        );
     }
 }

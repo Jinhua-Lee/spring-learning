@@ -29,12 +29,6 @@ spring:
     #    static-path-pattern: classpath:/static/
     # 默认值为 classpath:/META-INF/resources/,classpath:/resources/,classpath:/static/,classpath:/public/
 
-  redis:
-    host: my.vm
-    port: 6379
-    database: 0
-    password: cafebabe
-    connect-timeout: 1000ms
   jackson:
     serialization:
       WRITE_DATES_AS_TIMESTAMPS: false
@@ -53,6 +47,13 @@ spring:
     # - 目录/资源名
     # - 目录.资源名
     basename: i18n.message
+  data:
+    redis:
+      host: my.vm
+      port: 6379
+      database: 0
+      password: cafebabe
+      connect-timeout: 1000ms
 
 mybatis-plus:
   type-aliases-package: cn.spring.learning.tx.mapper

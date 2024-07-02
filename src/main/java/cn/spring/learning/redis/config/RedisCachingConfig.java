@@ -12,7 +12,7 @@ import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalTimeSerializer;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.cache.annotation.CachingConfigurerSupport;
+import org.springframework.cache.annotation.CachingConfigurer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.cache.RedisCacheConfiguration;
@@ -40,7 +40,7 @@ import java.time.format.DateTimeFormatter;
  */
 @Slf4j
 @Configuration
-public class RedisCachingConfig extends CachingConfigurerSupport {
+public class RedisCachingConfig implements CachingConfigurer {
 
     /**
      * 配置Redis模板，默认的k-v是obj - obj
@@ -68,15 +68,13 @@ public class RedisCachingConfig extends CachingConfigurerSupport {
      */
     @Bean
     public RedisSerializer<Object> redisSerializer() {
-        Jackson2JsonRedisSerializer<Object> serializer = new Jackson2JsonRedisSerializer<>(Object.class);
         ObjectMapper objectMapper = new ObjectMapper();
         objectMapper.setVisibility(PropertyAccessor.ALL, JsonAutoDetect.Visibility.ANY);
         objectMapper.activateDefaultTyping(
                 new LaissezFaireSubTypeValidator(), ObjectMapper.DefaultTyping.NON_FINAL
         );
         objectMapper.registerModule(configJavaTimeModule());
-        serializer.setObjectMapper(objectMapper);
-        return serializer;
+        return new Jackson2JsonRedisSerializer<>(objectMapper, Object.class);
     }
 
     /**

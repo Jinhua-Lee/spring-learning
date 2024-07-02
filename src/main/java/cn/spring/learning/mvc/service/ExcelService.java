@@ -1,6 +1,6 @@
 package cn.spring.learning.mvc.service;
 
-import javax.servlet.ServletOutputStream;
+import jakarta.servlet.ServletOutputStream;
 
 /**
  * @author Jinhua-Lee

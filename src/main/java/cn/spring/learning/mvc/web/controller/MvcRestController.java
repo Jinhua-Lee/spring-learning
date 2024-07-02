@@ -5,7 +5,7 @@ import cn.spring.learning.mvc.dto.ValidParamDTO;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotNull;
 
 /**
  * @author Jinhua

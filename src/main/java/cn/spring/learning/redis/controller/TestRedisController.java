@@ -3,6 +3,7 @@ package cn.spring.learning.redis.controller;
 import cn.spring.learning.common.ApiResult;
 import cn.spring.learning.redis.entity.MultiDataTypeEntity;
 import cn.spring.learning.redis.service.RedisService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.support.atomic.RedisAtomicLong;
 import org.springframework.http.MediaType;
@@ -20,6 +21,7 @@ import java.util.List;
  * @version 1.0
  * @date 2022/2/11 19:27
  */
+@Slf4j
 @RestController
 @RequestMapping(value = "/redis")
 @SuppressWarnings(value = "all")
@@ -59,8 +61,25 @@ public class TestRedisController {
 
     @GetMapping(value = "/atomic")
     public ApiResult<Long> testRedisAtomic() {
-        RedisAtomicLong atomicLong = redisService.getRedisAtomicLong("redis:atomic", 0L);
-        atomicLong.set(2);
+
+        class MyRuntimeException extends RuntimeException {
+            public MyRuntimeException() {
+                super();
+            }
+
+            public MyRuntimeException(String message) {
+                super(message);
+            }
+        }
+
+        // 为null时会报空指针
+        RedisAtomicLong atomicLong = redisService.getRedisAtomicLong("redis:atomic", null);
+        try {
+            atomicLong.getAndAdd(2);
+        } catch (Exception e) {
+            log.error("{}", e);
+            throw new MyRuntimeException(e.getMessage());
+        }
         return ApiResult.success(atomicLong.get());
     }
 }

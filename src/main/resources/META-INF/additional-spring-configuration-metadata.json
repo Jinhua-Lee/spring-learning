@@ -89,6 +89,11 @@
             "name": "learning.scheduling.master",
             "type": "java.lang.String",
             "description": "用于控制定时任务执行."
+        },
+        {
+            "name": "spring.datasource.druid.learning.fail-fast",
+            "type": "java.lang.String",
+            "description": "druid重连控制，连不上则直接抛出异常."
         }
     ]
 }

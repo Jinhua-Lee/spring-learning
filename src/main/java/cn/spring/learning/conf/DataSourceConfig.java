@@ -46,6 +46,7 @@ public class DataSourceConfig {
     public DataSource dateSource() {
         DruidDataSource dataSource = DruidDataSourceBuilder.create().build();
         dataSource.setFilters("wall,slf4j");
+        dataSource.setFailFast(true);
         return dataSource;
     }
 

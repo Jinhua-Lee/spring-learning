@@ -94,6 +94,11 @@
             "name": "spring.datasource.druid.learning.fail-fast",
             "type": "java.lang.String",
             "description": "druid重连控制，连不上则直接抛出异常."
+        },
+        {
+            "name": "learning.beans.manual-fault.enable",
+            "type": "java.lang.String",
+            "description": "是否启用ApplicationRunner停止JVM调试."
         }
     ]
 }

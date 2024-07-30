@@ -11,12 +11,12 @@ spring:
         driver-class-name: com.mysql.cj.jdbc.Driver
         url: jdbc:mysql://my.vm:3306/test?serverTimezone=UTC
         username: root
-        password: cafebabe
+        password: Cafe2babe.!
   rabbitmq:
     host: my.vm
     port: 5672
     username: user
-    password: password
+    password: Cafe2babe.!
     listener:
       simple:
         retry:
@@ -52,7 +52,7 @@ spring:
       host: my.vm
       port: 6379
       database: 0
-      password: cafebabe
+      password: Cafe2babe.!
       connect-timeout: 1000ms
 
 mybatis-plus:
@@ -101,6 +101,9 @@ learning:
     inner-injections[1]_inner-int: 2
   scheduling:
     master: true
+  beans:
+    manual-fault:
+      enable: false
 
 management:
   endpoints:

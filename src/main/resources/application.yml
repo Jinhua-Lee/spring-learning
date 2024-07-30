@@ -100,7 +100,7 @@ learning:
     inner-injections[1]_inner-str: 'hello-inner-2'
     inner-injections[1]_inner-int: 2
   scheduling:
-    master: false
+    master: true
 
 management:
   endpoints:

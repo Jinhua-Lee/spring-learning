@@ -12,7 +12,8 @@ import org.springframework.scheduling.annotation.EnableScheduling;
  */
 @EnableScheduling
 @SpringBootApplication(scanBasePackages = {
-        "cn.spring.learning.conf", "cn.spring.learning.scheduled"
+        "cn.spring.learning.conf",
+        "cn.spring.learning.scheduled",
 })
 @EnableAspectJAutoProxy
 public class ScheduledApplication {

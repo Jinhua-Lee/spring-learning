@@ -4,6 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.eclipse.paho.client.mqttv3.IMqttDeliveryToken;
 import org.eclipse.paho.client.mqttv3.MqttCallback;
 import org.eclipse.paho.client.mqttv3.MqttMessage;
+import org.springframework.stereotype.Component;
 
 /**
  * MQTT 消息回调，收到消息时候，记录日志
@@ -12,6 +13,7 @@ import org.eclipse.paho.client.mqttv3.MqttMessage;
  * @date 2021/12/3 14:53
  */
 @Slf4j
+@Component
 public class MqttReceiveCallback implements MqttCallback {
 
     @Override

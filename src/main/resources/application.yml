@@ -16,7 +16,7 @@ spring:
     host: my.vm
     port: 5672
     username: user
-    password: Cafe2babe.!
+    password: password
     listener:
       simple:
         retry:
@@ -126,7 +126,7 @@ rocketmq:
     group: rocketmq-group
 
 mqtt:
-  name-srv-addr: my.vm:1883
+  name-srv-addr: tcp://my.vm2:1883
   client-id: spring-learning
   qos: 1
   print-log: true

@@ -124,3 +124,11 @@ rocketmq:
   name-server: my.vm:10876
   producer:
     group: rocketmq-group
+
+mqtt:
+  name-srv-addr: my.vm:1883
+  client-id: spring-learning
+  qos: 1
+  print-log: true
+  log-path: 'log'
+  honor-mqs-unique-topic: 'HONOR_MQS_UNIQUE_TOPIC'

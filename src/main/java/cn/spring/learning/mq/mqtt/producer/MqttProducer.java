@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.Objects;
+import java.util.Set;
+import java.util.concurrent.ConcurrentSkipListSet;
 
 /**
  * @author lcs
@@ -21,6 +23,11 @@ public class MqttProducer {
     private MqttConnectOptions mqttConnectOptions;
 
     /**
+     * 保存已订阅的主题，订阅过后的主题不再执行订阅
+     */
+    private final Set<String> subscribedTopics = new ConcurrentSkipListSet<>();
+
+    /**
      * 发布消息
      *
      * @param topic   主题
@@ -31,7 +38,7 @@ public class MqttProducer {
         if (Objects.nonNull(mqttClient)) {
             if (!mqttClient.isConnected()) {
                 log.warn("mqttClient未连接，进行连接...");
-                reConnectMqtt();
+                mqttClient.connect(this.mqttConnectOptions);
             }
             publishMessage(topic, message, qos);
         } else {
@@ -51,33 +58,29 @@ public class MqttProducer {
         try {
             mqttClient.publish(topic, mqttMessage);
             if (log.isDebugEnabled()) {
-                log.debug("消息入库成功,topic={},body={}", topic, mqttMessage);
+                log.debug("消息入库成功, topic={}, body = {}", topic, mqttMessage);
             }
         } catch (Exception e) {
-            log.error("消息入库失败,msg={},body={}", e.getMessage(), mqttMessage);
+            log.error("消息入库失败,msg = {},body = {}", e.getMessage(), mqttMessage);
         }
     }
 
     /**
-     * 重新连接
-     */
-    public void reConnectMqtt() throws MqttException {
-        mqttClient.connect(mqttConnectOptions);
-    }
-
-    /**
-     * 清除
+     * 订阅
      *
      * @param topic 主题
      */
-    @SuppressWarnings("unused")
-    public void unsubscribeMqttTopic(String topic) {
-        if (Objects.nonNull(mqttClient) && !mqttClient.isConnected()) {
+    @SuppressWarnings(value = "unused")
+    public void subscribeMqttTopicIfNecessary(String topic) {
+        if (Objects.nonNull(mqttClient)
+                && mqttClient.isConnected()
+                && !this.subscribedTopics.contains(topic)) {
             try {
-                mqttClient.unsubscribe(topic);
+                mqttClient.subscribe(topic, 1);
             } catch (MqttException e) {
                 log.error(e.getMessage());
             }
+            this.subscribedTopics.add(topic);
         }
     }
 

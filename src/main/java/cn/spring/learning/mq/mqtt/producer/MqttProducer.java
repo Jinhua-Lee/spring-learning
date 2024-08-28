@@ -78,7 +78,7 @@ public class MqttProducer {
             try {
                 mqttClient.subscribe(topic, 1);
             } catch (MqttException e) {
-                log.error(e.getMessage());
+                log.error("", e);
             }
             this.subscribedTopics.add(topic);
         }

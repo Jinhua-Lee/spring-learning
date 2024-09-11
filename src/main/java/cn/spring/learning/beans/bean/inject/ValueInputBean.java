@@ -38,6 +38,9 @@ public class ValueInputBean implements InitializingBean {
     @Value(value = "${learning.val.boolVal: true}")
     private Boolean boolVal;
 
+    @Value(value = "${learning.val.strEmptyVal:}")
+    private String strEmptyVal;
+
     @Override
     public void afterPropertiesSet() throws Exception {
         ObjectMapper mapper = new ObjectMapper()

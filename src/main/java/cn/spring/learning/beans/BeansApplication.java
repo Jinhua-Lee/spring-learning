@@ -14,7 +14,7 @@ import org.springframework.context.annotation.EnableAspectJAutoProxy;
 @SpringBootApplication(scanBasePackages = {
         "cn.spring.learning.conf",
         // "cn.spring.learning.beans.bean.lifecycle",
-        // "cn.spring.learning.beans.bean.inject",
+        "cn.spring.learning.beans.bean.inject",
         // "cn.spring.learning.beans.processor",
         // "cn.spring.learning.beans.bean.circular.depend",
         // "cn.spring.learning.beans.aop",

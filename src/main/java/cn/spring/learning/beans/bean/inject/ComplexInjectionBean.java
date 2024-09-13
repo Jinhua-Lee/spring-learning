@@ -2,13 +2,16 @@ package cn.spring.learning.beans.bean.inject;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import lombok.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
 
@@ -37,6 +40,8 @@ public class ComplexInjectionBean implements InitializingBean {
     private String[] strArrayYml;
     private Map<Integer, String> int2StrYml;
 
+    private LocalDateTime dateTime;
+
     /**
      * 引用复杂类型
      */
@@ -47,6 +52,7 @@ public class ComplexInjectionBean implements InitializingBean {
     @Override
     public void afterPropertiesSet() throws Exception {
         ObjectMapper mapper = new ObjectMapper()
+                .registerModule(new JavaTimeModule())
                 .setSerializationInclusion(JsonInclude.Include.NON_NULL);
         log.info("complexInjectionBean信息：{}", mapper.writeValueAsString(this));
     }

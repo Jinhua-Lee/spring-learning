@@ -8,7 +8,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
@@ -39,6 +38,11 @@ public class ComplexInjectionBean implements InitializingBean {
 
     private String[] strArrayYml;
     private Map<Integer, String> int2StrYml;
+
+    /**
+     * 无法使用 @Value 注入列表
+     */
+    private List<String> stringList;
 
     private LocalDateTime dateTime;
 

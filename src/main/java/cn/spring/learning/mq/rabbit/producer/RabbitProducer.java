@@ -2,6 +2,7 @@ package cn.spring.learning.mq.rabbit.producer;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.core.Message;
+import org.springframework.amqp.rabbit.core.RabbitAdmin;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,6 +20,8 @@ public class RabbitProducer {
 
     private RabbitTemplate rabbitTemplate;
 
+    private RabbitAdmin rabbitAdmin;
+
     @GetMapping(value = "/send")
     public void sendMsg() {
         rabbitTemplate.convertAndSend(
@@ -31,7 +34,7 @@ public class RabbitProducer {
         );
     }
 
-    @GetMapping(value = "/sendAndReceive")
+    @GetMapping(value = "/send-receive")
     public void sendAndReceive() {
         rabbitTemplate.convertAndSend(
                 // 原有topic交换机，相同routingKey实现多队列同时消费功能
@@ -47,8 +50,28 @@ public class RabbitProducer {
         }
     }
 
+    @GetMapping(value = "/send-consume")
+    public void sendAndConsume() {
+        rabbitTemplate.convertAndSend(
+                // 原有topic交换机，相同routingKey实现多队列同时消费功能
+                "topicExA",
+                "rkB",
+                "test_send_and_consume_" + Instant.now().toEpochMilli()
+        );
+    }
+
+    @GetMapping(value = "/declare-queue")
+    public void declareQueue() {
+        rabbitAdmin.declareQueue();
+    }
+
     @Autowired
     public void setRabbitTemplate(RabbitTemplate rabbitTemplate) {
         this.rabbitTemplate = rabbitTemplate;
+    }
+
+    @Autowired
+    public void setRabbitAdmin(RabbitAdmin rabbitAdmin) {
+        this.rabbitAdmin = rabbitAdmin;
     }
 }

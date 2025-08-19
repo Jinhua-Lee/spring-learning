@@ -13,10 +13,12 @@ spring:
         username: root
         password: Cafe2babe.!
   rabbitmq:
-    host: my.vm
-    port: 5672
-    username: admin
-    password: Cafe2babe.!
+    host: 172.17.6.117
+    port: 5671
+#    username: admin
+#    password: Cafe2babe.!
+#    username: ''
+#    password: ''
     listener:
       simple:
         retry:
@@ -24,6 +26,20 @@ spring:
           max-attempts: 5
           initial-interval: 1000
     virtual-host: '/'
+    ssl:
+      enabled: true        # 启用 SSL
+#      server-hostname: 172.17.6.117
+      algorithm: TLSv1.2
+      # 客户端证书链
+      key-store: D:\IDEA_Projects\spring-learning\src\main\resources\certs\client_keystore.p12
+      # 密钥库密码
+      key-store-password: szpt_CeT108!
+      key-store-type: PKCS12
+      # 信任的 CA 证书
+      trust-store: D:\IDEA_Projects\spring-learning\src\main\resources\certs\truststore.p12
+      trust-store-password: szpt_CeT108!
+      trust-store-type: PKCS12
+      verify-hostname: false
     #  mvc:
     # 静态资源路径，暂未调试成功，先不用该配置项吧
     #    static-path-pattern: classpath:/static/
@@ -65,6 +81,8 @@ logging:
     root: info
     cn.spring.learning.tx.**: debug
     cn.spring.learning.beans.aop.advice: debug
+    org.springframework.amqp: DEBUG
+    com.rabbitmq.client: DEBUG
   file:
     path: 'log'
   pattern:

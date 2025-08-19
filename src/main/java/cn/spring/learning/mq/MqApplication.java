@@ -2,6 +2,7 @@ package cn.spring.learning.mq;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.amqp.RabbitAutoConfiguration;
 
 /**
  * @author Jinhua
@@ -10,10 +11,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  */
 @SpringBootApplication(scanBasePackages = {
         "cn.spring.learning.conf",
-        // "cn.spring.learning.mq.rabbit",
+        "cn.spring.learning.mq.rabbit",
         // "cn.spring.learning.mq.rocket",
         // "cn.spring.learning.mq.mqtt",
-})
+}, exclude = {RabbitAutoConfiguration.class})
 public class MqApplication {
 
     public static void main(String[] args) {
